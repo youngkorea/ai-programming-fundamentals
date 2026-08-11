@@ -73,32 +73,46 @@ def txt(x, y, s, size, fill, weight="400", spacing=None, anchor=None):
     return f'<text x="{x}" y="{y}"{a}>{esc(s)}</text>'
 
 
-def build_cover(cfg, w=WIDTH, h=190):
+def build_cover(cfg, w=WIDTH, h=176, dark=False):
     course, wk, wt, meta = cfg["course"], cfg["week_no"], cfg["week_title"], cfg["meta"]
-    warn(course, 40, w - 40, course)
+    warn(course, 40, w - 60, course)
+
+    if dark:
+        bg, c_course, c_week_bg, c_week_tx, c_wt, c_meta = (
+            C_COURSE, "#FFFFFF", "#5DCAA5", "#04342C", "#B5D4F4", "#85B7EB")
+    else:
+        bg, c_course, c_week_bg, c_week_tx, c_wt, c_meta = (
+            "#E6F1FB", C_COURSE, C_WEEK, "#FFFFFF", C_WEEK, C_META)
 
     badge_w = width_of(wk, 17) + 30
     p = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}">']
-    p.append(f'<rect x="0" y="0" width="{w}" height="6" fill="{C_COURSE}"/>')
-    p.append(txt(0, 78, course, 40, C_COURSE, "700"))
-    p.append(f'<rect x="0" y="102" width="{badge_w:.0f}" height="32" rx="4" fill="{C_WEEK}"/>')
-    p.append(txt(badge_w / 2, 124, wk, 17, "#FFFFFF", "700", anchor="middle"))
-    p.append(txt(badge_w + 14, 126, wt, 26, C_WEEK, "700"))
-    p.append(txt(w - 6, 168, meta, 14, C_META, anchor="end"))
-    p.append(f'<rect x="0" y="182" width="{w}" height="1" fill="{C_RULE}"/>')
+    p.append(f'<rect x="0" y="0" width="{w}" height="{h}" rx="8" fill="{bg}"/>')
+    if not dark:
+        p.append(f'<rect x="0" y="0" width="{w}" height="7" rx="3" fill="{C_COURSE}"/>')
+    p.append(txt(34, 84, course, 40, c_course, "700"))
+    p.append(f'<rect x="34" y="106" width="{badge_w:.0f}" height="32" rx="4" fill="{c_week_bg}"/>')
+    p.append(txt(34 + badge_w / 2, 128, wk, 17, c_week_tx, "700", anchor="middle"))
+    p.append(txt(34 + badge_w + 14, 130, wt, 26, c_wt, "700"))
+    p.append(txt(w - 34, 156, meta, 14, c_meta, anchor="end"))
     p.append('</svg>')
     return "\n".join(p)
 
 
-def build_unit(n, title, w=WIDTH, h=76):
-    badge = 52
-    warn(title, 27, w - badge - 30, title)
+def build_unit(n, title, w=WIDTH, h=64):
+    """Boxed unit header: bordered band, square number badge on the left."""
+    badge, r = 46, 6
+    warn(title, 24, w - badge - 34, title)
     p = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}">']
-    p.append(f'<rect x="0" y="0" width="{w}" height="{h - 6}" fill="{C_UNIT_BG}"/>')
-    p.append(f'<rect x="0" y="0" width="{badge}" height="{h - 6}" fill="{C_UNIT}"/>')
-    p.append(txt(badge / 2, 46, str(n), 30, "#FFFFFF", "700", anchor="middle"))
-    p.append(txt(badge + 22, 46, title, 27, C_UNIT_TX, "700"))
-    p.append(f'<rect x="0" y="{h - 6}" width="{w}" height="4" fill="{C_UNIT}"/>')
+    # band
+    p.append(f'<rect x="1" y="1" width="{w - 2}" height="{h - 2}" rx="{r}" fill="{C_UNIT_BG}"/>')
+    # badge, right edge squared off
+    p.append(f'<rect x="1" y="1" width="{badge}" height="{h - 2}" rx="{r}" fill="{C_UNIT}"/>')
+    p.append(f'<rect x="{badge - r + 1}" y="1" width="{r}" height="{h - 2}" fill="{C_UNIT}"/>')
+    p.append(txt(badge / 2 + 1, h / 2 + 9, str(n), 25, "#FFFFFF", "700", anchor="middle"))
+    p.append(txt(badge + 20, h / 2 + 9, title, 24, C_UNIT_TX, "700"))
+    # border on top
+    p.append(f'<rect x="1" y="1" width="{w - 2}" height="{h - 2}" rx="{r}" fill="none" '
+             f'stroke="{C_UNIT}" stroke-width="1.5"/>')
     p.append('</svg>')
     return "\n".join(p)
 
@@ -113,6 +127,8 @@ if __name__ == "__main__":
     os.makedirs(OUT_DIR, exist_ok=True)
     print(f"[{COVER['filename']}]")
     write(COVER["filename"], build_cover(COVER))
+    print("[w01_cover_dark.svg]")
+    write("w01_cover_dark.svg", build_cover(COVER, dark=True))
     for n, title, fname in UNITS:
         print(f"[{fname}]")
         write(fname, build_unit(n, title))

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="339" viewBox="0 0 900 339">
+<rect x="0" y="0" width="291" height="173" rx="6" fill="#F4F9FE" stroke="#D6E4F3" stroke-width="1"/>
+<text x="18" y="36" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#0C447C">
+<tspan x="18" dy="0">Course goals</tspan>
+</text>
+<text x="18" y="61" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="14" font-weight="400" fill="#3D3D3A">
+<tspan x="18" dy="0">Learn basic Python syntax and</tspan>
+<tspan x="18" dy="21">concepts for data analysis and AI</tspan>
+<tspan x="18" dy="21">modeling, and build hands-on</tspan>
+<tspan x="18" dy="21">programming skills.</tspan>
+</text>
+<rect x="305" y="0" width="291" height="173" rx="6" fill="#F4F9FE" stroke="#D6E4F3" stroke-width="1"/>
+<text x="323" y="36" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#0C447C">
+<tspan x="323" dy="0">Requirements</tspan>
+</text>
+<text x="323" y="61" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="14" font-weight="400" fill="#3D3D3A">
+<tspan x="323" dy="0">A computer that runs Python.</tspan>
+<tspan x="323" dy="21">Mobile devices are not</tspan>
+<tspan x="323" dy="21">recommended, and a separate</tspan>
+<tspan x="323" dy="21">coding computer is required for</tspan>
+<tspan x="323" dy="21">the exams.</tspan>
+</text>
+<rect x="609" y="0" width="291" height="173" rx="6" fill="#F4F9FE" stroke="#D6E4F3" stroke-width="1"/>
+<text x="627" y="36" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#0C447C">
+<tspan x="627" dy="0">Why Python</tspan>
+</text>
+<text x="627" y="61" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="14" font-weight="400" fill="#3D3D3A">
+<tspan x="627" dy="0">A rich library ecosystem,</tspan>
+<tspan x="627" dy="21">readable syntax, a strong</tspan>
+<tspan x="627" dy="21">community, and compatibility with</tspan>
+<tspan x="627" dy="21">machine learning frameworks.</tspan>
+</text>
+<rect x="0" y="187" width="291" height="152" rx="6" fill="#F4F9FE" stroke="#D6E4F3" stroke-width="1"/>
+<text x="18" y="223" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#0C447C">
+<tspan x="18" dy="0">Why Colab</tspan>
+</text>
+<text x="18" y="248" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="14" font-weight="400" fill="#3D3D3A">
+<tspan x="18" dy="0">No installation, free access to</tspan>
+<tspan x="18" dy="21">GPU and TPU resources, and the</tspan>
+<tspan x="18" dy="21">same environment for every</tspan>
+<tspan x="18" dy="21">student.</tspan>
+</text>
+<rect x="305" y="187" width="291" height="152" rx="6" fill="#F4F9FE" stroke="#D6E4F3" stroke-width="1"/>
+<text x="323" y="223" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#0C447C">
+<tspan x="323" dy="0">First steps</tspan>
+</text>
+<text x="323" y="248" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="14" font-weight="400" fill="#3D3D3A">
+<tspan x="323" dy="0">Create a notebook, run a cell,</tspan>
+<tspan x="323" dy="21">add cells, declare variables, run</tspan>
+<tspan x="323" dy="21">arithmetic, and comment code.</tspan>
+</text>
+</svg>
