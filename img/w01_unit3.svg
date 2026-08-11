@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="76" viewBox="0 0 900 76">
+<rect x="0" y="0" width="900" height="70" fill="#E6F1FB"/>
+<rect x="0" y="0" width="52" height="70" fill="#0C447C"/>
+<text x="26.0" y="46" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="30" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+<text x="74" y="46" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="27" font-weight="700" fill="#185FA5">Getting Started with Colab</text>
+<rect x="0" y="70" width="900" height="4" fill="#0C447C"/>
+</svg>
