@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="828" viewBox="0 0 900 828">
+<rect x="1" y="0" width="898" height="144" rx="6" fill="#F4F9FE" stroke="#0C447C" stroke-width="1.5"/>
+<rect x="1" y="0" width="62" height="144" rx="6" fill="#0C447C"/>
+<rect x="57" y="0" width="6" height="144" fill="#0C447C"/>
+<text x="32.0" y="48.0" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="30" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+<text x="84" y="48.0" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="26" font-weight="700" fill="#185FA5">Course Goals</text>
+<text x="84" y="84.0" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#1B3A5C">Learn the basic syntax and concepts of Python for data analysis and</text>
+<text x="84" y="114.0" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#1B3A5C">AI modeling, and build hands-on programming skills.</text>
+<rect x="1" y="156" width="898" height="174" rx="6" fill="#F4F9FE" stroke="#0C447C" stroke-width="1.5"/>
+<rect x="1" y="156" width="62" height="174" rx="6" fill="#0C447C"/>
+<rect x="57" y="156" width="6" height="174" fill="#0C447C"/>
+<text x="32.0" y="204.0" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="30" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+<text x="84" y="204.0" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="26" font-weight="700" fill="#185FA5">Requirements</text>
+<text x="84" y="240.0" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#1B3A5C">A computer on which you can run Python. Mobile devices are not</text>
+<text x="84" y="270.0" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#1B3A5C">recommended, and a separate coding computer is required for the</text>
+<text x="84" y="300.0" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#1B3A5C">exams.</text>
+<rect x="1" y="342" width="898" height="174" rx="6" fill="#F4F9FE" stroke="#0C447C" stroke-width="1.5"/>
+<rect x="1" y="342" width="62" height="174" rx="6" fill="#0C447C"/>
+<rect x="57" y="342" width="6" height="174" fill="#0C447C"/>
+<text x="32.0" y="390.0" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="30" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+<text x="84" y="390.0" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="26" font-weight="700" fill="#185FA5">Why Python</text>
+<text x="84" y="426.0" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#1B3A5C">A rich library ecosystem (NumPy, Pandas, Matplotlib and Seaborn),</text>
+<text x="84" y="456.0" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#1B3A5C">readable syntax, a strong community, and compatibility with machine</text>
+<text x="84" y="486.0" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#1B3A5C">learning frameworks.</text>
+<rect x="1" y="528" width="898" height="144" rx="6" fill="#F4F9FE" stroke="#0C447C" stroke-width="1.5"/>
+<rect x="1" y="528" width="62" height="144" rx="6" fill="#0C447C"/>
+<rect x="57" y="528" width="6" height="144" fill="#0C447C"/>
+<text x="32.0" y="576.0" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="30" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+<text x="84" y="576.0" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="26" font-weight="700" fill="#185FA5">Why Colab</text>
+<text x="84" y="612.0" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#1B3A5C">No installation, free access to GPU and TPU resources, and the same</text>
+<text x="84" y="642.0" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#1B3A5C">environment for every student.</text>
+<rect x="1" y="684" width="898" height="144" rx="6" fill="#F4F9FE" stroke="#0C447C" stroke-width="1.5"/>
+<rect x="1" y="684" width="62" height="144" rx="6" fill="#0C447C"/>
+<rect x="57" y="684" width="6" height="144" fill="#0C447C"/>
+<text x="32.0" y="732.0" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="30" font-weight="700" fill="#FFFFFF" text-anchor="middle">5</text>
+<text x="84" y="732.0" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="26" font-weight="700" fill="#185FA5">First Steps in Colab</text>
+<text x="84" y="768.0" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#1B3A5C">Create a notebook, run a cell, add cells, declare variables, run</text>
+<text x="84" y="798.0" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#1B3A5C">arithmetic, and comment code with a hash mark.</text>
+</svg>
