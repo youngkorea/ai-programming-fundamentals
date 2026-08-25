@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="492" viewBox="0 0 900 492">
+<rect x="1" y="1" width="898" height="490" rx="10" fill="#F2FBF7" stroke="#C9E7DC" stroke-width="1.5"/>
+<rect x="1" y="1" width="898" height="6" rx="3" fill="#0F6E56"/>
+<rect x="1" y="4" width="898" height="4" fill="#0F6E56"/>
+<circle cx="35" cy="40" r="9" fill="#0F6E56"/>
+<path d="M 31 40 l 3 3.5 l 6 -7" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="56" y="48" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#04342C">Lists</text>
+<text x="56" y="80" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#2C4A41">A list is an ordered and mutable collection that stores multiple</text>
+<text x="56" y="110" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#2C4A41">values in one object.</text>
+<rect x="26" y="124" width="848" height="1" fill="#C9E7DC"/>
+<circle cx="35" cy="158" r="9" fill="#0F6E56"/>
+<path d="M 31 158 l 3 3.5 l 6 -7" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="56" y="166" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#04342C">Accessing and Modifying Lists</text>
+<text x="56" y="198" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#2C4A41">Elements are reached with indexing and slicing, and lists are changed</text>
+<text x="56" y="228" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#2C4A41">with operations, methods, and built-in functions.</text>
+<rect x="26" y="242" width="848" height="1" fill="#C9E7DC"/>
+<circle cx="35" cy="276" r="9" fill="#0F6E56"/>
+<path d="M 31 276 l 3 3.5 l 6 -7" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="56" y="284" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#04342C">Tuples</text>
+<text x="56" y="316" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#2C4A41">A tuple is an ordered but immutable collection, so its values cannot</text>
+<text x="56" y="346" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#2C4A41">be changed after it is created.</text>
+<rect x="26" y="360" width="848" height="1" fill="#C9E7DC"/>
+<circle cx="35" cy="394" r="9" fill="#0F6E56"/>
+<path d="M 31 394 l 3 3.5 l 6 -7" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="56" y="402" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#04342C">Choosing Between Them</text>
+<text x="56" y="434" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#2C4A41">Use a list when the data may change, and a tuple when the values are</text>
+<text x="56" y="464" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#2C4A41">intended to stay fixed.</text>
+</svg>
