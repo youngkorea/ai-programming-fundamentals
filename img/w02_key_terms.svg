@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="142" viewBox="0 0 900 142">
+<text x="0" y="22" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#5F5E5A">KEY TERMS</text>
+<rect x="0" y="40" width="123" height="46" rx="23" fill="#E6F1FB"/>
+<text x="61.580000000000005" y="71.0" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="24" font-weight="400" fill="#0C447C" text-anchor="middle">object</text>
+<rect x="133" y="40" width="95" height="46" rx="23" fill="#E6F1FB"/>
+<text x="180.88000000000002" y="71.0" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="24" font-weight="400" fill="#0C447C" text-anchor="middle">type</text>
+<rect x="239" y="40" width="220" height="46" rx="23" fill="#E6F1FB"/>
+<text x="348.69000000000005" y="71.0" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="24" font-weight="400" fill="#0C447C" text-anchor="middle">scalar object</text>
+<rect x="469" y="40" width="276" height="46" rx="23" fill="#E6F1FB"/>
+<text x="606.5900000000001" y="71.0" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="24" font-weight="400" fill="#0C447C" text-anchor="middle">non-scalar object</text>
+<rect x="0" y="96" width="179" height="46" rx="23" fill="#E6F1FB"/>
+<text x="89.3" y="127.0" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="24" font-weight="400" fill="#0C447C" text-anchor="middle">expression</text>
+<rect x="189" y="96" width="123" height="46" rx="23" fill="#E6F1FB"/>
+<text x="250.18" y="127.0" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="24" font-weight="400" fill="#0C447C" text-anchor="middle">string</text>
+<rect x="322" y="96" width="137" height="46" rx="23" fill="#E6F1FB"/>
+<text x="390.27" y="127.0" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="24" font-weight="400" fill="#0C447C" text-anchor="middle">Boolean</text>
+<rect x="469" y="96" width="151" height="46" rx="23" fill="#E6F1FB"/>
+<text x="544.22" y="127.0" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="24" font-weight="400" fill="#0C447C" text-anchor="middle">variable</text>
+<rect x="630" y="96" width="248" height="46" rx="23" fill="#E6F1FB"/>
+<text x="753.61" y="127.0" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="24" font-weight="400" fill="#0C447C" text-anchor="middle">type conversion</text>
+</svg>
