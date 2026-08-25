@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="640" viewBox="0 0 900 640">
+<rect x="1" y="1" width="898" height="638" rx="10" fill="#F2FBF7" stroke="#C9E7DC" stroke-width="1.5"/>
+<rect x="1" y="1" width="898" height="6" rx="3" fill="#0F6E56"/>
+<rect x="1" y="4" width="898" height="4" fill="#0F6E56"/>
+<circle cx="35" cy="40" r="9" fill="#0F6E56"/>
+<path d="M 31 40 l 3 3.5 l 6 -7" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="56" y="48" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#04342C">Course Goals</text>
+<text x="56" y="80" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#2C4A41">Learn the basic syntax and concepts of Python for data analysis and AI</text>
+<text x="56" y="110" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#2C4A41">modeling, and build hands-on programming skills.</text>
+<rect x="26" y="124" width="848" height="1" fill="#C9E7DC"/>
+<circle cx="35" cy="158" r="9" fill="#0F6E56"/>
+<path d="M 31 158 l 3 3.5 l 6 -7" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="56" y="166" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#04342C">Requirements</text>
+<text x="56" y="198" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#2C4A41">A computer on which you can run Python. Mobile devices are not</text>
+<text x="56" y="228" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#2C4A41">recommended, and a separate coding computer is required for the exams.</text>
+<rect x="26" y="242" width="848" height="1" fill="#C9E7DC"/>
+<circle cx="35" cy="276" r="9" fill="#0F6E56"/>
+<path d="M 31 276 l 3 3.5 l 6 -7" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="56" y="284" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#04342C">Why Python</text>
+<text x="56" y="316" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#2C4A41">A rich library ecosystem (NumPy, Pandas, Matplotlib and Seaborn),</text>
+<text x="56" y="346" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#2C4A41">readable syntax, a strong community, and compatibility with machine</text>
+<text x="56" y="376" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#2C4A41">learning frameworks.</text>
+<rect x="26" y="390" width="848" height="1" fill="#C9E7DC"/>
+<circle cx="35" cy="424" r="9" fill="#0F6E56"/>
+<path d="M 31 424 l 3 3.5 l 6 -7" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="56" y="432" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#04342C">Why Colab</text>
+<text x="56" y="464" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#2C4A41">No installation, free access to GPU and TPU resources, and the same</text>
+<text x="56" y="494" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#2C4A41">environment for every student.</text>
+<rect x="26" y="508" width="848" height="1" fill="#C9E7DC"/>
+<circle cx="35" cy="542" r="9" fill="#0F6E56"/>
+<path d="M 31 542 l 3 3.5 l 6 -7" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="56" y="550" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#04342C">First Steps in Colab</text>
+<text x="56" y="582" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#2C4A41">Create a notebook, run a cell, add cells, declare variables, run</text>
+<text x="56" y="612" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#2C4A41">arithmetic, and comment code with a hash mark.</text>
+</svg>
