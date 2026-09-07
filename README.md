@@ -14,8 +14,12 @@ Course materials for **AI Programming Fundamentals** can be found at:
 If you have any questions about the course, please post them on the Course Q&A board or contact me at youngah2026@iscu.ac.kr.
 
 Prof. Shin,
+
 Department of Bigdata and Information Security,
+
 Seoul Cyber University
+
+---
 
 #### Copyright and Use
 
