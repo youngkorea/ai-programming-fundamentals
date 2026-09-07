@@ -1,8 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="145" viewBox="0 0 900 145">
-  <rect width="900" height="145" rx="16" fill="#FFFFFF"/>
-  <rect x="0" y="0" width="10" height="145" rx="5" fill="#0F6E56"/>
-  <circle cx="55" cy="72" r="28" fill="#EAF5F0"/>
-  <text x="55" y="80" text-anchor="middle" fill="#0F6E56" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="800">3</text>
-  <text x="102" y="64" fill="#0F6E56" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="800">Understanding Sets</text>
-  <text x="104" y="101" fill="#5B6E67" font-family="Arial, Helvetica, sans-serif" font-size="19">Create sets and work with unique values.</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="96" viewBox="0 0 900 96">
+<rect x="1" y="1" width="898" height="94" rx="6" fill="#E6F1FB"/>
+<rect x="1" y="1" width="68" height="94" rx="6" fill="#0C447C"/>
+<rect x="63" y="1" width="6" height="94" fill="#0C447C"/>
+<text x="35.0" y="65.0" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="46" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+<text x="94" y="65.0" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="48" font-weight="700" fill="#185FA5">Understanding Sets</text>
+<rect x="1" y="1" width="898" height="94" rx="6" fill="none" stroke="#0C447C" stroke-width="1.5"/>
 </svg>

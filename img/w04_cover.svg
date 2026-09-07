@@ -1,21 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="300" viewBox="0 0 900 300">
-  <rect width="900" height="300" rx="20" fill="#FFFFFF"/>
-  <rect x="0" y="0" width="14" height="300" rx="7" fill="#0F6E56"/>
-  <rect x="42" y="42" width="120" height="36" rx="18" fill="#EAF5F0"/>
-  <text x="102" y="66" text-anchor="middle" fill="#0F6E56" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">WEEK 04</text>
-  <text x="42" y="125" fill="#0F6E56" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">AI Programming Fundamentals</text>
-  <text x="42" y="191" fill="#0F6E56" font-family="Arial, Helvetica, sans-serif" font-size="50" font-weight="800">Dictionaries and Sets</text>
-  <text x="42" y="234" fill="#5B6E67" font-family="Arial, Helvetica, sans-serif" font-size="21">Organize mappings and work with unique values</text>
-  <g transform="translate(700 67)">
-    <rect x="0" y="0" width="145" height="155" rx="18" fill="#F7FBF9" stroke="#0F6E56" stroke-width="2"/>
-    <text x="24" y="42" fill="#0F6E56" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700">key</text>
-    <text x="73" y="42" fill="#5B6E67" font-family="Arial, Helvetica, sans-serif" font-size="17">:</text>
-    <text x="91" y="42" fill="#0F6E56" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700">value</text>
-    <line x1="24" y1="62" x2="121" y2="62" stroke="#BFD9CF" stroke-width="2"/>
-    <circle cx="42" cy="91" r="10" fill="#0F6E56"/>
-    <circle cx="73" cy="91" r="10" fill="#BFD9CF"/>
-    <circle cx="104" cy="91" r="10" fill="#0F6E56"/>
-    <circle cx="57" cy="121" r="10" fill="#BFD9CF"/>
-    <circle cx="88" cy="121" r="10" fill="#0F6E56"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="222" viewBox="0 0 900 222">
+<rect x="0" y="0" width="900" height="222" rx="8" fill="#0C447C"/>
+<text x="34" y="104" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="49" font-weight="700" fill="#FFFFFF">AI Programming Fundamentals</text>
+<rect x="34" y="134" width="58" height="32" rx="4" fill="#0F6E56"/>
+<text x="63.025000000000006" y="156" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">W04</text>
+<text x="106.05000000000001" y="160" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="32" font-weight="700" fill="#B5D4F4">Dictionaries and Sets</text>
+<text x="866" y="200" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="14" font-weight="400" fill="#85B7EB" text-anchor="end">youngah2026@iscu.ac.kr</text>
 </svg>
