@@ -13,14 +13,14 @@ Notebooks are executable: concepts and hands-on practice live in the same file.
 | 4 | Dictionaries and Sets | _not yet published_ |
 | 5 | Conditional Statements | _not yet published_ |
 | 6 | Loops | _not yet published_ |
-| 7 | Functions | _not yet published_ |
+| 7 | Review: Python Fundamentals | _not yet published_ |
 | **8** | **Midterm Exam** | |
-| 9 | Strings and Regular Expressions | _not yet published_ |
-| 10 | Modules and Packages | _not yet published_ |
-| 11 | File I/O and Exception Handling | _not yet published_ |
-| 12 | Classes | _not yet published_ |
-| 13 | Advanced Topics | _not yet published_ |
-| 14 | Introduction to Data Analysis Libraries | _not yet published_ |
+| 9 | Functions | _not yet published_ |
+| 10 | Strings | _not yet published_ |
+| 11 | Modules and Packages | _not yet published_ |
+| 12 | File I/O and Exception Handling | _not yet published_ |
+| 13 | Introduction to Data Analysis Libraries | _not yet published_ |
+| 14 | Review: Applied Python | _not yet published_ |
 | **15** | **Final Exam** | |
 
 ## Repository layout
