@@ -1,6 +1,6 @@
 # AI Programming Fundamentals
 
-Welcome to **AI Programming Fundamentals** at Seoul Cyber University(SCU) for the Fall semester of 2026.
+Welcome to **AI Programming Fundamentals** at Seoul Cyber University(SCU) for the fall semester of 2026.
 
 This course introduces the fundamentals of Python programming through hands-on practice. You will learn to write, run, and apply basic Python programs while building a foundation for further study related to data analysis and AI modeling.
 
