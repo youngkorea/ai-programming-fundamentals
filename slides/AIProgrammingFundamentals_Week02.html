@@ -1,0 +1,1754 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>AI Programming Fundamentals — Week 02</title><style>
+:root{
+ --W:1600px;--H:900px;
+ --brand:#1b5fa4;--brand-deep:#0c447c;--brand-dark:#08355f;--brand-mid:#3b79b6;
+ --mint:#e6f1fb;--mint-2:#d8e8f7;--mint-3:#bfd7ee;--sage:#7fa8cd;
+ --paper:#FFFFFF;--paper-2:#f9fafa;--ink:#1a3148;--muted:#5d7185;--line:#d4e2ee;
+ --code:#092d50;--code-2:#164f82;--white:#FFFFFF;--shadow:0 18px 50px rgba(13,39,65,.12);--shadow-soft:0 8px 24px rgba(13,39,65,.09);
+}
+*{box-sizing:border-box}
+::-webkit-scrollbar{display:none}html{scrollbar-width:none}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#dce7f0}
+body{font-family:Inter,"Segoe UI",Arial,sans-serif;color:var(--ink);font-synthesis:none;font-kerning:normal;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;touch-action:none}
+button,a{font:inherit}
+#viewport{position:relative;width:100vw;height:100vh;overflow:hidden;background:radial-gradient(circle at 28% 20%,#edf3f9,#d6e3ee 64%,#ccd9e5)}
+.slide{position:absolute;left:50%;top:50%;width:var(--W);height:var(--H);transform:translate(-50%,-50%) scale(var(--scale,1));transform-origin:center;display:none;overflow:hidden;background:var(--paper);box-shadow:0 30px 90px rgba(18,32,46,.24)}
+.slide.active{display:block;animation:fade .16s ease-out}@keyframes fade{from{opacity:.76}to{opacity:1}}
+.frame{position:absolute;inset:48px 72px 38px 72px}
+.content-slide{background:linear-gradient(145deg,#fff 0%,#f9fafa 100%)}
+.soft-orb{position:absolute;border-radius:50%;pointer-events:none}.orb-one{width:430px;height:430px;right:-225px;top:-250px;background:radial-gradient(circle,rgba(49,91,133,.13),rgba(49,91,133,0) 70%)}.orb-two{width:500px;height:500px;left:-300px;bottom:-330px;background:radial-gradient(circle,rgba(20,62,105,.085),rgba(20,62,105,0) 70%)}
+.slide-header{height:118px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid var(--line)}
+.slide-header h2{margin:15px 0 0;font-size:54px;line-height:1.04;font-weight:720;letter-spacing:-.035em;color:var(--ink)}
+.kicker{display:inline-flex;align-items:center;height:38px;padding:0 15px;border-radius:8px;background:var(--mint);color:var(--brand);font-size:27px;font-weight:750;letter-spacing:.035em}
+.week-chip{margin-top:4px;padding:8px 15px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--brand);font-size:27px;font-weight:650;white-space:nowrap}
+.slide-body{position:absolute;left:0;right:0;top:143px;bottom:55px}
+.slide-footer{position:absolute;left:0;right:0;bottom:0;height:38px;display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:27px;font-weight:520}
+.footer-right{display:flex;align-items:center;gap:18px}.progress{width:210px;height:5px;background:#dce7f0;border-radius:99px;overflow:hidden}.progress i{display:block;width:var(--progress,0%);height:100%;background:linear-gradient(90deg,var(--brand),var(--sage));border-radius:99px}.page-count{font-variant-numeric:tabular-nums;white-space:nowrap}
+.line-icon{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.icon-box{width:58px;height:58px;display:inline-flex;align-items:center;justify-content:center;border-radius:16px;background:var(--mint);color:var(--brand);flex:0 0 auto}.icon-box.large{width:72px;height:72px;border-radius:20px}.icon-box.huge{width:88px;height:88px;border-radius:24px}.step-icon{width:72px;height:72px;display:inline-flex;color:var(--brand)}
+.split{display:grid;height:100%;gap:52px}.hero-split{grid-template-columns:1.05fr .95fr}.step-split{grid-template-columns:.78fr 1.22fr;align-items:center}.hero-copy{display:flex;flex-direction:column;justify-content:center}.hero-copy.compact{padding:10px 0}.accent-line,.mini-rule{width:104px;height:7px;border-radius:99px;background:linear-gradient(90deg,var(--brand),var(--mint-3));margin-bottom:28px}.mini-rule{width:80px;height:5px;margin:24px 0}
+.hero-text{margin:0;font-size:48px;line-height:1.2;letter-spacing:-.028em;font-weight:450}.hero-text strong{color:var(--brand);font-weight:750}.lead{margin:22px 0 0;font-size:31px;line-height:1.47;color:var(--muted)}
+.large-title{font-size:43px;line-height:1.18;margin:24px 0 10px;letter-spacing:-.025em}.center-lead{font-size:37px;line-height:1.3;text-align:center;color:var(--brand);font-weight:650}
+.grid-2,.grid-3,.grid-4{display:grid;height:100%;gap:28px}.grid-2{grid-template-columns:repeat(2,1fr)}.grid-3{grid-template-columns:repeat(3,1fr)}.grid-4{grid-template-columns:repeat(4,1fr)}
+.card{height:100%;padding:34px 34px 30px;border-radius:26px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft);display:flex;flex-direction:column}.card-top{display:flex;align-items:center;justify-content:space-between}.card-number{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--brand);color:#fff;font-size:27px;font-weight:750}.card h3{margin:26px 0 12px;font-size:35px;line-height:1.16;letter-spacing:-.022em}.card p{margin:0;font-size:29px;line-height:1.43;color:var(--muted)}
+.feature-grid{height:480px;margin-top:30px}.feature-grid.with-callout{height:440px;margin-top:24px}.feature-grid.with-callout + .wide-callout{margin-top:16px;min-height:100px;padding:18px 30px}.outcome-grid,.objective-grid{height:470px;margin-top:45px}.outcome-grid .card,.objective-grid .card{padding:42px}.outcome-grid .card h3,.objective-grid .card h3{font-size:40px}.outcome-grid .card p,.objective-grid .card p{font-size:31px}.bottom-strip{position:absolute;left:0;right:0;bottom:0;height:110px;border-radius:22px;background:var(--brand-deep);color:#fff;padding:25px 34px;display:flex;align-items:center;justify-content:space-between}.bottom-strip b{font-size:34px}.bottom-strip span{font-size:29px;color:#dee3e9}
+.wide-callout{margin-top:26px;min-height:110px;padding:23px 30px;border-radius:22px;background:var(--brand-deep);color:#fff;display:flex;align-items:center;gap:24px;box-shadow:var(--shadow)}.wide-callout.subtle{background:var(--mint);color:var(--ink);box-shadow:none;border:1px solid var(--line)}.wide-callout p{margin:0;font-size:30px;line-height:1.42}.wide-callout strong{color:#c4ced8}.wide-callout.subtle strong{color:var(--brand)}
+.url-chip,.url-line,.file-chip{display:inline-flex;padding:10px 16px;border-radius:10px;background:var(--mint);color:var(--brand);font-size:29px;font-weight:650;word-break:break-all}.url-line{margin-top:22px;width:max-content;max-width:100%}.file-chip{margin-top:12px;background:var(--code);color:#e3e9ee;font-family:"Cascadia Code",Consolas,monospace}
+.cover-slide{background:linear-gradient(132deg,var(--brand-dark) 0%,#0d4e88 62%,#1761a3 100%);color:#fff}.cover-grid,.section-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(177,192,208,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(177,192,208,.07) 1px,transparent 1px);background-size:55px 55px;mask-image:linear-gradient(90deg,#000 0%,rgba(0,0,0,.78) 58%,rgba(0,0,0,.2) 100%)}.cover-slide:before{content:"";position:absolute;width:720px;height:720px;border-radius:50%;right:-250px;top:-260px;background:radial-gradient(circle,rgba(158,178,198,.22),rgba(158,178,198,0) 68%)}.cover-left{position:absolute;left:82px;top:72px;bottom:70px;width:820px;display:flex;flex-direction:column;justify-content:center}.cover-brand{position:absolute;top:0;font-size:27px;letter-spacing:.11em;font-weight:700;color:#becad5}.cover-tag{display:flex;align-items:center;gap:18px;margin-bottom:36px}.cover-tag span{padding:12px 19px;border-radius:9px;background:#e5eaee;color:var(--brand-deep);font-size:29px;font-weight:800}.cover-tag b{font-size:29px;color:#b3c1cf;letter-spacing:.035em}.cover-left h1{margin:0;font-size:82px;line-height:1.02;letter-spacing:-.045em;font-weight:760}.cover-left p{margin:28px 0 0;font-size:34px;line-height:1.35;color:#d1d8de}.cover-meta{display:flex;gap:14px;margin-top:36px}.cover-meta span{padding:9px 15px;border:1px solid rgba(225,230,236,.25);border-radius:999px;font-size:27px;color:#e0e6eb}.cover-right{position:absolute;right:34px;top:75px;width:680px;height:650px;display:flex;align-items:center;justify-content:center}.hero-svg{width:100%;height:100%}.cover-nav-hint{position:absolute;left:82px;bottom:46px;display:flex;align-items:center;gap:17px;color:#c9d0d8;font-size:27px}.cover-nav-hint span{padding:7px 14px;border-radius:8px;background:rgba(255,255,255,.11);font-weight:700}.cover-nav-hint b{font-weight:520}.cover-page{position:absolute;right:78px;bottom:48px;font-size:27px;color:#c9d0d8}
+.section-slide{background:linear-gradient(132deg,var(--brand-dark),#0d4e88 68%,#1866aa);color:#fff}.section-slide:before{content:"";position:absolute;width:820px;height:820px;border-radius:50%;right:-300px;top:-330px;background:radial-gradient(circle,rgba(154,173,192,.21),rgba(154,173,192,0) 70%)}.section-copy{position:absolute;left:82px;top:118px;width:790px}.section-eyebrow{display:inline-flex;padding:12px 18px;border-radius:9px;background:#e5eaee;color:var(--brand-deep);font-size:29px;font-weight:800}.section-copy h1{margin:34px 0 0;font-size:76px;line-height:1.08;letter-spacing:-.04em}.section-copy p{margin:26px 0 0;width:720px;font-size:32px;line-height:1.45;color:#cbd3db}.section-rule{width:150px;height:7px;border-radius:99px;background:#a1b2c3;margin-top:38px}.section-brand{display:block;margin-top:30px;font-size:27px;letter-spacing:.08em;color:#becad5}.section-art{position:absolute;right:62px;top:134px;width:650px;height:560px;display:flex;align-items:center;justify-content:center}.section-svg{width:100%;height:100%}.section-page{position:absolute;left:82px;right:78px;bottom:48px;display:flex;justify-content:space-between;align-items:center;font-size:27px;color:#c9d0d8}
+.hero-layout{display:grid;grid-template-columns:1.12fr .88fr;height:100%;gap:55px}.big-quote{margin:0;font-size:57px;line-height:1.14;letter-spacing:-.035em}.big-quote strong{color:var(--brand)}.quote-mark{height:60px;font-family:Georgia,serif;font-size:100px;color:var(--mint-3);line-height:.7}.hero-side{display:flex;flex-direction:column;justify-content:center;gap:24px}.stack-card{padding:31px;border-radius:25px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft)}.stack-card.active{background:var(--brand-deep);color:#fff}.stack-card.active .icon-box{background:rgba(255,255,255,.12);color:#e3e8ee}.stack-card h3{margin:20px 0 8px;font-size:35px}.stack-card p{margin:0;font-size:29px;line-height:1.38;color:var(--muted)}.stack-card.active p{color:#d4dbe1}
+.loop-flow{height:410px;display:flex;align-items:center;justify-content:center;gap:18px}.loop-step{width:250px;height:250px;border-radius:28px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft);display:flex;flex-direction:column;align-items:center;justify-content:center}.loop-step b{font-size:36px;margin-top:16px}.loop-step small{font-size:28px;line-height:1.22;color:var(--muted);margin-top:8px;width:205px;text-align:center}.flow-arrow,.path-arrow{font-size:52px;color:var(--sage);font-weight:400}
+.code-ecosystem{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:34px;background:linear-gradient(145deg,var(--brand-deep),#0f4b80);box-shadow:var(--shadow);overflow:hidden}.code-ecosystem:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(217,224,232,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(217,224,232,.07) 1px,transparent 1px);background-size:40px 40px}.code-badge{position:relative;width:180px;height:180px;border-radius:50%;background:#e6eaef;color:var(--brand);display:flex;align-items:center;justify-content:center;font-size:49px;font-weight:800;box-shadow:0 0 0 20px rgba(226,232,237,.08)}.ecosystem-row{position:relative;display:flex;gap:15px;margin-top:40px}.ecosystem-row span{padding:11px 18px;border-radius:999px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.15);color:#e3e8ee;font-size:27px;font-weight:650}.ecosystem-code{position:absolute;bottom:33px;left:55px;right:55px}.ecosystem-code i{display:block;height:8px;margin-top:11px;border-radius:99px;background:rgba(227,232,238,.23)}.ecosystem-code i:nth-child(2){width:76%}.ecosystem-code i:nth-child(3){width:88%}.ecosystem-code i:nth-child(4){width:56%}
+.device-stage{display:grid;grid-template-columns:1fr 120px 1fr;align-items:center;height:100%;gap:24px}.device-good,.device-bad{height:490px;padding:42px;border-radius:30px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft);display:flex;flex-direction:column;align-items:center;text-align:center}.device-good{border-top:7px solid var(--brand)}.device-bad{border-top:7px solid #848a90}.device-icon{width:120px;height:120px;color:var(--brand)}.device-bad .device-icon{color:#7d8288}.device-good h3,.device-bad h3{font-size:39px;margin:26px 0 12px}.device-good p,.device-bad p{font-size:30px;line-height:1.42;color:var(--muted);margin:0}.device-vs{font-size:38px;font-weight:800;color:var(--sage);text-align:center}.status{margin-top:auto;padding:10px 18px;border-radius:999px;font-size:28px;font-weight:700}.status.good{background:var(--mint);color:var(--brand)}.status.bad{background:#eff0f2;color:#686d71}
+.exam-layout{height:100%;display:grid;grid-template-columns:.75fr 1.25fr;grid-template-rows:1fr auto;gap:30px 55px}.exam-copy{display:flex;flex-direction:column;justify-content:center}.exam-copy h3{font-size:43px;margin:26px 0 12px}.exam-copy p{font-size:31px;line-height:1.45;color:var(--muted);margin:0}.dual-device{display:flex;align-items:center;justify-content:center;gap:20px}.mini-device{display:flex;flex-direction:column;align-items:center;gap:16px}.mini-device>span{font-size:29px;font-weight:650;color:var(--brand)}.screen{width:270px;height:210px;border:14px solid #292f35;border-bottom-width:28px;border-radius:20px;background:#fff;padding:32px}.screen b{font-size:30px}.screen i{display:block;height:9px;border-radius:99px;margin-top:15px;background:#d3d9df}.screen.code{background:var(--code);color:#e3e9ee}.screen.code i{background:#2b4e72}.plus-sign{font-size:58px;color:var(--sage)}.exam-note{grid-column:1/-1;padding:22px 28px;border-radius:20px;background:var(--mint);border:1px solid var(--line);font-size:30px;line-height:1.4;color:var(--brand-deep);font-weight:600}
+.visual-card{height:100%}.browser-mock{height:100%;border-radius:30px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);overflow:hidden}.browser-top{height:64px;background:#eff1f3;border-bottom:1px solid var(--line);display:grid;grid-template-columns:110px 1fr 70px;align-items:center;padding:0 22px}.browser-dots{display:flex;gap:10px}.browser-dots i{width:13px;height:13px;border-radius:50%;background:#96a4b3}.browser-dots i:nth-child(2){opacity:.65}.browser-dots i:nth-child(3){opacity:.38}.address{height:36px;border-radius:10px;background:#fff;border:1px solid #d8dce0;display:flex;align-items:center;padding:0 16px;color:#63696f;font-size:27px}.browser-menu{text-align:right;font-size:32px;color:#6b7177}.browser-body{height:calc(100% - 64px);background:#fff}
+.mock-colab{height:100%;display:grid;grid-template-columns:80px 1fr}.mock-side{background:#f3f4f6;border-right:1px solid var(--line);padding-top:34px}.mock-side i{display:block;width:33px;height:33px;border-radius:9px;background:#cad1d8;margin:0 auto 24px}.mock-main{padding:38px}.mock-text,.mock-code,.mock-output{border-radius:14px;border:1px solid var(--line);margin-bottom:20px;padding:22px}.mock-text b{font-size:29px;color:var(--brand)}.mock-text span{display:block;height:9px;background:#d8dde2;border-radius:9px;margin-top:14px}.mock-text span:last-child{width:70%}.mock-code{display:flex;align-items:center;gap:17px;background:#f9fafb}.mock-code b{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--brand);color:#fff;font-size:27px}.mock-code code{font-size:28px;color:var(--code)}.mock-output{font-size:28px;color:var(--muted);background:#f5f6f7}
+.learning-path{height:100%;display:flex;align-items:center;justify-content:center;gap:28px}.path-node{width:360px;height:360px;border-radius:32px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft);padding:40px;display:flex;flex-direction:column;justify-content:center}.path-node.current{background:var(--brand-deep);color:#fff}.path-node>span{font-size:27px;font-weight:800;color:var(--brand)}.path-node.current>span{color:#b1c0ce}.path-node b{font-size:39px;line-height:1.2;margin-top:22px}.path-node small{font-size:28px;line-height:1.3;color:var(--muted);margin-top:18px}.path-node.current small{color:#cfd6dd}
+.reference-stack{display:flex;flex-direction:column;gap:18px;padding-top:10px}.reference-card{height:158px;border-radius:23px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft);display:grid;grid-template-columns:70px 74px 1fr;align-items:center;gap:23px;padding:25px 30px}.ref-no{font-size:31px;font-weight:800;color:var(--sage)}.reference-card h3{margin:0;font-size:32px;line-height:1.2}.reference-card p{margin:8px 0 0;font-size:27px;line-height:1.35;color:var(--muted)}
+.format-grid{padding-top:25px;height:510px}.format-panel{border-radius:30px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft);padding:40px;display:flex;flex-direction:column;align-items:center;justify-content:center}.format-panel.active{background:linear-gradient(145deg,var(--brand-deep),#12518a);color:#fff}.format-panel.active .icon-box{background:rgba(255,255,255,.12);color:#e0e6eb}.format-panel.active .center-lead{color:#e0e6eb}.format-panel h3{font-size:42px;margin:26px 0}.pill-cloud{display:flex;flex-wrap:wrap;justify-content:center;gap:14px}.pill-cloud span{padding:12px 17px;border-radius:999px;background:var(--mint);color:var(--brand);font-size:28px;font-weight:650}.signal-lines{display:flex;align-items:end;gap:18px;height:110px;margin-top:28px}.signal-lines i{display:block;width:36px;border-radius:18px 18px 8px 8px;background:#abbac9}.signal-lines i:nth-child(1){height:40px}.signal-lines i:nth-child(2){height:73px}.signal-lines i:nth-child(3){height:106px}
+.process-flow{height:100%;display:grid;grid-template-columns:repeat(4,1fr);gap:22px;align-items:center}.process-item{height:400px;padding:34px;border-radius:28px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft);display:flex;flex-direction:column;justify-content:center}.process-item.active{background:var(--brand-deep);color:#fff}.process-item>span{font-size:29px;font-weight:800;color:var(--sage)}.process-item b{font-size:39px;margin-top:23px;line-height:1.15}.process-item small{font-size:29px;line-height:1.42;color:var(--muted);margin-top:18px}.process-item.active small{color:#ced5dc}
+.grading-wrap{padding-top:35px}.grading-bar{height:120px;border-radius:28px;overflow:hidden;display:flex;box-shadow:var(--shadow)}.grading-bar span{width:calc(var(--w)*1%);display:flex;align-items:center;justify-content:center}.grading-bar b{font-size:35px;color:#fff}.g1{background:#0b3d69}.g2{background:#1b5fa4}.g3{background:#3b79b6}.g4{background:#758da6}.g5{background:#aab9c9}.grading-labels{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:28px}.grading-labels>div{min-height:125px;padding:22px 16px;border-radius:19px;background:#fff;border:1px solid var(--line);display:flex;flex-direction:column}.grading-labels i{display:block;width:38px;height:8px;border-radius:99px}.grading-labels b{font-size:28px;margin-top:16px}.grading-labels span{font-size:27px;color:var(--muted);margin-top:7px}.grading-note{margin-top:25px;padding:20px 25px;border-radius:18px;background:var(--mint);font-size:29px;color:var(--brand-deep)}
+.policy-layout{height:100%;display:grid;grid-template-columns:.8fr 1.2fr;gap:32px;align-items:center}.policy-card{min-height:400px;padding:43px;border-radius:30px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft)}.policy-card.warning{background:var(--brand-deep);color:#fff}.policy-label{font-size:27px;font-weight:800;color:var(--brand)}.warning .policy-label{color:#b1c0cf}.policy-card h3{font-size:43px;line-height:1.2;margin:25px 0 18px}.policy-card p,.policy-card li{font-size:30px;line-height:1.45;color:var(--muted)}.policy-card ul{margin:0;padding-left:30px}.policy-card li{margin:12px 0}.warning li{color:#d9dfe5}
+.schedule-table{width:100%;padding-top:12px}.schedule-head,.schedule-row{display:grid;grid-template-columns:150px 1fr;align-items:center}.schedule-head{height:60px;border-radius:15px 15px 0 0;background:var(--brand-deep);color:#fff;font-size:27px;font-weight:800;padding:0 30px}.schedule-row{height:73px;padding:0 30px;background:#fff;border:1px solid var(--line);border-top:0}.schedule-row:last-child{border-radius:0 0 15px 15px}.schedule-row b{font-size:29px;color:var(--brand)}.schedule-row span{font-size:30px}.compact-schedule .schedule-row{height:65px}.schedule-row.exam-row{background:var(--mint)}.schedule-row.exam-row span{font-weight:750;color:var(--brand-deep)}
+.python-orbit{position:relative;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,var(--mint) 0 35%,transparent 36%),repeating-radial-gradient(circle,transparent 0 74px,rgba(20,62,105,.15) 75px 77px,transparent 78px 120px);margin:auto}.python-core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:155px;height:155px;border-radius:50%;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-size:56px;font-weight:800;box-shadow:var(--shadow)}.python-orbit>span{--r:205px;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(var(--a)) translateX(var(--r)) rotate(calc(-1*var(--a)));padding:12px 17px;border-radius:999px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft);font-size:28px;font-weight:700;color:var(--brand)}
+.library-grid{padding-top:25px;height:520px}.library-card{padding:38px;border-radius:29px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft);display:flex;flex-direction:column}.library-mark{width:70px;height:70px;border-radius:19px;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-size:38px;font-weight:800}.library-card h3{font-size:38px;margin:25px 0 10px}.library-card p{font-size:29px;line-height:1.4;color:var(--muted);margin:0}.mini-chart,.mini-table{height:115px;margin-top:auto;border-radius:17px;background:var(--mint);padding:20px}.mini-chart.bars{display:flex;align-items:end;gap:16px}.mini-chart.bars i{width:36px;border-radius:9px 9px 3px 3px;background:var(--brand)}.mini-chart.bars i:nth-child(1){height:38px}.mini-chart.bars i:nth-child(2){height:64px}.mini-chart.bars i:nth-child(3){height:46px}.mini-chart.bars i:nth-child(4){height:77px}.mini-table i{display:block;height:18px;border-radius:6px;background:#abbbca;margin-bottom:10px}.mini-table i:nth-child(2){width:80%}.mini-table i:nth-child(3){width:62%}.mini-chart.line svg{width:100%;height:100%;fill:none;stroke:var(--brand);stroke-width:6;stroke-linecap:round;stroke-linejoin:round}
+.popular-list{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;padding-top:8px}.popular-list>div{min-height:125px;padding:22px 26px;border-radius:20px;background:#fff;border:1px solid var(--line);display:grid;grid-template-columns:55px 210px 1fr;align-items:center;gap:14px;box-shadow:var(--shadow-soft)}.popular-list>div:last-child{grid-column:1/-1}.popular-list span{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--mint);color:var(--brand);font-size:27px;font-weight:800}.popular-list b{font-size:30px}.popular-list p{font-size:27px;line-height:1.34;color:var(--muted);margin:0}.popular-list code{font-size:27px;color:var(--brand)}
+.index-grid{padding-top:28px;height:520px}.index-card{padding:40px;border-radius:30px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft);display:flex;flex-direction:column}.index-label{font-size:28px;font-weight:800;color:var(--brand);letter-spacing:.05em}.index-card h3{font-size:39px;line-height:1.22;margin:24px 0}.index-url{font-size:28px;color:var(--muted);margin:0}.limitation{margin-top:auto;padding:22px;border-radius:18px;background:var(--mint);display:flex;flex-direction:column;gap:9px}.limitation b{font-size:28px;color:var(--brand)}.limitation span{font-size:28px;line-height:1.38}
+.clean-list{margin:16px 0 0;padding-left:30px}.clean-list li{font-size:30px;line-height:1.42;margin:12px 0}.cloud-notebook{position:relative;display:flex;align-items:center;justify-content:center}.cloud-shape{position:absolute;width:430px;height:300px;color:var(--mint-2);opacity:.95}.notebook-card{position:relative;width:270px;height:330px;border-radius:26px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);padding:35px;display:flex;flex-direction:column;align-items:center}.notebook-card>span{font-size:27px;color:var(--brand);font-weight:750}.notebook-card code{font-size:44px;color:var(--brand-deep);margin-top:25px}.nb-lines{margin-top:auto;width:100%}.nb-lines i{display:block;height:12px;border-radius:99px;background:var(--mint-3);margin-top:15px}.nb-lines i:nth-child(2){width:78%}.nb-lines i:nth-child(3){width:58%}
+.comparison-table{padding-top:14px}.comparison-head,.comparison-row{display:grid;grid-template-columns:1.1fr 1fr 1fr;align-items:center}.comparison-head{height:65px;border-radius:18px 18px 0 0;background:var(--brand-deep);color:#fff;padding:0 26px;font-size:28px;font-weight:800}.comparison-row{min-height:88px;padding:14px 26px;background:#fff;border:1px solid var(--line);border-top:0}.comparison-row b{font-size:29px}.comparison-row span,.comparison-row strong{font-size:28px;line-height:1.3}.comparison-row strong{color:var(--brand)}.comparison-note{margin-top:22px;padding:18px 24px;border-radius:17px;background:var(--mint);font-size:28px;line-height:1.38}.comparison-note span{font-weight:750;color:var(--brand)}
+.step-copy{display:flex;flex-direction:column;justify-content:center}.step-number{display:flex;align-items:center;justify-content:center;width:max-content;min-width:72px;height:52px;padding:0 18px;border-radius:999px;background:var(--brand);color:#fff;font-size:28px;font-weight:800}.step-copy h3{font-size:45px;line-height:1.16;margin:26px 0 10px}.step-copy p{font-size:30px;line-height:1.46;color:var(--muted);margin:17px 0}.step-tip{margin-top:22px;padding:20px;border-radius:20px;background:var(--mint);display:flex;align-items:center;gap:18px}.step-tip b{font-size:28px;line-height:1.36}.account-mock,.colab-home{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:35px}.google-ring,.colab-logo{width:82px;height:82px;border-radius:50%;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-size:39px;font-weight:800}.account-mock h3,.colab-home h3{font-size:39px;margin:24px 0 7px}.account-mock p,.colab-home p{font-size:28px;color:var(--muted);margin:0}.input-line{width:360px;height:64px;border:2px solid var(--brand);border-radius:12px;margin-top:30px;padding:0 18px;display:flex;align-items:center;color:#676e74;font-size:27px}.account-mock button,.colab-home button,.drop-zone button{border:0;border-radius:10px;background:var(--brand);color:#fff;padding:13px 22px;font-size:27px;font-weight:700;margin-top:22px}.colab-home .ghost{background:#fff;color:var(--brand);border:1px solid var(--brand)}.home-actions{display:flex;gap:14px}.focus-new{position:relative}.highlight-btn{box-shadow:0 0 0 8px rgba(20,62,105,.15);font-size:30px!important}.pointer-line{position:absolute;width:105px;height:4px;background:var(--brand);transform:rotate(-30deg);right:118px;bottom:118px}.pointer-label{position:absolute;right:55px;bottom:76px;font-size:27px;font-weight:800;color:var(--brand)}.upload-dialog{height:100%;padding:35px}.dialog-tabs{height:55px;border-bottom:1px solid var(--line);display:flex;gap:36px;align-items:flex-start}.dialog-tabs span{font-size:27px;color:var(--muted);height:55px}.dialog-tabs span.active{color:var(--brand);font-weight:750;border-bottom:4px solid var(--brand)}.drop-zone{margin:38px auto 0;height:300px;border:3px dashed var(--mint-3);border-radius:25px;background:var(--paper-2);display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--brand)}.drop-zone .line-icon{width:75px;height:75px}.drop-zone b{font-size:30px;margin-top:16px}
+.key-feature-grid{padding-top:18px;height:530px}.key-feature-grid .card{padding:28px 32px}.key-feature-grid .card h3{font-size:34px;margin:20px 0 8px}.key-feature-grid .card p{font-size:28px}
+.shortcut-layout{height:100%;display:grid;grid-template-columns:.82fr 1.18fr;gap:50px;align-items:center}.shortcut-intro{padding:40px}.shortcut-intro h3{font-size:43px;margin:28px 0 12px}.shortcut-intro p{font-size:30px;line-height:1.45;color:var(--muted)}.shortcut-cards{display:flex;flex-direction:column;gap:28px}.shortcut-card{height:190px;border-radius:28px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft);display:grid;grid-template-columns:125px 1fr;align-items:center;padding:28px}.keycap,kbd{display:inline-flex;align-items:center;justify-content:center;min-width:72px;height:72px;padding:0 18px;border-radius:12px;background:var(--code);color:#fff;font-family:"Cascadia Code",Consolas,monospace;font-size:32px;font-weight:700;box-shadow:inset 0 -6px 0 rgba(255,255,255,.08)}.shortcut-card b{font-size:36px}.shortcut-card p{font-size:29px;color:var(--muted);margin:10px 0 0;line-height:1.35}
+.run-methods{height:430px;display:grid;grid-template-columns:1fr 90px 1fr;gap:22px;align-items:center}.run-method{height:360px;border-radius:30px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px}.run-big{width:110px;height:110px;border-radius:50%;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-size:50px;padding-left:8px}.run-method h3{font-size:37px;margin:25px 0 10px}.run-method p{font-size:29px;color:var(--muted);margin:0}.or-divider{font-size:29px;font-weight:800;color:var(--sage);text-align:center}.key-combo{display:flex;align-items:center;gap:9px;flex-wrap:wrap;justify-content:center}.key-combo kbd{min-width:58px;height:58px;font-size:27px}.key-combo i,.shortcut-inline i{font-style:normal;font-size:27px;color:var(--muted)}.result-callout{position:absolute;left:0;right:0;bottom:0;height:105px;border-radius:22px;background:var(--mint);display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:650;color:var(--brand-deep)}.result-callout code{font-size:30px;color:var(--brand);margin-left:9px}
+.code-demo-layout,.arithmetic-layout,.comments-layout{height:100%;display:grid;grid-template-columns:1.22fr .78fr;gap:40px;align-items:center}.arithmetic-layout{grid-template-columns:1.35fr .65fr}.comments-layout{grid-template-columns:1.35fr .65fr}.notebook-panel{border-radius:27px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);overflow:hidden}.nb-toolbar{height:61px;background:#eff1f3;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:15px;padding:0 22px;color:var(--muted);font-size:27px}.run-dot{width:42px;height:42px;border-radius:50%;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-size:27px;padding-left:3px}.nb-toolbar i{margin-left:auto;width:70px;height:8px;border-radius:99px;background:#cbd2d9}.code-wrap{background:var(--code);padding:22px 28px}.code-wrap pre,.output-panel pre{margin:0;white-space:pre-wrap}.code-wrap code{font-family:"Cascadia Code",Consolas,"Liberation Mono",monospace;font-size:29px;line-height:1.45;color:#edf0f4}.fn{color:#9aafc5}.str{color:#b1c7dd}.num{color:#b9d9ff}.var{color:#fff}.com{color:#84929f}.output-panel{padding:15px 28px 18px;background:#f6f7f8}.output-label{font-size:27px;font-weight:750;color:var(--brand);margin-bottom:8px}.output-panel pre{font-family:"Cascadia Code",Consolas,monospace;font-size:27px;line-height:1.36;color:var(--ink)}.code-note{padding:13px 24px;background:var(--mint);font-size:27px;color:var(--brand);font-weight:650}.code-explain,.comment-guide{padding:24px}.code-explain h3,.comment-guide h3{font-size:41px;margin:26px 0 12px}.code-explain p,.comment-guide p{font-size:30px;line-height:1.44;color:var(--muted)}.concept-chip{padding:14px 18px;border-radius:13px;background:var(--mint);color:var(--brand);font-size:28px;font-weight:700}.variable-cards{display:flex;gap:14px;margin:20px 0}.variable-cards div{flex:1;padding:18px;border-radius:16px;background:var(--mint);display:flex;align-items:center;justify-content:space-between}.variable-cards b{font-family:Consolas,monospace;font-size:32px;color:var(--brand)}.variable-cards span{font-size:29px}.operator-board{height:410px;border-radius:30px;background:var(--brand-deep);color:#fff;padding:40px;display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.operator-board>span{border-radius:22px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:55px}.operator-board p{grid-column:1/-1;font-size:29px;line-height:1.4;color:#d2d9df;margin:8px 0 0}.practice-stage{height:100%;border-radius:34px;background:linear-gradient(145deg,var(--brand-deep),#104f86);color:#fff;padding:58px 72px;display:flex;flex-direction:column;justify-content:center;box-shadow:var(--shadow)}.practice-label{font-size:29px;font-weight:800;color:#b0becc;letter-spacing:.08em}.practice-stage h3{font-size:53px;margin:25px 0 14px}.practice-stage p{font-size:35px;line-height:1.42;color:#dce2e7;margin:0}.practice-stage code{color:#d9efa6;font-size:35px}.practice-output{margin-top:34px;padding:22px 28px;border-radius:18px;background:rgba(255,255,255,.1);display:flex;justify-content:space-between;align-items:center}.practice-output span{font-size:28px;color:#c6d0d9}.practice-output b{font-family:Consolas,monospace;font-size:36px}.pause-badge{margin-top:24px;font-size:28px;color:#b1bfcd}
+.expression-stack{height:430px;padding-top:22px;display:flex;flex-direction:column;gap:20px}.expression-row{height:115px;border-radius:22px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft);display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:0 34px}.expression-row code{font-size:34px;font-family:Consolas,monospace}.expression-row span{font-size:29px;color:var(--muted);text-align:right}.expression-row.muted{opacity:.58}.expression-row.active{background:var(--brand-deep);color:#fff}.expression-row.active span{color:#c6d0d9}
+.text-cell-layout{height:100%;display:grid;grid-template-columns:1.2fr .8fr;gap:45px;align-items:center}.text-editor{border-radius:28px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);overflow:hidden}.text-toolbar{height:70px;background:#eff1f3;display:flex;align-items:center;gap:14px;padding:0 25px;font-size:28px;color:var(--muted)}.text-toolbar span{width:42px;height:42px;border-radius:10px;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800}.markdown-entry{padding:35px;background:#fbfcfd;font-family:Consolas,monospace;font-size:33px;color:var(--brand)}.rendered-heading{padding:42px;font-size:45px;font-weight:750;border-top:1px solid var(--line)}.text-task{padding:40px}.text-task h3{font-size:43px;margin:25px 0 13px}.text-task p{font-size:30px;line-height:1.44;color:var(--muted)}.text-task code{font-size:29px;color:var(--brand)}.shortcut-inline{margin-top:24px;padding:17px;border-radius:18px;background:var(--mint);display:flex;align-items:center;gap:10px;flex-wrap:wrap}.shortcut-inline kbd{min-width:58px;height:58px;font-size:27px}.shortcut-inline span{font-size:27px;color:var(--brand-deep);font-weight:650;margin-left:8px}
+.summary-grid{height:100%;display:grid;grid-template-columns:repeat(2,1fr);gap:24px;padding-top:5px}.summary-card{padding:30px 34px;border-radius:24px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft);display:grid;grid-template-columns:70px 1fr;grid-template-rows:auto 1fr;column-gap:20px}.summary-card>span{grid-row:1/3;width:58px;height:58px;border-radius:50%;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-size:27px;font-weight:800}.summary-card h3{font-size:34px;margin:8px 0 10px}.summary-card p{font-size:28px;line-height:1.4;color:var(--muted);margin:0}.term-cloud{height:470px;display:flex;align-content:center;justify-content:center;align-items:center;flex-wrap:wrap;gap:18px;padding:30px 80px}.term-cloud span{padding:16px 23px;border-radius:999px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft);font-size:31px;font-weight:650;color:var(--brand-deep)}.term-cloud span:nth-child(1),.term-cloud span:nth-child(2),.term-cloud span:nth-child(9){background:var(--brand);color:#fff;border-color:var(--brand)}.closing-line{position:absolute;left:0;right:0;bottom:0;height:105px;border-radius:22px;background:var(--mint);display:flex;align-items:center;justify-content:center;gap:20px}.closing-line b{font-size:34px;color:var(--brand-deep)}
+code{font-family:"Cascadia Code",Consolas,"Liberation Mono",monospace}
+kbd{vertical-align:middle}
+.nav-zone{position:fixed;top:0;bottom:0;width:10vw;z-index:999;cursor:pointer}.nav-zone.prev{left:0}.nav-zone.next{right:0}
+
+/* ===== ver.02: blue reference palette and requested refinements ===== */
+:root{
+ --brand:#1B5FA4;
+ --brand-deep:#0C447C;
+ --brand-dark:#08355F;
+ --brand-mid:#3B79B6;
+ --mint:#E6F1FB;
+ --mint-2:#D8E8F7;
+ --mint-3:#BFD7EE;
+ --sage:#7FA8CD;
+ --paper:#FFFFFF;
+ --paper-2:#F8FBFE;
+ --ink:#1A3148;
+ --muted:#5D7185;
+ --line:#D4E2EE;
+ --code:#092D50;
+ --code-2:#164F82;
+ --accent:#58C7B0;
+ --shadow:0 18px 50px rgba(12,68,124,.14);
+ --shadow-soft:0 8px 24px rgba(12,68,124,.10);
+}
+html,body{background:#DCE7F0}
+body{font-family:Arial,"Helvetica Neue","Segoe UI",sans-serif;color:var(--ink);font-weight:400}
+#viewport{background:radial-gradient(circle at 28% 20%,#EFF5FA,#D7E3EE 64%,#CCD9E5)}
+.content-slide{background:linear-gradient(145deg,#FFFFFF 0%,#F8FBFE 100%)}
+.soft-orb.orb-one{background:radial-gradient(circle,rgba(59,121,182,.13),rgba(59,121,182,0) 70%)}
+.soft-orb.orb-two{background:radial-gradient(circle,rgba(27,95,164,.08),rgba(27,95,164,0) 70%)}
+.slide-header{border-bottom-color:var(--line)}
+.slide-header h2{color:var(--ink);font-weight:700}
+.kicker{background:var(--mint);color:var(--brand)}
+.week-chip{border-color:#C8DAEA;color:var(--brand);background:#FFFFFF}
+.slide-footer{justify-content:flex-start;color:#6A7D90;font-size:27px}
+.section-page.minimal{justify-content:flex-start;color:#C5D9EC}.section-page.minimal span{font-size:27px;letter-spacing:.11em;font-weight:700;text-transform:uppercase}
+.cover-slide{background:linear-gradient(132deg,#08355F 0%,#0C447C 56%,#155F9F 100%)}
+.cover-slide:before{background:radial-gradient(circle,rgba(93,157,213,.28),rgba(93,157,213,0) 68%)}
+.cover-grid,.section-grid{background-image:linear-gradient(rgba(190,216,239,.075) 1px,transparent 1px),linear-gradient(90deg,rgba(190,216,239,.075) 1px,transparent 1px)}
+.cover-brand{color:#C5D9EC}
+.cover-tag span{background:var(--accent);color:#073A62}
+.cover-tag b{color:#BDD7EF}
+.cover-left p{color:#C8DBED}
+.section-slide{background:linear-gradient(132deg,#08355F 0%,#0C447C 64%,#1662A1 100%)}
+.section-slide:before{background:radial-gradient(circle,rgba(105,169,220,.24),rgba(105,169,220,0) 70%)}
+.section-eyebrow{background:var(--accent);color:#073A62}
+.section-copy p,.section-brand{color:#C5D9EC}
+.section-rule{background:linear-gradient(90deg,var(--accent),#8EC2E5)}
+.accent-line,.mini-rule{background:linear-gradient(90deg,var(--brand),#8DB9DC)}
+.bottom-strip,.wide-callout{background:var(--brand-deep)}
+.wide-callout strong{color:#C6DFF3}
+.url-chip,.url-line{background:var(--mint);color:var(--brand)}
+.code-ecosystem{background:linear-gradient(145deg,#0B3C69,#115B96)}
+.code-ecosystem:before{background-image:linear-gradient(rgba(208,228,246,.075) 1px,transparent 1px),linear-gradient(90deg,rgba(208,228,246,.075) 1px,transparent 1px)}
+.code-badge{width:214px;height:214px;padding:0 12px;background:#E6F1FB;color:var(--brand);font-size:42px;line-height:1;letter-spacing:.015em;white-space:nowrap;box-shadow:0 0 0 20px rgba(214,232,247,.10)}
+.ecosystem-row{margin-top:34px}
+.ecosystem-row span{color:#E2EFFA}
+.schedule-head{background:var(--brand-deep)}
+.schedule-row b{color:var(--brand)}
+.schedule-row.exam-row{background:#E6F1FB}
+.schedule-row.exam-row span{color:var(--brand-deep)}
+.python-orbit{background:radial-gradient(circle,var(--mint) 0 35%,transparent 36%),repeating-radial-gradient(circle,transparent 0 74px,rgba(27,95,164,.15) 75px 77px,transparent 78px 120px)}
+.python-core{background:var(--brand)}
+.practice-stage{background:linear-gradient(145deg,#0A3D6A,#145F9B)}
+.operator-board,.expression-row.active{background:var(--brand-deep)}
+.nb-toolbar,.text-toolbar{background:#EDF4FA}
+.code-wrap{background:var(--code)}
+.run-dot,.run-big,.text-toolbar span,.library-mark,.summary-card>span{background:var(--brand)}
+.term-cloud span:nth-child(1),.term-cloud span:nth-child(2),.term-cloud span:nth-child(9){background:var(--brand);border-color:var(--brand)}
+/* Slide 5: the word PYTHON stays comfortably inside the circular badge. */
+.slide-course-intro .code-badge{font-size:42px;letter-spacing:.01em}
+/* Slide 38: create clear visual separation between keycaps and descriptions. */
+.slide-shortcuts-refined .shortcut-layout{grid-template-columns:.76fr 1.24fr;gap:72px}
+.slide-shortcuts-refined .shortcut-intro{padding:34px 18px 34px 38px}
+.slide-shortcuts-refined .shortcut-card{grid-template-columns:112px minmax(0,1fr);column-gap:40px;padding:28px 40px}
+.slide-shortcuts-refined .shortcut-card .keycap{justify-self:center}
+.slide-shortcuts-refined .shortcut-card b{display:block}
+/* No page information or version/date is ever shown inside a slide. */
+.page-count,.progress,.cover-meta,.cover-nav-hint,.cover-page{display:none!important}
+
+
+/* v12 page-specific refinements */
+.hello-slide .code-demo-layout{height:calc(100% - 20px);transform:translateY(-42px)}
+.hello-slide .concept-chip{display:flex;align-items:center;justify-content:center;text-align:center}
+.auto-output-slide .code-demo-layout{height:calc(100% - 125px);transform:translateY(-12px)}
+.auto-output-slide .code-note{min-height:62px;display:flex;align-items:center;justify-content:center;text-align:center}
+.auto-output-slide .result-callout{height:108px;padding:18px 30px;text-align:center;font-size:28px;line-height:1.35}
+.auto-output-slide .result-callout code{font-size:28px}
+@media print {
+  @page { size: 1600px 900px; margin: 0; }
+  html, body { width: 1600px; height: auto; overflow: visible !important; background: #fff !important; }
+  #viewport { width: 1600px; height: auto; overflow: visible !important; background: #fff !important; }
+  .slide {
+    position: relative !important;
+    left: auto !important; top: auto !important;
+    width: 1600px !important; height: 900px !important;
+    transform: none !important;
+    display: block !important;
+    box-shadow: none !important;
+    break-after: page; page-break-after: always;
+  }
+  .slide:last-of-type { break-after: auto; page-break-after: auto; }
+  .nav-zone { display: none !important; }
+}
+
+
+/* ===== 2026-08-12 requested refinements ===== */
+.nav-zone{width:clamp(42px,4vw,68px)}
+
+/* Cover / section artwork alignment: keep large art high and consistent. */
+.cover-slide.cover-refined .cover-left{justify-content:center}
+.cover-slide.cover-refined .cover-brand{top:auto;bottom:-2px;left:0}
+.cover-slide.cover-refined .cover-tag{margin:25px 0 0}
+.cover-slide.cover-refined .cover-left p{margin-top:22px}
+.cover-right,.section-art{right:34px;top:18px;width:680px;height:650px}
+
+/* Page 6: learning outcomes */
+.slide-course-outcomes .course-outcomes-intro{font-size:31px;line-height:1.4;color:var(--muted);margin:18px 0 0;font-weight:560}
+.slide-course-outcomes .outcome-grid{height:440px;margin-top:28px}
+.slide-course-outcomes .outcome-grid .card{padding:36px 42px}
+.slide-course-outcomes .outcome-grid .card h3{font-size:38px}
+.slide-course-outcomes .outcome-grid .card p{font-size:30px}
+
+/* Clickable URLs */
+a.deck-link{color:inherit;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px}
+a.deck-link:hover{opacity:.78}
+.url-chip a.deck-link,.url-line a.deck-link{color:inherit}
+
+/* Exam page: note first, main objects lower. */
+.slide-exam-refined .exam-layout{grid-template-columns:.75fr 1.25fr;grid-template-rows:auto 1fr;gap:28px 55px;align-items:center}
+.slide-exam-refined .exam-note{grid-column:1/-1;grid-row:1;margin-top:4px}
+.slide-exam-refined .exam-copy{grid-column:1;grid-row:2;justify-content:center;padding-top:18px}
+.slide-exam-refined .dual-device{grid-column:2;grid-row:2;padding-top:18px}
+.slide-exam-refined .screen.exam{display:flex;align-items:center;justify-content:center;padding:0;text-align:center}
+.slide-exam-refined .screen.exam i{display:none}
+.slide-exam-refined .screen.exam b{display:block;width:100%;text-align:center}
+
+/* Course level emphasis */
+.slide-course-level .wide-callout strong{color:var(--brand);font-weight:800}
+
+/* Class format: one centered panel. */
+.slide-class-format .format-grid{display:flex;justify-content:center;align-items:center;height:520px;padding-top:20px}
+.slide-class-format .format-panel{width:780px;height:440px}
+
+/* Interaction page: cards + grading/automatic-F note. */
+.slide-interaction .feature-grid{height:350px;padding-top:0;margin-top:12px}
+.slide-interaction .feature-grid .card{padding:27px 29px 25px}
+.slide-interaction .feature-grid .card h3{font-size:32px;margin:20px 0 9px}
+.slide-interaction .feature-grid .card p{font-size:27px;line-height:1.38}
+.interaction-notes{margin-top:18px;padding:18px 26px 19px;border-radius:20px;background:var(--mint);border:1px solid var(--line)}
+.interaction-notes h3{margin:0 0 8px;font-size:29px;color:var(--brand-deep)}
+.interaction-notes p{margin:5px 0;font-size:26px;line-height:1.34;color:var(--ink)}
+.interaction-notes p + p{margin-top:9px}
+
+/* Unit/section 2 weekly objectives: one page, three cards. */
+.slide-week-objectives .week-objectives-intro{font-size:31px;line-height:1.4;color:var(--muted);margin:18px 0 0;font-weight:560}
+.slide-week-objectives .objective-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;height:440px;margin-top:28px}
+.slide-week-objectives .objective-grid-3 .card{padding:32px 30px 28px}
+.slide-week-objectives .objective-grid-3 .card h3{font-size:32px;margin:22px 0 10px}
+.slide-week-objectives .objective-grid-3 .card p{font-size:27px;line-height:1.38}
+
+/* Keep section-page institutional label low left. */
+.section-page.minimal{justify-content:flex-start}
+
+
+/* v04 page-specific refinements */
+.python-core-logo{padding:20px}
+.python-logo-icon{width:112px;height:112px;display:block}
+.mini-numpy{height:115px;margin-top:auto;border-radius:17px;background:var(--mint);padding:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.mini-numpy span{display:flex;align-items:center;justify-content:center;border-radius:9px;background:#fff;border:1px solid var(--line);font-family:"Cascadia Code",Consolas,monospace;font-size:25px;font-weight:700;color:var(--brand-deep)}
+.mini-pandas{height:115px;margin-top:auto;border-radius:17px;background:var(--mint);padding:12px 15px;display:flex;flex-direction:column;justify-content:center}
+.mini-pandas-row{display:grid;grid-template-columns:1fr 1fr;border-left:1px solid var(--sage);border-top:1px solid var(--sage)}
+.mini-pandas-row:last-child{border-bottom:1px solid var(--sage)}
+.mini-pandas-row span{padding:4px 8px;border-right:1px solid var(--sage);font-size:22px;text-align:center;color:var(--brand-deep)}
+.mini-pandas-row.head span{font-weight:800;background:rgba(255,255,255,.65)}
+.popular-list b{text-align:center;justify-self:center}
+.index-url .deck-link{font-size:27px;word-break:break-all}
+
+/* v05 page-specific refinements */
+.process-item.pause-highlight{
+  background:#fff4c7;
+  color:var(--ink);
+  border-color:#ead99a;
+}
+.process-item.pause-highlight>span{color:var(--sage)}
+.process-item.pause-highlight b{color:var(--ink)}
+.process-item.pause-highlight small{color:var(--muted)}
+.slide-note .kicker{
+  background:#e8f4e8;
+  color:#356b45;
+  border:1px solid #cfe4d2;
+}
+.inline-code{
+  display:inline-block;
+  padding:2px 9px 3px;
+  margin:0 2px;
+  border-radius:7px;
+  border:1px solid #c7d9e8;
+  background:#edf4fa;
+  color:var(--brand-deep);
+  font-family:"Cascadia Code",Consolas,monospace;
+  font-size:.92em;
+  line-height:1.15;
+}
+.url-line a.deck-link{color:inherit;text-decoration:none}
+.url-line a.deck-link:hover{text-decoration:underline}
+
+/* v06 updates */
+.slide-google-combined .slide-body{top:135px;bottom:48px}
+.google-steps{height:100%;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch}
+.google-step{border-radius:26px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft);padding:24px 22px 22px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.google-step .step-number{height:44px;min-width:56px;font-size:25px;padding:0 14px}
+.google-step h3{margin:0;font-size:31px;line-height:1.15;letter-spacing:-.02em;color:var(--ink)}
+.google-step p{margin:0;font-size:25px;line-height:1.32;color:var(--muted)}
+.mini-browser{margin-top:auto;border-radius:20px;background:#fff;border:1px solid var(--line);overflow:hidden;box-shadow:0 8px 20px rgba(13,39,65,.08);height:318px}
+.mini-browser .browser-top{height:48px;grid-template-columns:74px 1fr 38px;padding:0 14px}
+.mini-browser .browser-dots{gap:7px}.mini-browser .browser-dots i{width:10px;height:10px}
+.mini-browser .address{height:28px;font-size:18px;padding:0 10px}
+.mini-browser .browser-menu{font-size:24px}.mini-browser .browser-body{height:calc(100% - 48px)}
+.mini-browser .account-mock,.mini-browser .colab-home{padding:18px;transform:scale(.82);transform-origin:center center;height:122%;margin-top:-18px}
+.mini-browser .google-ring,.mini-browser .colab-logo{width:64px;height:64px;font-size:31px}
+.mini-browser h3{font-size:28px;margin:18px 0 6px;text-align:center}.mini-browser p{font-size:22px;text-align:center}.mini-browser .input-line{width:250px;height:50px;margin-top:22px;font-size:22px}
+.mini-browser button{font-size:21px;padding:10px 16px;margin-top:18px}.mini-browser .home-actions{gap:10px}
+.mini-browser .focus-new{position:relative}.mini-browser .highlight-btn{font-size:24px!important;box-shadow:0 0 0 6px rgba(20,62,105,.15)}
+.slide-shortcuts-refined .shortcut-cards{gap:22px}
+.slide-shortcuts-refined .shortcut-card{height:158px;grid-template-columns:92px minmax(0,1fr);column-gap:30px;padding:22px 34px}
+.slide-shortcuts-refined .shortcut-card .keycap{min-width:62px;height:62px;font-size:28px;border-radius:11px}
+.slide-shortcuts-refined .shortcut-card b{font-size:33px}.slide-shortcuts-refined .shortcut-card p{font-size:27px;margin-top:8px}
+.practice-slide{background:linear-gradient(135deg,#fff8d8 0%,#f4e9a6 48%,#e8f0f9 100%);color:var(--ink)}
+.practice-slide:before{content:"";position:absolute;right:-260px;top:-260px;width:680px;height:680px;border-radius:50%;background:radial-gradient(circle,rgba(27,95,164,.18),rgba(27,95,164,0) 70%)}
+.practice-slide:after{content:"";position:absolute;left:-300px;bottom:-330px;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(238,198,58,.24),rgba(238,198,58,0) 70%)}
+.practice-inner{position:absolute;inset:82px;display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center;z-index:2}
+.practice-kicker{display:inline-flex;align-items:center;height:46px;padding:0 18px;border-radius:999px;background:#0c447c;color:#fff;font-size:28px;font-weight:800;letter-spacing:.08em}
+.practice-title{margin:30px 0 16px;font-size:96px;line-height:.98;letter-spacing:-.055em;color:#0c447c;font-weight:780}
+.practice-text{margin:0;font-size:36px;line-height:1.35;color:#44596f;max-width:690px}
+.practice-note{margin-top:34px;display:inline-flex;align-items:center;gap:14px;padding:16px 22px;border-radius:18px;background:rgba(255,255,255,.75);border:1px solid rgba(27,95,164,.20);box-shadow:var(--shadow-soft);font-size:28px;font-weight:700;color:#1a3148}
+.practice-visual{height:560px;border-radius:34px;background:#fff;border:1px solid rgba(27,95,164,.18);box-shadow:var(--shadow);padding:36px;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+.practice-visual:before{content:"";position:absolute;left:0;right:0;top:0;height:76px;background:#1b5fa4}.practice-visual .dots{position:absolute;top:31px;left:34px;display:flex;gap:10px}.practice-visual .dots i{width:14px;height:14px;border-radius:50%;background:#e8eef5;opacity:.95}
+.practice-code{margin-top:56px;border-radius:22px;background:#092d50;color:#eaf2fb;padding:30px 32px;font-family:"Cascadia Code",Consolas,monospace;font-size:31px;line-height:1.48;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+.practice-code .str{color:#ffdf7a}.practice-output{margin-top:26px;border-radius:18px;background:#edf7e9;border:1px solid #cfe9c7;padding:22px 28px;font-size:30px;color:#245a34;font-weight:720}
+.practice-footer{position:absolute;left:82px;right:82px;bottom:44px;display:flex;justify-content:space-between;color:#49637d;font-size:26px;z-index:3}
+
+
+/* v08 requested refinements */
+/* Page 8: center the required-environment cards as one central group. */
+.slide-prepare-centered .slide-body{display:flex;align-items:center;justify-content:center;top:136px;bottom:48px}
+.slide-prepare-centered .device-stage{height:auto;width:100%;align-items:center}
+.slide-prepare-centered .device-good,.slide-prepare-centered .device-bad{height:470px}
+
+/* Page 13: widen spacing among Class Format chips. */
+.slide-class-format .format-panel{width:820px;height:455px}
+.slide-class-format .pill-cloud{gap:22px 24px;margin-top:8px}
+.slide-class-format .pill-cloud span{padding:14px 20px}
+
+/* Page 14: green highlight for Pause a minute. */
+.process-item.pause-highlight{background:linear-gradient(145deg,#2f5d50,#3b7163);border-color:#2f5d50;color:#fff;box-shadow:0 15px 36px rgba(47,93,80,.22)}
+.process-item.pause-highlight>span{color:#d6eee5}
+.process-item.pause-highlight b{color:#fff}
+.process-item.pause-highlight small{color:#dcefe7}
+
+/* Page 15: automatic-F policy hierarchy. */
+.interaction-notes h3,.interaction-notes .auto-f-title{color:var(--brand-deep);font-weight:800}
+.interaction-notes .auto-f-title{margin:12px 0 0;font-size:29px;line-height:1.25}
+.interaction-notes .auto-f-text{margin:5px 0 0;font-size:26px;line-height:1.34;color:var(--ink)}
+
+/* Page 19 / 29 section brand alignment. */
+.section-brand{text-transform:uppercase;font-size:27px;letter-spacing:.11em;font-weight:700}
+
+/* Page 22: icon-like NumPy/Pandas visuals. */
+.mini-icon{height:115px;margin-top:auto;border-radius:17px;background:var(--mint);display:flex;align-items:center;justify-content:center;padding:12px}
+.mini-icon svg{width:100%;height:100%}.mini-icon text{font-family:"Cascadia Code",Consolas,monospace;font-size:15px;font-weight:800;fill:var(--brand-deep)}
+.mini-number-plot .plot-bg,.mini-table-plot .table-bg{fill:#fff;stroke:#bfd7ee;stroke-width:2}
+.mini-number-plot .axis{fill:none;stroke:#87a6bf;stroke-width:4;stroke-linecap:round}
+.mini-number-plot .line{fill:none;stroke:var(--brand);stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+.mini-number-plot .pt,.mini-table-plot .dot{fill:var(--brand)}
+.mini-table-plot .grid-line{fill:none;stroke:#9dbbd4;stroke-width:2.5}
+.mini-table-plot .table-head{fill:#d8e8f7}
+
+/* Page 25: NOTE label uses the PYPL/brand color with white text. */
+.slide-note .kicker{background:var(--brand);color:#fff;border-color:var(--brand)}
+
+/* Page 30: keep step visuals vertically centered in each card. */
+.slide-google-combined .google-step{gap:12px;justify-content:space-between}
+.slide-google-combined .mini-browser{margin-top:6px;margin-bottom:auto;align-self:stretch;height:300px}
+.slide-google-combined .google-step .step-number{margin-bottom:2px}
+
+/* Page 32/33: smaller A/B shortcut cards to avoid crowded overlap. */
+.slide-shortcuts-refined .shortcut-layout{grid-template-columns:.74fr 1.26fr;gap:82px}
+.slide-shortcuts-refined .shortcut-card{height:140px;grid-template-columns:78px minmax(0,1fr);column-gap:26px;padding:19px 30px}
+.slide-shortcuts-refined .shortcut-card .keycap{min-width:54px;height:54px;font-size:25px;border-radius:10px}
+.slide-shortcuts-refined .shortcut-card b{font-size:31px}.slide-shortcuts-refined .shortcut-card p{font-size:26px;margin-top:6px}
+
+/* Reusable practice divider: green emphasis with the blue course theme retained. */
+.practice-slide{background:linear-gradient(135deg,#eff8f3 0%,#d9ede5 38%,#e6f1fb 100%);color:var(--ink)}
+.practice-slide:before{content:"";position:absolute;right:-260px;top:-260px;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(27,95,164,.20),rgba(27,95,164,0) 70%)}
+.practice-slide:after{content:"";position:absolute;left:-300px;bottom:-330px;width:740px;height:740px;border-radius:50%;background:radial-gradient(circle,rgba(47,93,80,.24),rgba(47,93,80,0) 70%)}
+.practice-divider .practice-inner{position:absolute;inset:82px 90px;display:grid;grid-template-columns:1fr .92fr;gap:70px;align-items:center;z-index:2}
+.practice-divider .practice-kicker{background:#2f5d50;color:#fff;box-shadow:0 10px 22px rgba(47,93,80,.20)}
+.practice-divider .practice-title{color:#2f5d50;font-size:100px;margin:32px 0 18px}
+.practice-divider .practice-text{font-size:37px;line-height:1.34;color:#314b42;max-width:760px}
+.practice-divider .practice-visual.universal{height:560px;border-radius:34px;background:rgba(255,255,255,.84);border:1px solid rgba(47,93,80,.20);box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;padding:26px}
+.practice-universal-svg{width:100%;height:100%;display:block}
+.practice-footer,.practice-note,.practice-code,.practice-output,.practice-visual .dots{display:none!important}
+
+/* Page 45: regular alternating key-term pattern. */
+.slide-keyterms-pattern .term-cloud span{background:#fff;color:var(--brand-deep);border-color:var(--line)}
+.slide-keyterms-pattern .term-cloud span:nth-child(odd){background:var(--brand);color:#fff;border-color:var(--brand)}
+.slide-keyterms-pattern .term-cloud span:nth-child(even){background:#fff;color:var(--brand-deep);border-color:var(--line)}
+
+/* v08b: center the mini browser visuals within the remaining card space. */
+.slide-google-combined .mini-browser{margin-top:auto!important;margin-bottom:auto!important}
+
+
+
+/* ===== v09 page-specific refinements ===== */
+/* Keep the institutional label fixed in exactly the same place on the cover and every section divider. */
+.cover-slide .cover-brand,
+.section-slide .section-brand,
+.section-slide .section-page.minimal{display:none!important}
+.cover-slide::after,
+.section-slide::after{
+  content:"SEOUL CYBER UNIVERSITY";
+  position:absolute;
+  left:82px;
+  bottom:48px;
+  z-index:8;
+  color:#C5D9EC;
+  font-size:27px;
+  line-height:1;
+  letter-spacing:.11em;
+  font-weight:700;
+  text-transform:uppercase;
+  pointer-events:none;
+}
+
+/* Page 8: lower the blue note slightly. */
+.slide-exam-refined .exam-note{margin-top:24px}
+
+/* Page 13: larger keyword panel, wider spacing, and true vertical centering. */
+.slide-class-format .format-grid{
+  height:100%;
+  padding-top:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.slide-class-format .format-panel{
+  width:920px;
+  height:490px;
+  padding:44px 54px;
+}
+.slide-class-format .format-panel h3{margin:24px 0 30px}
+.slide-class-format .pill-cloud{
+  gap:30px 34px;
+  margin-top:0;
+  max-width:790px;
+}
+.slide-class-format .pill-cloud span{
+  padding:18px 27px;
+  font-size:30px;
+  min-height:64px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* Page 15: taller white cards and uniformly aligned blue icon boxes. */
+.slide-interaction .feature-grid{
+  height:382px;
+  margin-top:8px;
+  gap:28px;
+  align-items:stretch;
+}
+.slide-interaction .feature-grid .card{
+  height:100%;
+  padding:31px 31px 29px;
+}
+.slide-interaction .feature-grid .card-top{
+  height:68px;
+  min-height:68px;
+  display:flex;
+  align-items:center;
+}
+.slide-interaction .feature-grid .icon-box{
+  width:64px;
+  height:64px;
+  flex:0 0 64px;
+  border-radius:17px;
+}
+.slide-interaction .feature-grid .card h3{
+  margin:23px 0 11px;
+}
+.slide-interaction .interaction-notes{
+  margin-top:16px;
+  padding:19px 27px 20px;
+}
+
+/* Page 22: taller NumPy/Pandas/Matplotlib visual blocks and taller N/P/M cards. */
+.slide-library-enhanced .library-grid{
+  height:570px;
+  padding-top:10px;
+  gap:30px;
+  align-items:stretch;
+}
+.slide-library-enhanced .library-card{
+  height:100%;
+  padding:38px 38px 34px;
+}
+.slide-library-enhanced .library-mark{
+  width:78px;
+  height:78px;
+  border-radius:20px;
+  font-size:40px;
+}
+.slide-library-enhanced .library-card h3{margin:23px 0 10px}
+.slide-library-enhanced .mini-icon,
+.slide-library-enhanced .mini-chart{
+  height:152px;
+  min-height:152px;
+  margin-top:auto;
+}
+.slide-library-enhanced .mini-icon{padding:16px}
+.slide-library-enhanced .mini-number-plot text{font-size:19px}
+.slide-library-enhanced .mini-number-plot .pt{r:7px}
+.slide-library-enhanced .mini-table-plot .dot{r:6px}
+.slide-library-enhanced .mini-chart.line{padding:25px 20px}
+
+/* Page 24: distribute the five cards through the available vertical space. */
+.slide-python-popularity .popular-list{
+  height:100%;
+  padding:18px 0 12px;
+  gap:24px;
+  grid-template-columns:repeat(2,1fr);
+  grid-template-rows:repeat(3,1fr);
+}
+.slide-python-popularity .popular-list>div{
+  min-height:0;
+  height:100%;
+  padding:26px 30px;
+  grid-template-columns:64px 230px 1fr;
+  gap:18px;
+}
+.slide-python-popularity .popular-list span{
+  width:54px;
+  height:54px;
+}
+.slide-python-popularity .popular-list b{font-size:31px}
+.slide-python-popularity .popular-list p{font-size:28px}
+
+/* Page 33: smaller inline A/B keys on the left, larger A/B keycaps on the right. */
+.slide-shortcuts-refined .shortcut-intro kbd{
+  min-width:50px;
+  height:50px;
+  padding:0 11px;
+  border-radius:9px;
+  font-size:24px;
+  vertical-align:middle;
+}
+.slide-shortcuts-refined .shortcut-cards{gap:26px}
+.slide-shortcuts-refined .shortcut-card{
+  height:154px;
+  grid-template-columns:98px minmax(0,1fr);
+  column-gap:30px;
+  padding:22px 34px;
+}
+.slide-shortcuts-refined .shortcut-card .keycap{
+  min-width:74px;
+  width:74px;
+  height:74px;
+  font-size:32px;
+  border-radius:12px;
+}
+
+/* Pause a minute icon badge for pages 35-36 */
+.hello-slide .slide-body,.pause-minute-slide .slide-body{position:relative}
+.pause-minute-pin{position:absolute;left:50%;top:6px;transform:translateX(-50%);display:flex;align-items:center;gap:12px;padding:10px 20px;border-radius:999px;background:linear-gradient(135deg,#e6f3cf,#fff3b8);border:1px solid rgba(53,108,63,.18);box-shadow:0 8px 18px rgba(20,53,86,.12);z-index:3}
+.pause-minute-pin .pause-icon-wrap{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#7fb36d,#f0d66d);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.pause-minute-pin .pause-icon-wrap svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.pause-minute-pin .pause-label{font-size:24px;font-weight:800;letter-spacing:.02em;color:#2a5f34;white-space:nowrap}
+.pause-minute-slide .code-demo-layout{padding-top:30px}
+.hello-slide .code-demo-layout{padding-top:28px}
+
+/* v14: shorter recommendation box on Automatic Output slide */
+.auto-output-slide .result-callout{
+  height:72px;
+  padding:0 26px;
+  font-size:28px;
+  line-height:1.25;
+}
+.auto-output-slide .code-demo-layout{
+  height:calc(100% - 95px);
+}
+
+/* v15: larger left-aligned Pause a minute badge for practice code pages */
+.pause-minute-pin{
+  left:0 !important;
+  top:-4px !important;
+  transform:none !important;
+  gap:18px !important;
+  padding:14px 28px !important;
+  border-radius:999px !important;
+}
+.pause-minute-pin .pause-icon-wrap{
+  width:64px !important;
+  height:64px !important;
+}
+.pause-minute-pin .pause-icon-wrap svg{
+  width:35px !important;
+  height:35px !important;
+}
+.pause-minute-pin .pause-label{
+  font-size:31px !important;
+  font-weight:850 !important;
+}
+.practice-code-with-pause .slide-body{position:relative}
+.practice-code-with-pause .code-demo-layout,
+.practice-code-with-pause .arithmetic-layout{
+  padding-top:48px;
+}
+.auto-output-slide.practice-code-with-pause .code-demo-layout{
+  height:calc(100% - 105px);
+  padding-top:48px;
+}
+
+/* v16: replace TASK badge with HANDS-ON PRACTICE badge on Using Text Cells */
+.text-task .practice-badge-inline{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:max-content;
+  min-width:72px;
+  height:52px;
+  padding:0 18px;
+  border-radius:999px;
+  background:var(--brand);
+  color:#fff;
+  font-size:28px;
+  font-weight:800;
+  letter-spacing:.02em;
+}
+
+/* v17: move all yellow Pause a minute badges upward */
+.pause-minute-pin{
+  top:-30px !important;
+}
+
+/* ===== Week 02 additions — new components built on the ver.02 blue palette ===== */
+.kw{color:#7FB2E8;font-weight:700}
+
+/* Week learning objectives (four items, 2 x 2) */
+.slide-objectives-4 .week-objectives-intro{font-size:31px;line-height:1.4;color:var(--muted);margin:16px 0 0;font-weight:560}
+.slide-objectives-4 .summary-grid{height:calc(100% - 66px);padding-top:16px;gap:22px}
+.slide-objectives-4 .summary-card{padding:26px 32px}
+.slide-objectives-4 .summary-card h3{font-size:33px;margin:6px 0 10px}
+.slide-objectives-4 .summary-card p{font-size:27px;line-height:1.4}
+
+/* Horizontal concept chain: object -> value -> type */
+.chain-flow{height:250px;display:flex;align-items:center;justify-content:center;gap:22px;padding-top:14px}
+.chain-node{min-width:262px;padding:30px 32px;border-radius:26px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft);text-align:center}
+.chain-node b{display:block;font-size:36px;line-height:1.15;color:var(--brand-deep);font-family:Consolas,"Cascadia Code",monospace}
+.chain-node span{display:block;margin-top:12px;font-size:27px;color:var(--muted)}
+.chain-node.accent{background:var(--brand-deep);border-color:var(--brand-deep)}
+.chain-node.accent b{color:#fff}
+.chain-node.accent span{color:#C6DFF3}
+.chain-arrow{font-size:46px;font-weight:800;color:var(--sage)}
+
+/* Operator reference list */
+.op-list{display:grid;grid-template-columns:repeat(2,1fr);gap:16px 26px;padding-top:16px}
+.op-list.one-col{grid-template-columns:1fr}
+.op-item{min-height:78px;display:flex;align-items:center;gap:22px;padding:12px 26px;border-radius:19px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft)}
+.op-item b{min-width:104px;text-align:center;font-family:Consolas,"Cascadia Code",monospace;font-size:33px;font-weight:800;color:#fff;background:var(--brand);border-radius:13px;padding:7px 12px}
+.op-item span{font-size:30px;line-height:1.25}
+.op-item i{font-style:normal;font-size:25px;color:var(--muted);margin-left:auto;text-align:right;line-height:1.2}
+
+/* Expression -> result reference grid */
+.result-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px 26px;padding-top:16px}
+.result-item{min-height:80px;display:grid;grid-template-columns:1fr auto;align-items:center;padding:14px 28px;border-radius:19px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft)}
+.result-item code{font-family:Consolas,"Cascadia Code",monospace;font-size:32px;color:var(--brand-deep)}
+.result-item b{font-family:Consolas,"Cascadia Code",monospace;font-size:32px;color:var(--brand)}
+.result-item.wide{grid-column:1/-1}
+
+/* Paired code / output examples */
+.example-stack{height:100%;display:flex;flex-direction:column;justify-content:center;gap:22px}
+.example-title{margin:0 0 9px;font-size:27px;font-weight:750;color:var(--brand-deep)}
+.example-row{display:grid;grid-template-columns:1.15fr .85fr;border-radius:22px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-soft)}
+.ex-code{background:var(--code);padding:20px 26px}
+.ex-code pre{margin:0;white-space:pre-wrap}
+.ex-code code{font-family:Consolas,"Cascadia Code",monospace;font-size:26px;line-height:1.42;color:#EDF0F4}
+.ex-out{background:#fff;padding:18px 26px;display:flex;flex-direction:column;justify-content:center}
+.ex-out b{font-size:24px;font-weight:800;letter-spacing:.06em;color:var(--brand)}
+.ex-out pre{margin:8px 0 0;font-family:Consolas,"Cascadia Code",monospace;font-size:27px;line-height:1.34;color:var(--ink);white-space:pre-wrap}
+
+/* Type / value chips inside cards */
+.chip-row{display:flex;flex-wrap:wrap;gap:13px;margin-top:18px}
+.chip-row span{padding:10px 19px;border-radius:999px;background:var(--mint);color:var(--brand-deep);font-family:Consolas,"Cascadia Code",monospace;font-size:27px;font-weight:700}
+.chip-row span.ghost{background:#fff;border:1px dashed #BFD1E1;color:var(--muted)}
+
+/* String index / slice strip */
+.char-strip{display:flex;justify-content:center;gap:16px;padding-top:22px}
+.char-cell{width:124px;text-align:center}
+.char-cell .ch{height:126px;border-radius:24px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft);display:flex;align-items:center;justify-content:center;font-family:Consolas,"Cascadia Code",monospace;font-size:54px;color:var(--brand-deep)}
+.char-cell .ix{margin-top:14px;font-size:29px;font-weight:800;color:var(--brand)}
+.char-cell .nix{margin-top:6px;font-size:26px;color:var(--muted)}
+.char-cell.hi .ch{background:var(--brand-deep);border-color:var(--brand-deep);color:#fff}
+.strip-legend{display:flex;justify-content:center;gap:44px;padding-top:26px}
+.strip-legend div{display:flex;align-items:center;gap:12px;font-size:28px;color:var(--muted)}
+.strip-legend i{width:26px;height:26px;border-radius:8px;background:var(--brand);display:inline-block}
+.strip-legend i.alt{background:#fff;border:1px solid var(--line)}
+
+/* Truth-value mini table inside a card */
+.mini-truth{margin-top:auto;width:100%}
+.mini-truth div{display:grid;grid-template-columns:1fr auto;align-items:center;padding:10px 16px;border-radius:13px;background:var(--mint);margin-top:10px;font-family:Consolas,"Cascadia Code",monospace;font-size:26px;color:var(--brand-deep)}
+.mini-truth div b{font-weight:800;color:var(--brand)}
+
+/* Two-panel layouts that need a slightly wider code column */
+.wide-code-layout{height:100%;display:grid;grid-template-columns:1.3fr .7fr;gap:40px;align-items:center}
+.even-layout{height:100%;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+
+/* Rule list (variable naming) */
+.rule-list{display:flex;flex-direction:column;gap:18px;padding-top:16px}
+.rule-item{min-height:96px;display:flex;align-items:center;gap:24px;padding:18px 30px;border-radius:22px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft)}
+.rule-item .icon-box{width:52px;height:52px;border-radius:14px}
+.rule-item p{margin:0;font-size:29px;line-height:1.35}
+.rule-item code{font-size:28px;color:var(--brand);font-weight:700}
+
+/* Section body helpers */
+.body-lead{margin:0 0 6px;font-size:31px;line-height:1.42;color:var(--muted)}
+.stack-gap{height:100%;display:flex;flex-direction:column;justify-content:center;gap:26px}
+
+/* Lead paragraph above a code/output stack */
+.lead-stack{height:100%;display:flex;flex-direction:column;justify-content:center}
+.lead-stack .body-lead{flex:0 0 auto;margin:0 0 16px}
+.lead-stack .example-stack{flex:0 1 auto;height:auto}
+
+/* Vertical reasoning chain */
+.vchain{display:flex;flex-direction:column;gap:13px;margin-top:20px}
+.vchain div{padding:14px 22px;border-radius:16px;background:var(--mint);font-size:27px;line-height:1.25;color:var(--ink)}
+.vchain div code{font-size:26px;color:var(--brand);font-weight:700}
+.vchain div:last-child{background:var(--brand-deep);color:#fff}
+.vchain div:last-child code{color:#C6DFF3}
+.plain-explain{padding:24px}
+.plain-explain h3{font-size:41px;margin:0 0 6px;line-height:1.16}
+.plain-explain p{font-size:29px;line-height:1.4;color:var(--muted);margin:12px 0 0}
+
+/* Program slide: leave room for the two-sentence callout */
+.slide-program .expression-stack{height:400px}
+/* Slightly larger supporting note text */
+.comparison-note{font-size:29px}
+
+/* Truncation slide: compact chain so the two examples and the caution fit */
+.slide-truncation .chain-flow{height:200px}
+
+/* ===== Notebook-cell table: one row per Notebook cell ===== */
+.example-table{display:flex;flex-direction:column;justify-content:center;gap:18px;padding-top:6px;height:100%}
+.example-line{display:grid;grid-template-columns:.34fr 1.16fr .5fr;border-radius:22px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-soft);background:#fff}
+.example-line .ex-label{display:flex;align-items:center;padding:15px 24px;font-size:27px;font-weight:700;line-height:1.22;color:var(--brand-deep)}
+.example-line .ex-code{padding:15px 24px;background:var(--code)}
+.example-line .ex-code pre{margin:0;white-space:pre-wrap}
+.example-line .ex-code code{font-family:Consolas,"Cascadia Code",monospace;font-size:27px;line-height:1.40;color:#EDF0F4}
+.example-line .ex-out{padding:15px 24px;background:#fff;border-left:1px solid var(--line)}
+.example-line .ex-out b{font-size:24px;font-weight:800;letter-spacing:.06em;color:var(--brand)}
+.example-line .ex-out pre{margin:6px 0 0;font-family:Consolas,"Cascadia Code",monospace;font-size:26px;line-height:1.34;color:var(--ink);white-space:pre-wrap}
+.example-table.dense .example-line .ex-code code{font-size:25px;line-height:1.40}
+.example-table.dense .example-line .ex-out pre{font-size:25px}
+.example-table.dense2{gap:14px}
+.example-table.dense2 .example-line .ex-label{padding:12px 22px;font-size:26px}
+.example-table.dense2 .example-line .ex-code{padding:12px 24px}
+.example-table.dense2 .example-line .ex-out{padding:12px 24px}
+.example-table.dense2 .example-line .ex-code code{font-size:24px;line-height:1.38}
+.example-table.dense2 .example-line .ex-out pre{font-size:25px}
+
+/* Code cell with the output panel beside the code (for long cells) */
+.split-cell .notebook-panel{display:grid;grid-template-columns:1.1fr .9fr}
+.split-cell .nb-toolbar{grid-column:1/-1}
+.split-cell .output-panel{border-left:1px solid var(--line)}
+
+/* String Operations: operator board as a bottom strip under the cell table */
+.slide-strops .example-table{height:auto}
+.slide-strops .operator-board{height:150px;margin-top:20px;grid-template-columns:118px 118px 1fr;gap:22px;padding:24px 34px;align-items:center}
+.slide-strops .operator-board>span{font-size:48px;height:100%}
+.slide-strops .operator-board p{grid-column:auto;margin:0;font-size:28px}
+
+/* Wider code column when a Notebook cell has long lines */
+.wide-code-examples .example-row{grid-template-columns:1.4fr .6fr}
+.slide-boolapps .example-table{height:auto}
+
+/* ===== Definition blocks (Week 02 pp. 4-5) ===== */
+.definition-lead{margin:0;font-size:41px;line-height:1.26;font-weight:760;letter-spacing:-.012em;color:var(--brand-deep)}
+.definition-body{margin:28px 0 0;font-size:30px;line-height:1.44;color:var(--muted)}
+.definition-panel{padding:20px 8px}
+.definition-panel.quoted{border-left:7px solid var(--brand);padding:14px 8px 14px 34px}
+.definition-panel.quoted .definition-lead{font-size:39px}
+
+/* Green frame marking a whole code cell as one program */
+.program-frame{position:relative;border:4px solid #2F5D50;border-radius:32px;padding:26px;background:rgba(47,93,80,.06)}
+.program-frame .program-tag{position:absolute;top:-19px;left:34px;padding:6px 20px;border-radius:999px;background:#2F5D50;color:#fff;font-size:23px;font-weight:800;letter-spacing:.1em}
+
+/* Reversed two-column layout: copy on the left, code cell on the right */
+.reverse-demo-layout{height:100%;display:grid;grid-template-columns:.86fr 1.14fr;gap:44px;align-items:center}
+
+/* Numbered statement boxes */
+.point-stack{height:100%;display:flex;flex-direction:column;justify-content:center;gap:20px}
+.point-box{padding:26px 30px;border-radius:22px;background:#fff;border:1px solid var(--line);border-left:7px solid var(--brand);box-shadow:var(--shadow-soft)}
+.point-box p{margin:0;font-size:30px;line-height:1.4;color:var(--ink)}
+
+/* Definition panel: blue lead term, gradient rule, grey supporting text */
+.definition-term{color:var(--brand);font-weight:800}
+.definition-rule{width:112px;height:7px;border-radius:4px;margin:34px 0 30px;background:linear-gradient(90deg,#1B5FA4,#7FA8CD)}
+
+/* Green underline marking a single statement inside a code cell */
+.stmt-underline{border-bottom:5px solid #4E9E7F;padding-bottom:7px}
+
+/* Pause pin above the right-hand code cell */
+.practice-code-with-pause .reverse-demo-layout{height:100%;margin-top:0;padding-top:104px;align-items:center}
+/* Pause badge sits above the right-hand code cell, aligned to its left edge */
+.slide-pause-right .pause-minute-pin{left:44.7% !important;right:auto !important;top:8px !important;transform:none !important;padding:10px 26px !important}
+
+/* Two side-by-side statement boxes above a visual */
+.point-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.point-grid .point-box{display:flex;align-items:center}
+.point-grid + .chain-flow{height:230px}
+
+/* ===== v5 targeted refinements: pp. 5, 6, and 9 ===== */
+.statement-definition-slide .code-demo-layout{grid-template-columns:1.18fr .82fr;gap:48px}
+.statement-definition-slide .definition-panel{height:100%;display:flex;align-items:center;padding:0 12px}
+.statement-definition-slide .definition-lead{font-size:43px;line-height:1.30;letter-spacing:-.016em}
+.statement-definition-slide .definition-term{color:var(--brand);font-weight:820}
+
+.objects-types-slide .slide-body{position:relative;display:flex;align-items:center;justify-content:center}
+.objects-types-slide .pause-minute-pin{left:50% !important;right:auto !important;top:-8px !important;transform:translateX(-50%) !important;gap:14px !important;padding:10px 24px !important}
+.objects-types-slide .pause-minute-pin .pause-icon-wrap{width:52px !important;height:52px !important}
+.objects-types-slide .pause-minute-pin .pause-icon-wrap svg{width:29px !important;height:29px !important}
+.objects-types-slide .pause-minute-pin .pause-label{font-size:29px !important;font-weight:830 !important}
+.objects-types-slide .reverse-demo-layout{width:100%;height:auto !important;padding-top:0 !important;margin-top:36px !important;grid-template-columns:.88fr 1.12fr;gap:42px;align-items:center;transform:translateY(-22px)}
+.objects-types-slide .point-stack{height:auto;justify-content:center;gap:16px}
+.objects-types-slide .point-box{padding:21px 27px}
+.objects-types-slide .point-box p{font-size:29px;line-height:1.34}
+.objects-types-slide .notebook-panel{align-self:center}
+.objects-types-slide .code-wrap{padding:18px 28px}
+.objects-types-slide .code-wrap code{font-size:28px;line-height:1.38}
+.objects-types-slide .output-panel{padding:12px 28px 14px}
+.objects-types-slide .output-panel pre{font-size:26px;line-height:1.28}
+
+.operators-expressions-redesign .slide-body{padding-top:4px}
+.oe-layout{height:100%;display:grid;grid-template-columns:.92fr 1.08fr;gap:30px;align-items:stretch}
+.oe-defs{display:flex;flex-direction:column;justify-content:center;gap:16px}
+.oe-card{padding:22px 26px;border-radius:22px;background:#fff;border:1px solid var(--line);border-left:7px solid var(--brand);box-shadow:var(--shadow-soft)}
+.oe-tag{display:inline-flex;align-items:center;height:34px;padding:0 12px;border-radius:8px;background:var(--mint);color:var(--brand);font-size:22px;font-weight:850;letter-spacing:.07em}
+.oe-card p{margin:13px 0 0;font-size:28px;line-height:1.36;color:var(--ink)}
+.oe-card strong{color:var(--brand-deep)}
+.oe-eval-note{display:flex;align-items:center;gap:17px;padding:18px 22px;border-radius:20px;background:var(--brand-deep);color:#fff;box-shadow:var(--shadow-soft)}
+.oe-eval-icon{width:48px;height:48px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:rgba(255,255,255,.12);color:#fff;flex:0 0 auto}
+.oe-eval-icon svg{width:29px;height:29px}
+.oe-eval-note p{margin:0;font-size:27px;line-height:1.34;color:#fff}
+.oe-eval-note strong{color:#D9EBFA}
+.oe-visual{height:100%;padding:28px 30px 24px;border-radius:30px;background:linear-gradient(150deg,#f7fbff 0%,#eef5fb 100%);border:1px solid var(--line);box-shadow:var(--shadow-soft);display:flex;flex-direction:column;justify-content:center;align-items:center}
+.oe-caption{font-size:27px;font-weight:760;color:var(--brand-deep);margin-bottom:18px;text-align:center}
+.oe-expression-anatomy{width:100%;display:grid;grid-template-columns:1fr .72fr 1fr;gap:12px}
+.oe-token{min-height:112px;border-radius:22px;background:#fff;border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 7px 18px rgba(13,39,65,.07)}
+.oe-token span{font-size:22px;font-weight:780;letter-spacing:.04em;color:var(--muted)}
+.oe-token b{margin-top:9px;font-family:Consolas,"Cascadia Code",monospace;font-size:43px;line-height:1;color:var(--brand-deep)}
+.oe-token.operator{background:var(--brand-deep);border-color:var(--brand-deep)}
+.oe-token.operator span{color:#C7D7E6}
+.oe-token.operator b{color:#fff;font-size:48px}
+.oe-evaluate-label{position:relative;margin:17px 0 14px;padding:0 18px;font-size:23px;font-weight:800;letter-spacing:.05em;color:var(--brand);text-transform:uppercase}
+.oe-evaluate-label:before,.oe-evaluate-label:after{content:"";position:absolute;top:50%;width:74px;height:2px;background:var(--mint-3)}
+.oe-evaluate-label:before{right:100%}.oe-evaluate-label:after{left:100%}
+.oe-result-flow{display:flex;align-items:center;justify-content:center;gap:14px}
+.oe-result{min-width:150px;padding:14px 20px;border-radius:18px;background:#fff;border:1px solid var(--line);text-align:center}
+.oe-result span{display:block;font-size:21px;font-weight:760;color:var(--muted)}
+.oe-result b{display:block;margin-top:6px;font-family:Consolas,"Cascadia Code",monospace;font-size:34px;color:var(--brand-deep)}
+.oe-result.value{background:var(--brand);border-color:var(--brand)}
+.oe-result.value span{color:#D8E7F5}.oe-result.value b{color:#fff}
+.oe-result-arrow{font-size:38px;font-weight:800;color:var(--sage)}
+.oe-final{width:100%;margin-top:18px;padding:16px 20px;border-radius:18px;background:#fff;border:1px solid var(--line);text-align:center}
+.oe-final p{margin:0;font-size:26px;line-height:1.34;color:var(--brand-deep)}
+
+
+
+/* ===== v6 requested refinements: pp. 4-18 ===== */
+/* Page 5: emphasize the full statement definition. */
+.statement-definition-slide .statement-full-definition{
+  font-size:44px;
+  line-height:1.30;
+  letter-spacing:-.018em;
+  color:var(--brand-deep);
+  font-weight:800;
+}
+.statement-definition-slide .statement-full-definition strong{font-weight:800}
+
+/* Page 6: treat the pause badge + content as one centered vertical group. */
+.objects-types-slide .slide-body{
+  position:absolute;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:18px;
+  padding:0;
+}
+.objects-types-slide .pause-minute-pin{
+  position:static !important;
+  left:auto !important;
+  right:auto !important;
+  top:auto !important;
+  transform:none !important;
+  margin:0 !important;
+  gap:14px !important;
+  padding:10px 24px !important;
+  flex:0 0 auto;
+}
+.objects-types-slide .pause-minute-pin .pause-icon-wrap{width:52px !important;height:52px !important}
+.objects-types-slide .pause-minute-pin .pause-icon-wrap svg{width:29px !important;height:29px !important}
+.objects-types-slide .pause-minute-pin .pause-label{font-size:29px !important;font-weight:830 !important}
+.objects-types-slide .reverse-demo-layout{
+  width:100%;
+  height:438px !important;
+  min-height:0;
+  padding:0 !important;
+  margin:0 !important;
+  transform:none !important;
+  grid-template-columns:.88fr 1.12fr;
+  gap:42px;
+  align-items:center;
+  flex:0 0 auto;
+}
+.objects-types-slide .point-stack{height:auto;justify-content:center;gap:15px}
+.objects-types-slide .point-box{padding:20px 27px}
+.objects-types-slide .point-box p{font-size:28px;line-height:1.32}
+.objects-types-slide .notebook-panel{align-self:center;max-height:430px}
+.objects-types-slide .nb-toolbar{height:56px}
+.objects-types-slide .code-wrap{padding:17px 28px}
+.objects-types-slide .code-wrap code{font-size:27px;line-height:1.35}
+.objects-types-slide .output-panel{padding:11px 28px 13px}
+.objects-types-slide .output-panel pre{font-size:25px;line-height:1.24}
+
+/* Page 9: a simpler concept-to-result visual hierarchy. */
+.operators-expressions-v6 .slide-body{padding-top:0}
+.oev6-shell{height:100%;display:flex;flex-direction:column;gap:17px}
+.oev6-concepts{display:grid;grid-template-columns:1fr 1fr;gap:22px;flex:0 0 154px}
+.oev6-card{
+  border-radius:24px;
+  background:#fff;
+  border:1px solid var(--line);
+  box-shadow:var(--shadow-soft);
+  padding:20px 26px 20px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.oev6-card-head{display:flex;align-items:center;gap:13px;margin-bottom:10px}
+.oev6-no{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--brand);color:#fff;font-size:22px;font-weight:820}
+.oev6-name{font-size:23px;letter-spacing:.075em;font-weight:850;color:var(--brand)}
+.oev6-card p{margin:0;font-size:27px;line-height:1.33;color:var(--ink)}
+.oev6-card strong{color:var(--brand-deep)}
+.oev6-demo{
+  flex:1 1 auto;
+  min-height:0;
+  display:grid;
+  grid-template-columns:1.13fr 86px .87fr;
+  align-items:center;
+  gap:0;
+  border-radius:28px;
+  background:linear-gradient(150deg,#F8FBFE 0%,#EDF5FB 100%);
+  border:1px solid var(--line);
+  padding:22px 26px;
+}
+.oev6-expression-panel{height:100%;display:flex;flex-direction:column;justify-content:center}
+.oev6-eyebrow{font-size:22px;font-weight:850;letter-spacing:.075em;color:var(--brand);margin-bottom:13px}
+.oev6-anatomy{display:grid;grid-template-columns:1fr .68fr 1fr;gap:12px}
+.oev6-token{height:102px;border-radius:20px;background:#fff;border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(13,39,65,.06)}
+.oev6-token span{font-size:21px;color:var(--muted);font-weight:760}
+.oev6-token code{margin-top:7px;font-size:40px;line-height:1;color:var(--brand-deep);font-weight:760}
+.oev6-token.operator{background:var(--brand-deep);border-color:var(--brand-deep)}
+.oev6-token.operator span{color:#C9DCEB}
+.oev6-token.operator code{color:#fff;font-size:45px}
+.oev6-pattern{display:grid;grid-template-columns:1fr .68fr 1fr;gap:12px;margin-top:10px;text-align:center}
+.oev6-pattern code{font-size:20px;color:var(--muted);font-weight:650}
+.oev6-arrow-zone{height:100%;display:flex;align-items:center;justify-content:center;position:relative}
+.oev6-arrow-line{position:absolute;left:4px;right:4px;height:2px;background:var(--mint-3)}
+.oev6-arrow-circle{position:relative;width:54px;height:54px;border-radius:50%;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:750;box-shadow:0 8px 18px rgba(27,95,164,.18)}
+.oev6-result-panel{height:100%;display:flex;flex-direction:column;justify-content:center;padding-left:9px}
+.oev6-result-panel>p{margin:0 0 16px;font-size:25px;line-height:1.34;color:var(--ink)}
+.oev6-result-panel>p strong{color:var(--brand-deep)}
+.oev6-value-row{display:grid;grid-template-columns:126px 1fr;grid-template-rows:auto auto;gap:10px 14px;align-items:center}
+.oev6-result-card{grid-row:1/3;height:112px;border-radius:22px;background:var(--brand);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.oev6-result-card span{font-size:20px;letter-spacing:.07em;font-weight:780;color:#D7E8F7}
+.oev6-result-card code{margin-top:7px;font-size:44px;line-height:1;color:#fff;font-weight:760}
+.oev6-has-type{align-self:end;font-size:20px;font-weight:700;color:var(--muted)}
+.oev6-type-pill{align-self:start;width:max-content;min-width:102px;padding:10px 19px;border-radius:999px;background:#fff;border:1px solid var(--line);box-shadow:0 5px 14px rgba(13,39,65,.06)}
+.oev6-type-pill code{font-size:28px;color:var(--brand-deep);font-weight:760}
+.oev6-keyidea{flex:0 0 80px;border-radius:21px;background:var(--brand-deep);color:#fff;padding:0 28px;display:flex;align-items:center;gap:23px}
+.oev6-keyidea>span{padding:8px 12px;border-radius:9px;background:rgba(255,255,255,.12);font-size:21px;font-weight:850;letter-spacing:.07em;white-space:nowrap;color:#D7E8F7}
+.oev6-keyidea p{margin:0;font-size:28px;line-height:1.28;color:#fff}
+.oev6-keyidea strong{font-weight:800;color:#fff}
+
+/* ===== v7 refinements ===== */
+.statement-definition-slide .definition-panel{align-items:center}
+.definition-lead,
+.statement-definition-slide .definition-lead{font-size:41px;line-height:1.26;letter-spacing:-.012em;font-weight:760;color:var(--brand-deep)}
+.definition-term,
+.statement-definition-slide .definition-term{color:var(--brand);font-weight:800}
+.statement-definition-slide .definition-rule{margin:32px 0 0}
+
+.objects-types-slide .point-stack{gap:0}
+.objects-types-slide .point-box{position:relative;background:none;border:0;border-radius:0;box-shadow:none;padding:20px 6px 20px 36px;border-bottom:1px solid var(--line)}
+.objects-types-slide .point-box:last-child{border-bottom:0}
+.objects-types-slide .point-box:before{content:"";position:absolute;left:2px;top:31px;width:13px;height:13px;border-radius:3px;background:var(--brand);transform:rotate(45deg)}
+.objects-types-slide .point-box p{font-size:29px;line-height:1.34}
+.objects-types-slide .slide-body{flex-direction:row;align-items:center;justify-content:center;gap:0}
+.objects-types-slide .pause-minute-pin{position:absolute !important;top:-6px !important;right:0 !important;left:auto !important;transform:none !important}
+
+.tagged-band{display:flex;align-items:center;gap:23px;min-height:80px;padding:0 28px;border-radius:21px}
+.tagged-band>span{padding:8px 12px;border-radius:9px;font-size:21px;font-weight:850;letter-spacing:.07em;white-space:nowrap}
+.tagged-band p{margin:0;font-size:28px;line-height:1.28;font-weight:600}
+.tagged-band.deep{background:var(--brand-deep);color:#fff}
+.tagged-band.deep>span{background:rgba(255,255,255,.12);color:#D7E8F7}
+.tagged-band.deep p{color:#fff}
+.tagged-band.deep p code{font-family:Consolas,"Cascadia Code",monospace;color:#C9DCEB;font-weight:700}
+.tagged-band.deep p strong{color:#fff;font-weight:780}
+.tagged-band.green{background:#E9F4EE;border:1px solid rgba(47,93,80,.22)}
+.tagged-band.green>span{background:#2F5D50;color:#fff}
+.tagged-band.green p{color:#20362D;font-weight:560}
+.tagged-band.green p strong{color:#1C4E3F;font-weight:720}
+.coming-later-band{margin-top:22px}
+
+.oev6-card-head{margin-bottom:9px}
+.oev6-name{position:relative;padding-left:23px}
+.oev6-name:before{content:"";position:absolute;left:0;top:50%;width:12px;height:12px;margin-top:-6px;border-radius:3px;background:var(--brand);transform:rotate(45deg)}
+.oev6-token{justify-content:center}
+.oev6-token code,.oev6-token.operator code{margin-top:0}
+.oev6-arrow-circle svg{display:block;width:26px;height:26px;fill:none;stroke:#fff;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.oev6-spacer{visibility:hidden}
+.oev6-value-row{display:flex;align-items:flex-start;gap:20px}
+.oev6-value-col{flex:0 0 auto;width:126px}
+.oev6-result-card{height:102px;border-radius:20px;justify-content:center}
+.oev6-result-card code{margin-top:0}
+.oev6-value-label{margin-top:10px;text-align:center}
+.oev6-value-label code{font-size:20px;color:var(--muted);font-weight:650}
+.oev6-type-group{display:flex;align-items:center;gap:16px;height:102px}
+.oev6-has-type{align-self:center;font-size:22px;font-weight:700;color:var(--muted)}
+.oev6-type-pill{align-self:center;min-width:96px;text-align:center}
+.oev6-result-panel>p{margin:22px 0 0;font-size:25px;line-height:1.34;font-weight:560;color:var(--muted)}
+
+/* ===== v8 ===== */
+/* p.6 larger statement text; key nouns in the Output label colour */
+.objects-types-slide .point-box{padding:22px 6px 22px 38px}
+.objects-types-slide .point-box p{font-size:32px;line-height:1.34}
+.objects-types-slide .point-box p strong{color:var(--brand);font-weight:800;letter-spacing:-.012em}
+.objects-types-slide .point-box:before{top:34px;width:14px;height:14px}
+
+/* ===== v10 ===== */
+/* Soft band: light sky-blue panel, black copy (pp. 8 and 9 share it) */
+.tagged-band.soft{background:var(--mint);border:1px solid var(--line);color:#0B1B2B}
+.tagged-band.soft>span{background:var(--brand);color:#fff}
+.tagged-band.soft p{color:#0B1B2B;font-weight:600}
+.tagged-band.soft p strong{color:var(--brand-deep);font-weight:760}
+.tagged-band.soft p code{font-family:Consolas,"Cascadia Code",monospace;color:var(--brand-deep);font-weight:700}
+
+/* Left and right halves of the expression figure share one vertical rhythm */
+.oev6-eyebrow{display:block;height:27px;line-height:27px;margin-bottom:13px}
+.oev6-pattern{margin-top:10px}
+.oev6-pattern code{display:block;line-height:24px}
+.oev6-value-label{margin-top:10px}
+.oev6-value-label code{display:block;line-height:24px;font-size:20px;color:var(--muted);font-weight:650}
+.oev6-result-panel{justify-content:center}
+.oev6-result-panel>p{display:none}
+
+/* value box, has type, int */
+.oev6-value-row{display:grid;grid-template-columns:126px max-content max-content;
+  grid-template-rows:102px 34px;column-gap:20px;row-gap:0;align-items:center}
+.oev6-value-col{grid-column:1;grid-row:1 / span 2;width:126px;display:flex;flex-direction:column}
+.oev6-result-card{height:102px;border-radius:20px;justify-content:center;background:#7E93AB;border:1px solid #7E93AB}
+.oev6-result-card code{margin-top:0;color:#fff}
+.oev6-has-type{grid-column:2;grid-row:2;align-self:center;font-size:22px;font-weight:700;color:var(--muted)}
+.oev6-type-pill{grid-column:3;grid-row:1;align-self:center;min-width:96px;text-align:center}
+
+/* ===== v11 ===== */
+/* Scalar / Non-scalar headings use the same term colour as pp.4-6 */
+.scalar-objects-slide .card h3{color:var(--brand);font-weight:800}
+
+/* Tagged band inverted: brand-blue panel, light sky-blue chip */
+.tagged-band.soft{background:var(--brand);border:1px solid var(--brand);color:#fff}
+.tagged-band.soft>span{background:var(--mint);color:var(--brand-deep)}
+.tagged-band.soft p{color:#fff;font-weight:600}
+.tagged-band.soft p strong{color:#fff;font-weight:780}
+.tagged-band.soft p code{font-family:Consolas,"Cascadia Code",monospace;color:#D7E8F7;font-weight:700}
+
+/* ===== v12 ===== */
+/* Bottom bands match the p.7 callout panel colour */
+.tagged-band.soft{background:var(--brand-deep);border:1px solid var(--brand-deep);color:#fff;box-shadow:var(--shadow)}
+.tagged-band.soft>span{background:var(--mint);color:var(--brand-deep)}
+.tagged-band.soft p{color:#fff;font-weight:600}
+.tagged-band.soft p strong{color:#fff;font-weight:780}
+.tagged-band.soft p code{font-family:Consolas,"Cascadia Code",monospace;color:#C6DFF3;font-weight:700}
+
+/* "has type" sits on the same baseline row as the "value" label */
+.oev6-has-type{grid-column:2;grid-row:2;align-self:stretch;display:flex;align-items:flex-end;
+  line-height:24px;font-size:22px;font-weight:700;color:var(--muted)}
+
+/* ===== v13 ===== */
+/* Definition card: the p.9 concept-card shell, laid out as one row */
+.def-card{display:grid;grid-template-columns:max-content 1fr;align-items:center;gap:26px;
+  margin:0 0 16px;padding:18px 30px;border-radius:24px;background:#fff;border:1px solid var(--line);
+  box-shadow:var(--shadow-soft)}
+.def-card .def-name{position:relative;padding-left:23px;font-size:23px;letter-spacing:.075em;
+  font-weight:850;color:var(--brand);white-space:nowrap}
+.def-card .def-name:before{content:"";position:absolute;left:0;top:50%;width:12px;height:12px;
+  margin-top:-6px;border-radius:3px;background:var(--brand);transform:rotate(45deg)}
+.def-card p{margin:0;font-size:30px;line-height:1.34;color:var(--ink)}
+.def-card p strong{color:var(--brand);font-weight:800}
+.def-card p code{color:var(--brand-deep);font-weight:700}
+.lead-stack .def-card{flex:0 0 auto}
+
+/* p.13 keeps three worked examples alongside the definition card */
+.float-def-slide .example-stack{gap:18px}
+.float-def-slide .example-title{font-size:25px;margin:0 0 8px}
+.float-def-slide .ex-code{padding:16px 26px}
+.float-def-slide .ex-code code{font-size:25px;line-height:1.40}
+.float-def-slide .ex-out{padding:16px 26px}
+.float-def-slide .ex-out pre{font-size:25px}
+
+/* ===== v14: emphasis boxes inherited from the Week 01 final deck ===== */
+
+/* Supporting notes = Week 01 p.16 bottom box */
+.comparison-note{margin-top:22px;padding:20px 25px;border-radius:18px;background:var(--mint);
+  font-size:29px;line-height:1.38;color:var(--brand-deep)}
+.comparison-note span{font-weight:750;color:var(--brand)}
+.comparison-note strong{font-weight:800;color:var(--brand-deep)}
+
+/* Tagged band = Week 01 p.39 recommendation box */
+.tagged-band.soft{min-height:88px;padding:0 26px;gap:20px;border-radius:22px;background:var(--mint);
+  border:0;box-shadow:none;color:var(--brand-deep)}
+.tagged-band.soft>span{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;
+  height:52px;padding:0 22px;border-radius:999px;background:var(--brand);color:#fff;font-size:25px;
+  font-weight:850;letter-spacing:.03em;text-transform:uppercase;box-shadow:0 6px 14px rgba(27,95,164,.28)}
+.tagged-band.soft p{font-size:28px;line-height:1.25;font-weight:650;color:var(--brand-deep)}
+.tagged-band.soft p strong{color:var(--brand);font-weight:900}
+.tagged-band.soft p code{font-family:Consolas,"Cascadia Code",monospace;color:var(--brand);font-weight:650}
+
+/* Key insight = Week 01 p.40 green box */
+.tagged-band.insight{min-height:88px;padding:0 26px;gap:20px;border-radius:22px;
+  background:linear-gradient(135deg,#eaf5ef,#f4faf6);border:1px solid rgba(47,93,80,.22);
+  border-left:14px solid #2f5d50;box-shadow:0 14px 30px rgba(20,53,86,.10);color:var(--ink)}
+.tagged-band.insight>span{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;
+  height:52px;padding:0 22px;border-radius:999px;background:#2f5d50;color:#fff;font-size:25px;
+  font-weight:850;letter-spacing:.03em;text-transform:uppercase;box-shadow:0 6px 14px rgba(47,93,80,.24)}
+.tagged-band.insight p{font-size:28px;line-height:1.25;font-weight:650;color:var(--ink)}
+.tagged-band.insight p strong{color:#2f5d50;font-weight:850}
+.oev6-keyidea{flex:0 0 88px}
+
+/* ===== v15 ===== */
+/* p.8 card headings share the p.9 concept-label role */
+.scalar-objects-slide .card h3{position:relative;margin:24px 0 14px;padding-left:23px;font-size:23px;
+  line-height:1.2;letter-spacing:.075em;font-weight:850;color:var(--brand)}
+.scalar-objects-slide .card h3:before{content:"";position:absolute;left:0;top:50%;width:12px;height:12px;
+  margin-top:-6px;border-radius:3px;background:var(--brand);transform:rotate(45deg)}
+
+/* Key terms written as code keep one colour everywhere */
+.content-slide .slide-header h2 code,
+.content-slide .card h3 code{color:var(--brand);font-weight:800}
+
+/* p.9 eyebrow pinned to the panel's top-left */
+.oev6-demo{position:relative;align-items:center;padding:56px 26px 22px}
+.oev6-demo-eyebrow{position:absolute;left:26px;top:20px;margin:0}
+.oev6-expression-panel{height:auto}
+.oev6-result-panel{height:auto;justify-content:flex-start}
+
+/* label rows on both halves share one height so the boxes line up */
+.oev6-pattern{margin-top:10px;height:50px}
+.oev6-pattern code{display:block;line-height:50px}
+.oev6-value-row{display:grid;grid-template-columns:126px max-content max-content;
+  grid-template-rows:102px 50px;column-gap:20px;row-gap:10px;align-items:center}
+.oev6-result-card{grid-column:1;grid-row:1}
+.oev6-value-label{grid-column:1;grid-row:2;margin:0;text-align:center}
+.oev6-value-label code{display:block;line-height:50px}
+.oev6-has-type{grid-column:2;grid-row:2;align-self:center;display:flex;align-items:center;height:50px;line-height:1}
+.oev6-type-pill{grid-column:3;grid-row:2;align-self:center;padding:8px 18px;min-width:96px;text-align:center}
+
+/* pp.12-13 definition card sits high, with a clear gap below */
+.def-lead-slide .lead-stack{justify-content:flex-start}
+.def-lead-slide .def-card{margin:0 0 34px}
+.def-lead-slide .example-stack{gap:18px}
+.def-lead-slide .example-title{font-size:25px;margin:0 0 8px}
+.def-lead-slide .ex-code{padding:16px 26px}
+.def-lead-slide .ex-code code{font-size:25px;line-height:1.40}
+.def-lead-slide .ex-out{padding:16px 26px}
+.def-lead-slide .ex-out pre{font-size:25px}
+
+/* ===== v16 ===== */
+/* Week 01 green insight box: nudge the glyph inside its badge */
+.wide-callout.insight-callout{background:linear-gradient(135deg,#eaf5ef,#f4faf6);color:var(--ink);
+  border:1px solid rgba(47,93,80,.22);border-left:14px solid #2f5d50;border-radius:22px;
+  box-shadow:0 14px 30px rgba(20,53,86,.10)}
+.wide-callout.insight-callout .icon-box{background:#2f5d50;border-color:#2f5d50;color:#fff}
+.wide-callout.insight-callout .icon-box .line-icon{stroke:#fff;transform:translateX(-4px)}
+.wide-callout.insight-callout p{color:var(--ink)}
+.wide-callout.insight-callout strong{color:#2f5d50;font-weight:850}
+
+/* p.16 : figure on top, emphasis band across the bottom */
+.result-type-slide .code-demo-layout{height:calc(100% - 110px)}
+.result-type-band{margin-top:22px}
+.result-type-band>span{font-family:Consolas,"Cascadia Code",monospace;text-transform:none;font-size:26px;
+  letter-spacing:0;font-weight:800}
+
+/* ===== v17 ===== */
+/* p.6 : pause badge below the code cell, body nudged up */
+.objects-types-slide .slide-body{align-items:flex-start;padding-top:30px}
+.objects-types-slide .pause-minute-pin{top:auto !important;bottom:30px !important;right:0 !important;
+  left:auto !important;transform:none !important}
+
+/* p.9 : arrow and "has type / int" align with the middle of the boxes */
+.oev6-arrow-zone{align-items:flex-start;padding-top:24px}
+.oev6-arrow-line{top:51px}
+.oev6-has-type{grid-column:2;grid-row:1;align-self:center}
+.oev6-type-pill{grid-column:3;grid-row:1;align-self:center}
+
+/* p.14 : the operators are the subject here, so the type names stay black */
+.operators-slide .slide-header h2 code{color:var(--ink);font-weight:760}
+
+/* pp.7, 11, 14, 15 : light sky-blue panel with a dark navy badge (Week 01 pattern) */
+.wide-callout.soft-callout{background:var(--mint);border:1px solid var(--line);box-shadow:none;
+  color:var(--brand-deep)}
+.wide-callout.soft-callout .icon-box{background:var(--brand-deep);border-color:var(--brand-deep);color:#fff}
+.wide-callout.soft-callout .icon-box .line-icon{stroke:#fff;transform:translateX(-4px)}
+.wide-callout.soft-callout p{color:var(--brand-deep);font-weight:650}
+.wide-callout.soft-callout strong{color:var(--brand);font-weight:850}
+
+/* ===== v18 ===== */
+/* p.17 : the concept chip is centred inside the explanation column */
+.eval-expr-slide .code-explain .concept-chip{display:flex;align-items:center;justify-content:center;
+  text-align:center;width:max-content;min-width:60%;margin-left:auto;margin-right:auto}
+
+/* p.18 : lead sits at the top, followed by an "Examples:" label */
+.top-lead-slide .lead-stack{justify-content:flex-start}
+.top-lead-slide .lead-stack .body-lead{margin:0 0 10px}
+.examples-label{flex:0 0 auto;margin:0 0 16px;font-size:28px;line-height:1.3;font-weight:750;
+  color:var(--muted)}
+
+/* ===== v19 ===== */
+/* Badge glyphs sit centred; only the spark icon needs the optical nudge */
+.wide-callout.soft-callout .icon-box .line-icon{transform:none}
+.operators-slide .wide-callout.soft-callout .icon-box .line-icon{transform:translateX(-4px)}
+
+/* pp.14-15 : bottom panel drops further down the slide */
+.operators-slide .wide-callout{margin-top:70px}
+.results-slide .wide-callout{margin-top:60px}
+
+/* p.18 : black lead, navy "Examples:" label */
+.top-lead-slide .lead-stack .body-lead{color:var(--ink)}
+.examples-label{color:var(--brand-deep)}
+
+/* Key terms inside a lead sentence keep the standard term colour */
+.body-lead strong{color:var(--brand);font-weight:800}
+.body-lead code{color:var(--brand-deep);font-weight:700}
+
+/* p.22 : operator strip matches the other bottom panels */
+.slide-strops .example-stack{height:auto}
+.slide-strops .operator-board{background:var(--mint);border:1px solid var(--line);box-shadow:none}
+.slide-strops .operator-board>span{background:var(--brand-deep);color:#fff;border-radius:16px;
+  display:flex;align-items:center;justify-content:center;height:76px}
+.slide-strops .operator-board p{color:var(--brand-deep);font-weight:650}
+.slide-strops .operator-board p b{color:var(--brand);font-weight:850}
+
+/* p.23 : "text =" sits on the same row as the character boxes */
+.strip-prefix{display:flex;align-items:center;height:126px;margin-right:10px}
+.strip-prefix code{font-family:Consolas,"Cascadia Code",monospace;font-size:40px;font-weight:700;
+  color:var(--brand-deep)}
+.indexing-slide .slide-body{display:flex;flex-direction:column;justify-content:center}
+.indexing-slide .body-lead{margin:0 0 8px}
+
+/* ===== v20 ===== */
+/* Lead sentences read as body copy in black across the deck */
+.body-lead{color:var(--ink)}
+.slide-body>.body-lead{margin:0 0 10px}
+
+/* ===== v21 ===== */
+/* Badges in the bottom panels use the same blue as the tagged bands */
+.wide-callout.soft-callout .icon-box{background:var(--brand);border-color:var(--brand)}
+
+/* Concept chips are centred inside the explanation column */
+.code-explain .concept-chip{display:flex;align-items:center;justify-content:center;text-align:center;
+  width:max-content;min-width:60%;margin-left:auto;margin-right:auto}
+
+/* p.22 : operator glyphs optically centred in their tiles */
+.slide-strops .operator-board>span>i{font-style:normal;display:block;line-height:1}
+.slide-strops .operator-board>span:nth-child(2)>i{transform:translateY(13px)}
+
+/* p.23 : text sits at the top of the body */
+.indexing-slide .slide-body{justify-content:flex-start}
+
+/* p.25 : more air between the lead sentence and the first example */
+.strings-ai-slide .lead-stack .body-lead{margin:0 0 30px}
+
+/* ===== v22 ===== */
+/* pp.23-24 : more air between the sentence and the figure below it */
+.indexing-slide .char-strip{padding-top:56px}
+.slicing-slide .result-grid{padding-top:54px}
+
+/* p.29 : bottom panel drops further down */
+.comparison-ops-slide .wide-callout{margin-top:90px}
+
+/* p.37 : panel tuned so the three examples and the note both fit */
+.slide-boolapps .wide-callout{margin-top:10px;min-height:0;padding:16px 26px}
+
+/* ===== v23 ===== */
+/* pp.47-49 : example labels sit above the code/output row, content centred */
+.conv-stack-slide .slide-body{display:flex;flex-direction:column;justify-content:center}
+.conv-stack-slide .example-stack{height:auto;gap:18px}
+.conv-stack-slide .example-title{font-size:25px;margin:0 0 8px}
+.conv-stack-slide .ex-code{padding:16px 26px}
+.conv-stack-slide .ex-code code{font-size:25px;line-height:1.40}
+.conv-stack-slide .ex-out{padding:16px 26px}
+.conv-stack-slide .ex-out pre{font-size:25px}
+.conv-stack-slide .body-lead{margin:0 0 20px}
+
+/* ===== v24 ===== */
+/* p.48 : Week 01 green insight box for the truncation caution */
+.wide-callout.insight-callout{background:linear-gradient(135deg,#eaf5ef,#f4faf6);color:var(--ink);
+  border:1px solid rgba(47,93,80,.22);border-left:14px solid #2f5d50;border-radius:22px;
+  box-shadow:0 14px 30px rgba(20,53,86,.10)}
+.wide-callout.insight-callout .icon-box{background:#2f5d50;border-color:#2f5d50;color:#fff}
+.wide-callout.insight-callout .icon-box .line-icon{stroke:#fff;transform:none}
+.wide-callout.insight-callout p{color:var(--ink);font-weight:650}
+.wide-callout.insight-callout code{color:#2f5d50;font-weight:750}
+.wide-callout.insight-callout strong{color:#2f5d50;font-weight:850}
+
+/* ===== v25 ===== */
+/* p.29 : body centred in the slide */
+.comparison-ops-slide .slide-body{display:flex;flex-direction:column;justify-content:center}
+.comparison-ops-slide .wide-callout{margin-top:56px}
+
+/* p.33 : bottom panel drops further down */
+.logical-ops-slide .wide-callout{margin-top:46px}
+
+/* ===== v26 ===== */
+/* p.9 : arrow centred on the whole box + label group */
+.oev6-arrow-zone{align-items:flex-start;padding-top:49px}
+.oev6-arrow-line{top:76px}
+
+/* p.18 : more air between the lead sentence and "Examples:" */
+.top-lead-slide .lead-stack .body-lead{margin:0 0 32px}
+
+/* p.23 : result boxes sit further below the character strip */
+.indexing-slide .result-grid{padding-top:56px}
+
+/* pp.33, 36, 37 : bottom panels nudged down */
+.logical-ops-slide .feature-grid.with-callout{height:410px}
+.logical-ops-slide .feature-grid .card{padding:26px 30px 24px}
+.logical-ops-slide .feature-grid .card h3{margin:20px 0 10px}
+.logical-ops-slide .wide-callout{margin-top:70px}
+.bool-convert-slide .wide-callout{margin-top:28px}
+.slide-boolapps .wide-callout{margin-top:20px}
+
+/* ===== v27 ===== */
+/* p.33 : compact cards free up room so the bottom panel can sit lower */
+.logical-ops-slide .feature-grid.with-callout{height:392px}
+.logical-ops-slide .feature-grid .card{padding:24px 30px 20px}
+.logical-ops-slide .feature-grid .card-top .icon-box{width:50px;height:50px;border-radius:14px}
+.logical-ops-slide .feature-grid .card h3{margin:12px 0 10px;font-size:32px}
+.logical-ops-slide .feature-grid .card p{font-size:28px;line-height:1.43}
+.logical-ops-slide .mini-truth div{padding:8px 14px;margin-top:8px;font-size:25px}
+.logical-ops-slide .wide-callout{margin-top:98px}
+</style></head><body><!-- SCU AI Programming Fundamentals — Week 02 | Design system: Week 01 deck (ver.02 blue palette) | Content: instructor Week 02 notebook (Data Types and Variables); code outputs verified. --><div id="viewport"><section class="slide cover-slide cover-refined"><div class="cover-grid"></div><div class="cover-left"><span class="cover-brand">SEOUL CYBER UNIVERSITY</span><h1>AI Programming<br/>Fundamentals</h1><div class="cover-tag"><span>WEEK 02</span><b>DATA TYPES AND VARIABLES</b></div><p>Objects &amp; Types · Numbers &amp; Strings · Boolean Expressions · Variables</p></div><div class="cover-right">
+<svg aria-label="Data types and variables illustration" class="hero-svg" role="img" viewbox="0 0 680 600">
+<defs>
+<lineargradient id="cvA" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#2A72B3"></stop><stop offset="1" stop-color="#0C3F6E"></stop></lineargradient>
+<lineargradient id="cvB" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#E3E8EE"></stop><stop offset="1" stop-color="#97ABBE"></stop></lineargradient>
+<filter id="shadow"><fedropshadow dx="0" dy="18" flood-color="#040E19" flood-opacity=".28" stddeviation="18"></fedropshadow></filter>
+</defs>
+<circle cx="546" cy="92" fill="#286AA7" opacity=".30" r="78"></circle>
+<circle cx="592" cy="182" fill="#A5B6C8" r="13"></circle>
+<circle cx="494" cy="30" fill="#A5B6C8" r="8"></circle>
+<g opacity=".32" stroke="#91A6BB" stroke-width="2"><path d="M546 92 592 182 494 30 430 100 546 92Z"></path><path d="M430 100 366 54M592 182l46 34M494 30l40-20"></path></g>
+<g filter="url(#shadow)">
+<rect fill="#FBFCFD" height="330" rx="30" width="486" x="86" y="118"></rect>
+<rect fill="url(#cvA)" height="58" rx="30" width="486" x="86" y="118"></rect>
+<circle cx="124" cy="147" fill="#DBE2E8" r="7"></circle>
+<circle cx="149" cy="147" fill="#B6C4D2" r="7"></circle>
+<circle cx="174" cy="147" fill="#8399B0" r="7"></circle>
+<rect fill="#0C447C" height="46" rx="14" width="132" x="116" y="208"></rect>
+<text fill="#DCE9F6" font-family="Consolas, monospace" font-size="25" x="136" y="239">int</text>
+<rect fill="#1B5FA4" height="46" rx="14" width="152" x="262" y="208"></rect>
+<text fill="#EAF2FA" font-family="Consolas, monospace" font-size="25" x="284" y="239">float</text>
+<rect fill="#58C7B0" height="46" rx="14" width="118" x="428" y="208"></rect>
+<text fill="#073A62" font-family="Consolas, monospace" font-size="25" x="450" y="239">str</text>
+<rect fill="#3B79B6" height="46" rx="14" width="126" x="116" y="272"></rect>
+<text fill="#EAF2FA" font-family="Consolas, monospace" font-size="25" x="138" y="303">bool</text>
+<g fill="#D4DBE2"><rect height="18" rx="8" width="248" x="262" y="286"></rect></g>
+<rect fill="url(#cvB)" height="42" rx="12" width="244" x="116" y="348"></rect>
+<path d="m131 365 10 8-10 8M157 381l10-24M195 365l-10 8 10 8" fill="none" stroke="#1B5FA4" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"></path>
+<rect fill="#E7EBEF" height="20" rx="8" width="196" x="116" y="410"></rect>
+</g>
+<g filter="url(#shadow)" transform="translate(444 384)">
+<circle cx="72" cy="72" fill="#1B5FA4" r="70"></circle>
+<path d="M49 67c0-18 10-29 23-29s23 11 23 29v12c0 18-10 29-23 29S49 97 49 79V67Z" fill="#EAEEF2"></path>
+<path d="M55 67h34M60 53l-9-10M84 53l9-10M60 93h24" stroke="#1B5FA4" stroke-linecap="round" stroke-width="6"></path>
+<circle cx="64" cy="72" fill="#1B5FA4" r="4"></circle>
+<circle cx="80" cy="72" fill="#1B5FA4" r="4"></circle>
+</g>
+</svg></div></section><section class="slide content-slide slide-objectives-4"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">WEEK 02</span><h2>Week Learning Objectives</h2></div></header><div class="slide-body"><p class="week-objectives-intro">By the end of this week, you will be able to:</p><div class="summary-grid"><div class="summary-card"><span>01</span><h3>Objects and Types</h3><p>Explain how Python programs work with objects and types, and distinguish between scalar and non-scalar objects.</p></div><div class="summary-card"><span>02</span><h3>Numbers and Strings</h3><p>Use numeric types, strings, and operators to construct and evaluate Python expressions.</p></div><div class="summary-card"><span>03</span><h3>Boolean Expressions</h3><p>Apply comparison and logical operators to construct Boolean expressions and interpret their results.</p></div><div class="summary-card"><span>04</span><h3>Variables and Conversion</h3><p>Use variables, assignment, and type conversion to represent and process data in Python.</p></div></div></div></div></section><section class="slide section-slide"><div class="section-grid"></div><div class="section-copy"><span class="section-eyebrow">1</span><h1>Python Objects<br/>and Basic Data Types</h1><p>What Python programs work with: statements, objects, types, expressions, numbers, and strings.</p><div class="section-rule"></div><span class="section-brand">AI Programming Fundamentals</span></div><div class="section-art"><svg class="section-svg" viewbox="0 0 620 520">
+<defs><filter id="s1"><fedropshadow dx="0" dy="20" flood-color="#061525" flood-opacity=".28" stddeviation="20"></fedropshadow></filter></defs>
+<g filter="url(#s1)">
+<rect fill="#FAFCFD" height="358" rx="34" width="426" x="98" y="76"></rect>
+<rect fill="#225F98" height="74" rx="34" width="426" x="98" y="76"></rect>
+<path d="M98 118h426" opacity=".7" stroke="#A7B8C9" stroke-width="2"></path>
+<circle cx="143" cy="113" fill="#DDE3E9" r="8"></circle>
+<circle cx="172" cy="113" fill="#B1BFCD" r="8"></circle>
+<rect fill="#E3EAF1" height="70" rx="18" width="150" x="136" y="164"></rect>
+<text fill="#0C447C" font-family="Consolas, monospace" font-size="30" x="170" y="207">5</text>
+<rect fill="#E3EAF1" height="70" rx="18" width="150" x="316" y="164"></rect>
+<text fill="#0C447C" font-family="Consolas, monospace" font-size="30" x="336" y="207">'Hi'</text>
+<rect fill="#1B5FA4" height="60" rx="16" width="150" x="136" y="262"></rect>
+<text fill="#FFFFFF" font-family="Consolas, monospace" font-size="26" x="164" y="300">int</text>
+<rect fill="#1B5FA4" height="60" rx="16" width="150" x="316" y="262"></rect>
+<text fill="#FFFFFF" font-family="Consolas, monospace" font-size="26" x="344" y="300">str</text>
+<path d="M211 240v14M391 240v14" stroke="#7FA8CD" stroke-linecap="round" stroke-width="6"></path>
+<rect fill="#BCC8D4" height="30" rx="10" width="330" x="136" y="356"></rect>
+</g>
+</svg></div></section><section class="slide content-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">PROGRAMS TO OBJECTS</span><h2>What Is a Program?</h2></div></header><div class="slide-body"><div class="code-demo-layout"><div class="program-frame"><span class="program-tag">PROGRAM</span><div class="notebook-panel"><div class="nb-toolbar"><span class="run-dot">▶</span><span>Code cell</span><i></i></div><div class="code-wrap"><pre><code><span class="fn">print</span>(<span class="str">'Hello, Colab!'</span>)</code></pre></div><div class="output-panel"><div class="output-label">Output</div><pre>Hello, Colab!</pre></div></div></div><div class="definition-panel"><p class="definition-lead"><span class="definition-term">A program</span><br/>is a sequence of definitions and commands.</p><div class="definition-rule"></div><p class="definition-body">The Python interpreter reads the program, processes its definitions, and executes its commands.</p></div></div></div></div></section><section class="slide content-slide statement-definition-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">PROGRAMS TO OBJECTS</span><h2>Statements</h2></div></header><div class="slide-body"><div class="code-demo-layout"><div class="notebook-panel"><div class="nb-toolbar"><span class="run-dot">▶</span><span>Code cell</span><i></i></div><div class="code-wrap"><pre><code><span class="stmt-underline"><span class="fn">print</span>(<span class="str">'Hello, Colab!'</span>)</span></code></pre></div><div class="output-panel"><div class="output-label">Output</div><pre>Hello, Colab!</pre></div></div><div class="definition-panel"><p class="definition-lead"><span class="definition-term">A statement</span> (or command) is an instruction that Python executes.</p></div></div></div></div></section><section class="slide content-slide objects-types-slide practice-code-with-pause"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">PROGRAMS TO OBJECTS</span><h2>Objects and Types</h2></div></header><div class="slide-body"><div class="pause-minute-pin"><span class="pause-icon-wrap"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M12 22a10 10 0 1 0-10-10"></path><path d="M12 6v6l4 2"></path></svg></span><span class="pause-label">Pause a minute</span></div><div class="reverse-demo-layout"><div class="point-stack"><div class="point-box"><p><strong>Objects</strong> are the main things that Python programs manipulate.</p></div><div class="point-box"><p>Every object has a <strong>type</strong>.</p></div><div class="point-box"><p>The type of the object determines what programs can do with that object.</p></div></div><div class="notebook-panel"><div class="nb-toolbar"><span class="run-dot">▶</span><span>Code cell</span><i></i></div><div class="code-wrap"><pre><code><span class="fn">print</span>(<span class="fn">type</span>(<span class="num">5</span>))
+<span class="fn">print</span>(<span class="fn">type</span>(<span class="num">3.0</span>))
+<span class="fn">print</span>(<span class="fn">type</span>(<span class="num">True</span>))
+<span class="fn">print</span>(<span class="fn">type</span>(<span class="str">'Hello, Colab!'</span>))</code></pre></div><div class="output-panel"><div class="output-label">Output</div><pre>&lt;class 'int'&gt;
+&lt;class 'float'&gt;
+&lt;class 'bool'&gt;
+&lt;class 'str'&gt;</pre></div></div></div></div></div></section><section class="slide content-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">PROGRAMS TO OBJECTS</span><h2>The Four Types We Start With</h2></div></header><div class="slide-body"><div class="grid-4 feature-grid with-callout"><article class="card"><div class="card-top"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><path d="M9 4 7 20M17 4l-2 16M4 9h16M3 15h16"></path></svg></span></div><h3><code>int</code></h3><p>Whole numbers like <code>25</code>, <code>1000</code>, and <code>-5</code>.</p></article><article class="card"><div class="card-top"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><rect height="8" rx="2" width="18" x="3" y="8"></rect><path d="M7 8v4M11 8v3M15 8v4M19 8v3"></path></svg></span></div><h3><code>float</code></h3><p>Numbers with decimals like <code>3.14</code> and <code>0.5</code>.</p></article><article class="card"><div class="card-top"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><rect height="10" rx="5" width="20" x="2" y="7"></rect><circle cx="17" cy="12" r="3"></circle></svg></span></div><h3><code>bool</code></h3><p>Only two values: <code>True</code> and <code>False</code>.</p></article><article class="card"><div class="card-top"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h13"></path></svg></span></div><h3><code>str</code></h3><p>Text such as <code>'Hello'</code>.</p></article></div><div class="wide-callout soft-callout"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3"></circle></svg></span><p>The type of a value helps decide how Python uses it.</p></div></div></div></section><section class="slide content-slide scalar-objects-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">PROGRAMS TO OBJECTS</span><h2>Scalar and Non-Scalar Objects</h2></div></header><div class="slide-body"><div class="grid-2 feature-grid with-callout"><article class="card"><div class="card-top"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><path d="M21 8 12 3 3 8v8l9 5 9-5V8Z"></path><path d="m3 8 9 5 9-5M12 13v8"></path></svg></span></div><h3>SCALAR OBJECTS</h3><p>A single value that we treat as one whole.</p><div class="chip-row"><span>int</span><span>float</span><span>bool</span></div></article><article class="card"><div class="card-top"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5Z"></path><path d="m3 13 9 5 9-5"></path></svg></span></div><h3>NON-SCALAR OBJECTS</h3><p>Made of smaller parts that we can access, such as the characters in a string.</p><div class="chip-row"><span>str</span><span class="ghost">list</span><span class="ghost">tuple</span><span class="ghost">dict</span><span class="ghost">set</span></div></article></div><div class="tagged-band soft coming-later-band"><span>COMING LATER</span><p><code>list</code> and <code>tuple</code> in <strong>Week 03</strong> · <code>dict</code> and <code>set</code> in <strong>Week 04</strong></p></div></div></div></section><section class="slide content-slide operators-expressions-v6"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">PROGRAMS TO OBJECTS</span><h2>Operators and Expressions</h2></div></header><div class="slide-body"><div class="oev6-shell">
+<div class="oev6-concepts">
+<article class="oev6-card"><div class="oev6-card-head"><span class="oev6-name">OPERATOR</span></div><p>An <strong>operator</strong> specifies an operation to perform on objects or values.</p>
+</article>
+<article class="oev6-card"><div class="oev6-card-head"><span class="oev6-name">EXPRESSION</span></div><p>Objects and operators can be combined to form an <strong>expression</strong>.</p>
+</article>
+</div><div class="oev6-demo"><span class="oev6-eyebrow oev6-demo-eyebrow">A SIMPLE EXPRESSION</span><div class="oev6-expression-panel"><div class="oev6-anatomy"><div class="oev6-token"><code>3</code></div><div class="oev6-token operator"><code>+</code></div><div class="oev6-token"><code>2</code></div></div><div class="oev6-pattern"><code>object</code><code>operator</code><code>object</code></div>
+</div>
+<div aria-hidden="true" class="oev6-arrow-zone">
+<span class="oev6-arrow-line"></span><span class="oev6-arrow-circle"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M4 12h15m-6-7 7 7-7 7"></path></svg></span></div><div class="oev6-result-panel"><div class="oev6-value-row"><div class="oev6-result-card"><code>5</code></div><div class="oev6-value-label"><code>value</code></div><span class="oev6-has-type">has type</span><div class="oev6-type-pill"><code>int</code></div></div></div></div><div class="oev6-keyidea tagged-band insight"><span>KEY IDEA</span><p>An expression evaluates to a <strong>value</strong>, and that value has a <strong>type</strong>.</p></div></div></div></div></section><section class="slide practice-slide practice-divider week02-practice-after-expressions">
+<div class="practice-inner">
+<div class="practice-copy">
+<span class="practice-kicker">HANDS-ON PRACTICE</span>
+<h1 class="practice-title">Let's Practice</h1>
+<p class="practice-text">Now, move to the Jupyter Notebook and practice objects, types, operators, and expressions together.</p>
+</div>
+<div class="practice-visual universal">
+<svg aria-hidden="true" class="practice-universal-svg" viewbox="0 0 560 470">
+<defs>
+<filter height="140%" id="practiceShadowW02P10" width="140%" x="-20%" y="-20%">
+<fedropshadow dx="0" dy="18" flood-color="#0b253c" flood-opacity=".18" stddeviation="18"></fedropshadow>
+</filter>
+</defs>
+<g filter="url(#practiceShadowW02P10)">
+<rect fill="#ffffff" height="312" rx="34" width="420" x="70" y="58"></rect>
+<rect fill="#2f5d50" height="72" rx="34" width="420" x="70" y="58"></rect>
+<circle cx="112" cy="94" fill="#dfeee8" r="8"></circle>
+<circle cx="142" cy="94" fill="#b8d8ca" r="8"></circle>
+<circle cx="172" cy="94" fill="#7fb79f" r="8"></circle>
+<rect fill="#dcebe6" height="28" rx="9" width="118" x="112" y="166"></rect>
+<rect fill="#e6f1fb" height="22" rx="8" width="294" x="112" y="215"></rect>
+<rect fill="#e6f1fb" height="22" rx="8" width="244" x="112" y="259"></rect>
+<rect fill="#e6f1fb" height="22" rx="8" width="318" x="112" y="303"></rect>
+<circle cx="432" cy="322" fill="#1b5fa4" r="58"></circle>
+<path d="M409 322h45M432 299v46" stroke="#ffffff" stroke-linecap="round" stroke-width="9"></path>
+</g>
+<path d="M394 156l42 42 77-88" fill="none" stroke="#2f5d50" stroke-linecap="round" stroke-linejoin="round" stroke-width="18"></path>
+</svg>
+</div>
+</div>
+</section><section class="slide content-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">NUMERIC TYPES AND OPERATORS</span><h2>Numeric Types: <code>int</code> and <code>float</code></h2></div></header><div class="slide-body"><div class="grid-2 feature-grid with-callout"><article class="card"><div class="card-top"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><path d="M9 4 7 20M17 4l-2 16M4 9h16M3 15h16"></path></svg></span></div><h3><code>int</code>: integers</h3><p>Numbers with no fractional part. Positive, negative, or zero.</p><div class="chip-row"><span>25</span><span>1000</span><span>-5</span></div></article><article class="card"><div class="card-top"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><rect height="8" rx="2" width="18" x="3" y="8"></rect><path d="M7 8v4M11 8v3M15 8v4M19 8v3"></path></svg></span></div><h3><code>float</code>: decimals</h3><p>Floating-point values, used to represent real-number values approximately.</p><div class="chip-row"><span>175.5</span><span>3.14159</span><span>0.9567</span></div></article></div><div class="wide-callout soft-callout"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><path d="M4 19V5M4 19h16"></path><path d="m7 15 4-4 3 2 5-7"></path></svg></span><p>Integers suit <strong>counts, repetitions, and numbers of samples</strong>.<br/>Floats suit <strong>measurements, ratios, probabilities, and model performance</strong>.</p></div></div></div></section><section class="slide content-slide def-lead-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">NUMERIC TYPES AND OPERATORS</span><h2>Integers (<code>int</code>)</h2></div></header><div class="slide-body"><div class="lead-stack"><div class="def-card"><span class="def-name">INTEGER</span><p>An integer is a number with no fractional part. It can be positive, negative, or zero.</p></div><div class="example-stack"><div class="example-item"><p class="example-title">A person's age</p><div class="example-row"><div class="ex-code"><pre><code>age = <span class="num">25</span>
+age</code></pre></div><div class="ex-out"><b>OUTPUT</b><pre>25</pre></div></div></div><div class="example-item"><p class="example-title">The number of samples in a dataset</p><div class="example-row"><div class="ex-code"><pre><code>num_samples = <span class="num">1000</span>
+num_samples</code></pre></div><div class="ex-out"><b>OUTPUT</b><pre>1000</pre></div></div></div><div class="example-item"><p class="example-title">A temperature below zero</p><div class="example-row"><div class="ex-code"><pre><code>temperature = -<span class="num">5</span>
+temperature</code></pre></div><div class="ex-out"><b>OUTPUT</b><pre>-5</pre></div></div></div></div></div></div></div></section><section class="slide content-slide float-def-slide def-lead-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">NUMERIC TYPES AND OPERATORS</span><h2>Floating-Point Numbers (<code>float</code>)</h2></div></header><div class="slide-body"><div class="lead-stack"><div class="def-card"><span class="def-name">FLOAT</span><p>Floating-point numbers represent real-number values approximately.</p></div><div class="example-stack"><div class="example-item"><p class="example-title">A measured height</p><div class="example-row"><div class="ex-code"><pre><code>height = <span class="num">175.5</span>
+height</code></pre></div><div class="ex-out"><b>OUTPUT</b><pre>175.5</pre></div></div></div><div class="example-item"><p class="example-title">A constant value</p><div class="example-row"><div class="ex-code"><pre><code>pi = <span class="num">3.14159</span>
+pi</code></pre></div><div class="ex-out"><b>OUTPUT</b><pre>3.14159</pre></div></div></div><div class="example-item"><p class="example-title">A computed area</p><div class="example-row"><div class="ex-code"><pre><code>radius = <span class="num">10</span>
+area = pi * (radius ** <span class="num">2</span>)
+area</code></pre></div><div class="ex-out"><b>OUTPUT</b><pre>314.159</pre></div></div></div></div></div></div></div></section><section class="slide content-slide operators-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">NUMERIC TYPES AND OPERATORS</span><h2>Operators on <code>int</code> and <code>float</code></h2></div></header><div class="slide-body"><div class="op-list"><div class="op-item"><b>+</b><span>Addition</span></div><div class="op-item"><b>-</b><span>Subtraction</span></div><div class="op-item"><b>*</b><span>Multiplication</span></div><div class="op-item"><b>/</b><span>Division</span><i>always a float</i></div><div class="op-item"><b>//</b><span>Floor division</span><i>rounds the quotient down</i></div><div class="op-item"><b>%</b><span>Remainder</span></div><div class="op-item"><b>**</b><span>Exponentiation</span></div></div><div class="wide-callout soft-callout"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><path d="m12 3 1.7 4.3L18 9l-4.3 1.7L12 15l-1.7-4.3L6 9l4.3-1.7L12 3Z"></path><path d="m19 15 .8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15Z"></path></svg></span><p>These operators are used throughout the course, from simple arithmetic to model metrics.</p></div></div></div></section><section class="slide content-slide results-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">NUMERIC TYPES AND OPERATORS</span><h2>Results at a Glance</h2></div></header><div class="slide-body"><div class="result-grid"><div class="result-item"><code>10 + 3</code><b>13</b></div><div class="result-item"><code>10 - 3</code><b>7</b></div><div class="result-item"><code>10 * 3</code><b>30</b></div><div class="result-item"><code>10 / 3</code><b>3.3333333333333335</b></div><div class="result-item"><code>10 // 3</code><b>3</b></div><div class="result-item"><code>10 % 3</code><b>1</b></div><div class="result-item wide"><code>2 ** 3</code><b>8</b></div></div><div class="wide-callout soft-callout"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><path d="M4 19V5M4 19h16"></path><path d="m7 15 4-4 3 2 5-7"></path></svg></span><p>Only <strong>/</strong> produces a float here.<br/><strong>//</strong> performs floor division, rounding the quotient down, and <strong>%</strong> returns the remainder.</p></div></div></div></section><section class="slide content-slide result-type-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">NUMERIC TYPES AND OPERATORS</span><h2>Result Type Depends on Operator and Operand Types</h2></div></header><div class="slide-body"><div class="code-demo-layout"><div class="notebook-panel"><div class="nb-toolbar"><span class="run-dot">▶</span><span>Code cell</span><i></i></div><div class="code-wrap"><pre><code><span class="fn">print</span>(<span class="num">3</span> + <span class="num">2</span>, <span class="fn">type</span>(<span class="num">3</span> + <span class="num">2</span>))
+<span class="fn">print</span>(<span class="num">5</span> / <span class="num">2</span>, <span class="fn">type</span>(<span class="num">5</span> / <span class="num">2</span>))</code></pre></div><div class="output-panel"><div class="output-label">Output</div><pre>5 &lt;class 'int'&gt;
+2.5 &lt;class 'float'&gt;</pre></div></div><div class="code-explain"><span class="icon-box huge"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><path d="M4 8h13l-3-3M20 16H7l3 3"></path></svg></span><h3>Same operands,<br/>different types</h3><p>The operator and the types of the objects together determine the resulting value and its type.</p></div></div><div class="tagged-band soft result-type-band"><span>int / int &rarr; float</span><p>In Python, <code>/</code> always produces a floating-point result, even for <code>4 / 2</code>.</p></div></div></div></section><section class="slide content-slide eval-expr-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">NUMERIC TYPES AND OPERATORS</span><h2>Evaluating Expressions</h2></div></header><div class="slide-body"><div class="code-demo-layout"><div class="notebook-panel"><div class="nb-toolbar"><span class="run-dot">▶</span><span>Code cell</span><i></i></div><div class="code-wrap"><pre><code>without_parentheses = <span class="num">4</span> + <span class="num">2</span> * <span class="num">3</span>
+with_parentheses = (<span class="num">4</span> + <span class="num">2</span>) * <span class="num">3</span>
+
+without_parentheses, with_parentheses</code></pre></div><div class="output-panel"><div class="output-label">Output</div><pre>(10, 18)</pre></div></div><div class="code-explain"><span class="icon-box huge"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><circle cx="5" cy="6" r="2.5"></circle><circle cx="19" cy="12" r="2.5"></circle><circle cx="5" cy="18" r="2.5"></circle><path d="M7.5 6H13a3 3 0 0 1 3 3v.5M16 14.5v.5a3 3 0 0 1-3 3H7.5"></path></svg></span><h3>Parentheses set the order</h3><p>Python evaluates an expression step by step until one value remains.</p><div class="variable-cards"><div><b>4+2*3</b><span>10</span></div><div><b>(4+2)*3</b><span>18</span></div></div><div class="concept-chip">parentheses first</div></div></div></div></div></section><section class="slide content-slide top-lead-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">NUMERIC TYPES AND OPERATORS</span><h2>Numbers in Data and AI</h2></div></header><div class="slide-body"><div class="lead-stack"><p class="body-lead">Numeric types appear frequently in data analysis and AI workflows.</p><p class="examples-label">Examples:</p><div class="example-stack"><div class="example-item"><p class="example-title">Dataset size: a count represented as an integer</p><div class="example-row"><div class="ex-code"><pre><code>dataset_size = <span class="num">10000</span>
+
+<span class="fn">print</span>(<span class="str">'Dataset size:'</span>, dataset_size)</code></pre></div><div class="ex-out"><b>OUTPUT</b><pre>Dataset size: 10000</pre></div></div></div><div class="example-item"><p class="example-title">Model accuracy: a ratio represented as a float</p><div class="example-row"><div class="ex-code"><pre><code>accuracy = <span class="num">0.9567</span>
+
+<span class="fn">print</span>(<span class="str">'Model accuracy:'</span>, accuracy)</code></pre></div><div class="ex-out"><b>OUTPUT</b><pre>Model accuracy: 0.9567</pre></div></div></div></div></div></div></div></section><section class="slide practice-slide practice-divider">
+<div class="practice-inner">
+<div class="practice-copy">
+<span class="practice-kicker">HANDS-ON PRACTICE</span>
+<h1 class="practice-title">Let's Practice</h1>
+<p class="practice-text">Now, let's move to the Jupyter Notebook and work with Python objects, numeric types, and expressions.</p>
+</div>
+<div class="practice-visual universal">
+<svg aria-hidden="true" class="practice-universal-svg" viewbox="0 0 560 470">
+<defs>
+<filter height="140%" id="practiceShadowW2_1" width="140%" x="-20%" y="-20%">
+<fedropshadow dx="0" dy="18" flood-color="#0b253c" flood-opacity=".18" stddeviation="18"></fedropshadow>
+</filter>
+</defs>
+<g filter="url(#practiceShadowW2_1)">
+<rect fill="#ffffff" height="312" rx="34" width="420" x="70" y="58"></rect>
+<rect fill="#2f5d50" height="72" rx="34" width="420" x="70" y="58"></rect>
+<circle cx="112" cy="94" fill="#dfeee8" r="8"></circle>
+<circle cx="142" cy="94" fill="#b8d8ca" r="8"></circle>
+<circle cx="172" cy="94" fill="#7fb79f" r="8"></circle>
+<rect fill="#dcebe6" height="28" rx="9" width="118" x="112" y="166"></rect>
+<rect fill="#e6f1fb" height="22" rx="8" width="294" x="112" y="215"></rect>
+<rect fill="#e6f1fb" height="22" rx="8" width="244" x="112" y="259"></rect>
+<rect fill="#e6f1fb" height="22" rx="8" width="318" x="112" y="303"></rect>
+<circle cx="432" cy="322" fill="#1b5fa4" r="58"></circle>
+<path d="M409 322h45M432 299v46" stroke="#ffffff" stroke-linecap="round" stroke-width="9"></path>
+</g>
+<path d="M394 156l42 42 77-88" fill="none" stroke="#2f5d50" stroke-linecap="round" stroke-linejoin="round" stroke-width="18"></path>
+</svg>
+</div>
+</div>
+</section><section class="slide content-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">STRINGS</span><h2>Strings as Non-Scalar Objects</h2></div></header><div class="slide-body"><div class="grid-3 feature-grid with-callout"><article class="card"><div class="card-top"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h13"></path></svg></span></div><h3>A sequence of characters</h3><p>Letters, digits, spaces, and special characters can all appear inside a string.</p></article><article class="card"><div class="card-top"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg></span></div><h3>Case-sensitive</h3><p><code>'Python'</code> and <code>'python'</code> are two different strings.</p></article><article class="card"><div class="card-top"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5Z"></path><path d="m3 13 9 5 9-5"></path></svg></span></div><h3>Non-scalar</h3><p>The sequence inside a string can be accessed, so a string is a non-scalar object.</p></article></div><div class="wide-callout soft-callout"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><path d="M9.5 4.5A3.5 3.5 0 0 0 6 8v1a3 3 0 0 0-1 5.83V16a3 3 0 0 0 3 3h1.5"></path><path d="M14.5 4.5A3.5 3.5 0 0 1 18 8v1a3 3 0 0 1 1 5.83V16a3 3 0 0 1-3 3h-1.5"></path></svg></span><p>Because a string has an internal structure,<br/>we can access and work with <strong>individual characters</strong>.</p></div></div></div></section><section class="slide content-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">STRINGS</span><h2>String Literals</h2></div></header><div class="slide-body"><div class="code-demo-layout"><div class="example-stack"><div class="example-item"><p class="example-title">Single quotes</p><div class="example-row"><div class="ex-code"><pre><code>name = <span class="str">'Alice'</span>
+name</code></pre></div><div class="ex-out"><b>OUTPUT</b><pre>'Alice'</pre></div></div></div><div class="example-item"><p class="example-title">Double quotes</p><div class="example-row"><div class="ex-code"><pre><code>greeting = <span class="str">"Hello, World!"</span>
+greeting</code></pre></div><div class="ex-out"><b>OUTPUT</b><pre>'Hello, World!'</pre></div></div></div><div class="example-item"><p class="example-title">Triple quotes</p><div class="example-row"><div class="ex-code"><pre><code>multiline = <span class="str">'''This is
+a string that spans
+multiple lines.'''</span>
+<span class="fn">print</span>(multiline)</code></pre></div><div class="ex-out"><b>OUTPUT</b><pre>This is
+a string that spans
+multiple lines.</pre></div></div></div></div><div class="code-explain"><span class="icon-box huge"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h13"></path></svg></span><h3>Three ways to quote</h3><p>Single quotes and double quotes behave the same way.</p><p>Triple quotes can be used for strings that span multiple lines.</p><div class="concept-chip">'...'  ·  "..."  ·  '''...'''</div></div></div></div></div></section><section class="slide content-slide slide-strops"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">STRINGS</span><h2>String Operations</h2></div></header><div class="slide-body"><div class="example-stack"><div class="example-item"><p class="example-title">Concatenation with <code>+</code></p><div class="example-row"><div class="ex-code"><pre><code>first_name = <span class="str">'John'</span>
+last_name = <span class="str">'Doe'</span>
+full_name = first_name + <span class="str">' '</span> + last_name
+full_name</code></pre></div><div class="ex-out"><b>OUTPUT</b><pre>'John Doe'</pre></div></div></div><div class="example-item"><p class="example-title">Repetition with <code>*</code></p><div class="example-row"><div class="ex-code"><pre><code>echo = <span class="str">'Hello '</span> * <span class="num">3</span>
+echo</code></pre></div><div class="ex-out"><b>OUTPUT</b><pre>'Hello Hello Hello '</pre></div></div></div></div><div class="operator-board"><span><i>+</i></span><span><i>*</i></span><p>With strings, <b>+</b> joins strings, and <b>*</b> repeats a string.<br/>The meaning of an operator depends on the types of its operands.</p></div></div></div></section><section class="slide content-slide indexing-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">STRINGS</span><h2>String Indexing</h2></div></header><div class="slide-body"><p class="body-lead">Each character in a string has an <strong>index</strong>.<br/>Indexing starts at <code>0</code>, and negative indexes count backward from the end.</p><div class="char-strip"><div class="strip-prefix"><code>text =</code></div><div class="char-cell hi"><div class="ch">P</div><div class="ix">0</div><div class="nix">-6</div></div><div class="char-cell"><div class="ch">y</div><div class="ix">1</div><div class="nix">-5</div></div><div class="char-cell"><div class="ch">t</div><div class="ix">2</div><div class="nix">-4</div></div><div class="char-cell"><div class="ch">h</div><div class="ix">3</div><div class="nix">-3</div></div><div class="char-cell"><div class="ch">o</div><div class="ix">4</div><div class="nix">-2</div></div><div class="char-cell hi"><div class="ch">n</div><div class="ix">5</div><div class="nix">-1</div></div></div><div class="result-grid"><div class="result-item"><code>text[0]</code><b>'P'</b></div><div class="result-item"><code>text[-1]</code><b>'n'</b></div></div></div></div></section><section class="slide content-slide slicing-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">STRINGS</span><h2>String Slicing</h2></div></header><div class="slide-body"><p class="body-lead">Slicing extracts part of a string, using the form <code>string[start:stop:step]</code>.</p><div class="result-grid"><div class="result-item wide"><code>text[1:4]</code><b>'yth'</b></div><div class="result-item wide"><code>text[:3]</code><b>'Pyt'</b></div><div class="result-item wide"><code>text[-3:]</code><b>'hon'</b></div><div class="result-item wide"><code>text[::-1]</code><b>'nohtyP'</b></div></div></div></div></section><section class="slide content-slide top-lead-slide strings-ai-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">STRINGS</span><h2>Strings in Data and AI</h2></div></header><div class="slide-body"><div class="lead-stack"><p class="body-lead">Strings are commonly used for class labels, model names, version information, messages, and other textual data.</p><div class="example-stack"><div class="example-item"><p class="example-title">Class labels</p><div class="example-row"><div class="ex-code"><pre><code>class_labels = <span class="str">'cat,dog'</span>
+<span class="fn">print</span>(<span class="str">'Class labels:'</span>, class_labels)</code></pre></div><div class="ex-out"><b>OUTPUT</b><pre>Class labels: cat,dog</pre></div></div></div><div class="example-item"><p class="example-title">Model name and version</p><div class="example-row"><div class="ex-code"><pre><code>model_name = <span class="str">'Deep Neural Network'</span>
+version = <span class="str">'v2.0'</span>
+model_info = model_name + <span class="str">' '</span> + version
+<span class="fn">print</span>(<span class="str">'Model information:'</span>, model_info)</code></pre></div><div class="ex-out"><b>OUTPUT</b><pre>Model information: Deep Neural Network v2.0</pre></div></div></div></div></div></div></div></section><section class="slide practice-slide practice-divider">
+<div class="practice-inner">
+<div class="practice-copy">
+<span class="practice-kicker">HANDS-ON PRACTICE</span>
+<h1 class="practice-title">Let's Practice</h1>
+<p class="practice-text">Now, let's work with strings and see how Python accesses and manipulates text.</p>
+</div>
+<div class="practice-visual universal">
+<svg aria-hidden="true" class="practice-universal-svg" viewbox="0 0 560 470">
+<defs>
+<filter height="140%" id="practiceShadowW2_2" width="140%" x="-20%" y="-20%">
+<fedropshadow dx="0" dy="18" flood-color="#0b253c" flood-opacity=".18" stddeviation="18"></fedropshadow>
+</filter>
+</defs>
+<g filter="url(#practiceShadowW2_2)">
+<rect fill="#ffffff" height="312" rx="34" width="420" x="70" y="58"></rect>
+<rect fill="#2f5d50" height="72" rx="34" width="420" x="70" y="58"></rect>
+<circle cx="112" cy="94" fill="#dfeee8" r="8"></circle>
+<circle cx="142" cy="94" fill="#b8d8ca" r="8"></circle>
+<circle cx="172" cy="94" fill="#7fb79f" r="8"></circle>
+<rect fill="#dcebe6" height="28" rx="9" width="118" x="112" y="166"></rect>
+<rect fill="#e6f1fb" height="22" rx="8" width="294" x="112" y="215"></rect>
+<rect fill="#e6f1fb" height="22" rx="8" width="244" x="112" y="259"></rect>
+<rect fill="#e6f1fb" height="22" rx="8" width="318" x="112" y="303"></rect>
+<circle cx="432" cy="322" fill="#1b5fa4" r="58"></circle>
+<path d="M409 322h45M432 299v46" stroke="#ffffff" stroke-linecap="round" stroke-width="9"></path>
+</g>
+<path d="M394 156l42 42 77-88" fill="none" stroke="#2f5d50" stroke-linecap="round" stroke-linejoin="round" stroke-width="18"></path>
+</svg>
+</div>
+</div>
+</section><section class="slide section-slide"><div class="section-grid"></div><div class="section-copy"><span class="section-eyebrow">2</span><h1>Boolean Type<br/>and Expressions</h1><p>Boolean values, comparison and logical operators, and the expressions built from them.</p><div class="section-rule"></div><span class="section-brand">AI Programming Fundamentals</span></div><div class="section-art"><svg class="section-svg" viewbox="0 0 620 520">
+<defs><filter id="s2"><fedropshadow dx="0" dy="20" flood-color="#061525" flood-opacity=".28" stddeviation="20"></fedropshadow></filter></defs>
+<g filter="url(#s2)">
+<rect fill="#FAFCFD" height="352" rx="34" width="430" x="96" y="80"></rect>
+<rect fill="#225F98" height="70" rx="34" width="430" x="96" y="80"></rect>
+<path d="M96 120h430" opacity=".7" stroke="#A7B8C9" stroke-width="2"></path>
+<circle cx="141" cy="115" fill="#DDE3E9" r="8"></circle>
+<circle cx="170" cy="115" fill="#B1BFCD" r="8"></circle>
+<rect fill="#E5EBF1" height="74" rx="37" width="196" x="132" y="160"></rect>
+<circle cx="169" cy="197" fill="#8FA6BC" r="27"></circle>
+<text fill="#5D7185" font-family="Consolas, monospace" font-size="25" x="206" y="207">False</text>
+<rect fill="#1B5FA4" height="74" rx="37" width="196" x="132" y="256"></rect>
+<circle cx="291" cy="293" fill="#FFFFFF" r="27"></circle>
+<text fill="#DCE9F6" font-family="Consolas, monospace" font-size="25" x="152" y="303">True</text>
+<rect fill="#ECF0F3" height="170" rx="20" width="122" x="366" y="160"></rect><text fill="#0C447C" font-family='Consolas, "Cascadia Code", "Courier New", monospace' font-size="34" text-anchor="middle" x="427" y="206">and</text><text fill="#0C447C" font-family='Consolas, "Cascadia Code", "Courier New", monospace' font-size="34" text-anchor="middle" x="427" y="256">or</text><text fill="#0C447C" font-family='Consolas, "Cascadia Code", "Courier New", monospace' font-size="34" text-anchor="middle" x="427" y="306">not</text><rect fill="#BCC8D4" height="30" rx="10" width="290" x="132" y="358"></rect>
+</g>
+</svg></div></section><section class="slide content-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">BOOLEAN VALUES</span><h2><code>bool</code> as a Scalar Type</h2></div></header><div class="slide-body"><div class="code-demo-layout"><div class="example-stack"><div class="example-item"><p class="example-title">A Boolean value</p><div class="example-row"><div class="ex-code"><pre><code>is_student = <span class="num">True</span>
+
+is_student</code></pre></div><div class="ex-out"><b>OUTPUT</b><pre>True</pre></div></div></div><div class="example-item"><p class="example-title">Its type</p><div class="example-row"><div class="ex-code"><pre><code><span class="fn">type</span>(<span class="num">True</span>)</code></pre></div><div class="ex-out"><b>OUTPUT</b><pre>bool</pre></div></div></div></div><div class="code-explain"><span class="icon-box huge"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><rect height="10" rx="5" width="20" x="2" y="7"></rect><circle cx="17" cy="12" r="3"></circle></svg></span><h3>Two values, one type</h3><p>The Boolean type is <code>bool</code>, and it has exactly two values.</p><p>In Python, the Boolean values are written exactly as <code>True</code> and <code>False</code>.</p><div class="concept-chip">True · False</div></div></div></div></div></section><section class="slide content-slide comparison-ops-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">BOOLEAN VALUES</span><h2>Comparison Operators</h2></div></header><div class="slide-body"><div class="op-list"><div class="op-item"><b>==</b><span>equal to</span></div><div class="op-item"><b>!=</b><span>not equal to</span></div><div class="op-item"><b>&lt;</b><span>less than</span></div><div class="op-item"><b>&gt;</b><span>greater than</span></div><div class="op-item"><b>&lt;=</b><span>less than or equal to</span></div><div class="op-item"><b>&gt;=</b><span>greater than or equal to</span></div></div><div class="wide-callout soft-callout"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><path d="M5 9h14M5 15h14"></path></svg></span><p>A comparison operator compares two values and <strong>produces a Boolean value</strong>.</p></div></div></div></section><section class="slide content-slide split-cell"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">BOOLEAN VALUES</span><h2>Comparison Operators in Code</h2></div></header><div class="slide-body"><div class="code-demo-layout"><div class="notebook-panel"><div class="nb-toolbar"><span class="run-dot">▶</span><span>Code cell</span><i></i></div><div class="code-wrap"><pre><code>x = <span class="num">5</span>
+y = <span class="num">10</span>
+
+<span class="fn">print</span>(x == y)
+<span class="fn">print</span>(x != y)
+<span class="fn">print</span>(x &lt; y)
+<span class="fn">print</span>(x &gt; y)
+<span class="fn">print</span>(x &lt;= y)
+<span class="fn">print</span>(x &gt;= y)</code></pre></div><div class="output-panel"><div class="output-label">Output</div><pre>False
+True
+True
+False
+True
+False</pre></div></div><div class="code-explain"><span class="icon-box huge"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg></span><h3>Each line answers one question</h3><p>Every comparison is evaluated on its own and prints <code>True</code> or <code>False</code>.</p><div class="concept-chip">comparison → Boolean</div></div></div></div></div></section><section class="slide content-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">BOOLEAN VALUES</span><h2>Comparing Strings</h2></div></header><div class="slide-body"><div class="code-demo-layout"><div class="notebook-panel"><div class="nb-toolbar"><span class="run-dot">▶</span><span>Code cell</span><i></i></div><div class="code-wrap"><pre><code>name1 = <span class="str">'Alice'</span>
+name2 = <span class="str">'Bob'</span>
+
+<span class="fn">print</span>(name1 == name2)
+<span class="fn">print</span>(name1 != name2)
+<span class="fn">print</span>(name1 &lt; name2)</code></pre></div><div class="output-panel"><div class="output-label">Output</div><pre>False
+True
+True</pre></div></div><div class="code-explain"><span class="icon-box huge"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h13"></path></svg></span><h3>Text can be ordered too</h3><p>Strings can also be compared.</p><p>Ordering comparisons use <strong>lexicographical ordering</strong>, so <code>'Alice'</code> comes before <code>'Bob'</code>.</p><div class="concept-chip">lexicographical ordering</div></div></div></div></div></section><section class="slide content-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">BOOLEAN VALUES</span><h2>Expression → Value → Type</h2></div></header><div class="slide-body"><div class="code-demo-layout"><div class="notebook-panel"><div class="nb-toolbar"><span class="run-dot">▶</span><span>Code cell</span><i></i></div><div class="code-wrap"><pre><code>x = <span class="num">5</span>
+y = <span class="num">10</span>
+
+comparison_result = x &lt; y
+
+<span class="fn">print</span>(comparison_result)
+<span class="fn">print</span>(<span class="fn">type</span>(comparison_result))</code></pre></div><div class="output-panel"><div class="output-label">Output</div><pre>True
+&lt;class 'bool'&gt;</pre></div></div><div class="code-explain"><span class="icon-box huge"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><circle cx="5" cy="6" r="2.5"></circle><circle cx="19" cy="12" r="2.5"></circle><circle cx="5" cy="18" r="2.5"></circle><path d="M7.5 6H13a3 3 0 0 1 3 3v.5M16 14.5v.5a3 3 0 0 1-3 3H7.5"></path></svg></span><h3>A comparison is an expression</h3><p><code>x &lt; y</code> is an expression like any other.</p><p>It evaluates to <code>True</code> or <code>False</code>, and that value has type <code>bool</code>.</p><div class="concept-chip">x &lt; y → True → bool</div></div></div></div></div></section><section class="slide content-slide logical-ops-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">LOGICAL OPERATORS</span><h2>Logical Operators</h2></div></header><div class="slide-body"><div class="grid-3 feature-grid with-callout"><article class="card"><div class="card-top"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><path d="M20 6 9 17l-5-5"></path></svg></span></div><h3><code>and</code></h3><p>With Boolean values, the result is <code>True</code> only when both values are <code>True</code>.</p><div class="mini-truth"><div>True and True<b>True</b></div><div>True and False<b>False</b></div></div></article><article class="card"><div class="card-top"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><path d="M3 5h18l-7 8v6l-4 2v-8L3 5Z"></path></svg></span></div><h3><code>or</code></h3><p>With Boolean values, the result is <code>True</code> when at least one value is <code>True</code>.</p><div class="mini-truth"><div>True or False<b>True</b></div><div>False or False<b>False</b></div></div></article><article class="card"><div class="card-top"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><path d="M4 8h13l-3-3M20 16H7l3 3"></path></svg></span></div><h3><code>not</code></h3><p>Reverses the truth value.</p><div class="mini-truth"><div>not True<b>False</b></div><div>not False<b>True</b></div></div></article></div><div class="wide-callout soft-callout"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><circle cx="5" cy="6" r="2.5"></circle><circle cx="19" cy="12" r="2.5"></circle><circle cx="5" cy="18" r="2.5"></circle><path d="M7.5 6H13a3 3 0 0 1 3 3v.5M16 14.5v.5a3 3 0 0 1-3 3H7.5"></path></svg></span><p>We use <code>and</code> and <code>or</code> mainly with <strong>Boolean values and comparison expressions</strong>.</p></div></div></div></section><section class="slide content-slide split-cell"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">LOGICAL OPERATORS</span><h2>Logical Operators in Code</h2></div></header><div class="slide-body"><div class="code-demo-layout"><div class="notebook-panel"><div class="nb-toolbar"><span class="run-dot">▶</span><span>Code cell</span><i></i></div><div class="code-wrap"><pre><code>a = <span class="num">True</span>
+b = <span class="num">False</span>
+
+<span class="fn">print</span>(a <span class="kw">and</span> b)
+<span class="fn">print</span>(a <span class="kw">or</span> b)
+<span class="fn">print</span>(<span class="kw">not</span> a)
+<span class="fn">print</span>(<span class="kw">not</span> b)</code></pre></div><div class="output-panel"><div class="output-label">Output</div><pre>False
+True
+False
+True</pre></div></div><div class="code-explain"><span class="icon-box huge"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><rect height="16" rx="2" width="20" x="2" y="4"></rect><path d="m6 9 3 3-3 3M12 15h5"></path></svg></span><h3>Combining Boolean values</h3><p>With Boolean values, <code>a and b</code> needs both to be <code>True</code>, so the result is <code>False</code>.</p><p><code>a or b</code> only needs one, so the result is <code>True</code>.</p><div class="concept-chip">and · or · not</div></div></div></div></div></section><section class="slide content-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">LOGICAL OPERATORS</span><h2>Boolean Expressions</h2></div></header><div class="slide-body"><div class="code-demo-layout"><div class="notebook-panel"><div class="nb-toolbar"><span class="run-dot">▶</span><span>Code cell</span><i></i></div><div class="code-wrap"><pre><code>age = <span class="num">20</span>
+
+is_working_age = age &gt;= <span class="num">18</span> <span class="kw">and</span> age &lt; <span class="num">65</span>
+
+is_working_age</code></pre></div><div class="output-panel"><div class="output-label">Output</div><pre>True</pre></div></div><div class="code-explain"><span class="icon-box huge"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3"></circle></svg></span><h3>Conditions built from comparisons</h3><p>Comparison expressions can be combined with logical operators.</p><p>A comparison-based Boolean expression evaluates to <code>True</code> or <code>False</code>.</p><div class="concept-chip">18 ≤ age &lt; 65</div></div></div></div></div></section><section class="slide content-slide bool-convert-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">LOGICAL OPERATORS</span><h2>Converting Values to Boolean</h2></div></header><div class="slide-body"><div class="grid-2 feature-grid with-callout"><article class="card"><div class="card-top"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><rect height="10" rx="5" width="20" x="2" y="7"></rect><circle cx="17" cy="12" r="3"></circle></svg></span></div><h3>Converts to <code>False</code></h3><p>Zero, empty text, empty collections, and <code>None</code>.</p><div class="chip-row"><span>0</span><span>''</span><span>[]</span><span>None</span></div></article><article class="card"><div class="card-top"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><path d="M20 6 9 17l-5-5"></path></svg></span></div><h3>Converts to <code>True</code></h3><p>Most nonzero numbers and non-empty values.</p><div class="chip-row"><span>1</span><span>100</span><span>-1</span><span>'Hello'</span><span>[1, 2, 3]</span></div></article></div><div class="wide-callout soft-callout"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><rect height="10" rx="5" width="20" x="2" y="7"></rect><circle cx="17" cy="12" r="3"></circle></svg></span><p><code>bool()</code> converts a value to a Boolean value.<br/>Lists and <code>None</code> are included only as examples here and will be covered later.</p></div></div></div></section><section class="slide content-slide slide-boolapps"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">DATA &amp; AI</span><h2>Boolean Values in Data and AI</h2></div></header><div class="slide-body"><div class="example-table dense2"><div class="example-line"><div class="ex-label">Data filtering</div><div class="ex-code"><pre><code>number = <span class="num">4</span>
+is_even = number % <span class="num">2</span> == <span class="num">0</span>
+is_even</code></pre></div><div class="ex-out"><b>OUTPUT</b><pre>True</pre></div></div><div class="example-line"><div class="ex-label">Model evaluation</div><div class="ex-code"><pre><code>threshold = <span class="num">0.8</span>
+accuracy = <span class="num">0.85</span>
+is_good_model = accuracy &gt; threshold
+is_good_model</code></pre></div><div class="ex-out"><b>OUTPUT</b><pre>True</pre></div></div><div class="example-line"><div class="ex-label">Checking for missing values</div><div class="ex-code"><pre><code>values = [<span class="num">1</span>, <span class="num">2</span>, <span class="num">None</span>, <span class="num">4</span>, <span class="num">5</span>]
+first_value_is_missing = values[<span class="num">0</span>] <span class="kw">is</span> <span class="num">None</span>
+third_value_is_missing = values[<span class="num">2</span>] <span class="kw">is</span> <span class="num">None</span>
+first_value_is_missing, third_value_is_missing</code></pre></div><div class="ex-out"><b>OUTPUT</b><pre>(False, True)</pre></div></div></div><div class="wide-callout soft-callout"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5Z"></path><path d="m3 13 9 5 9-5"></path></svg></span><p>The list syntax in this example will be introduced in <strong>Week 03</strong>.<br/>For now, focus on whether each check returns <code>True</code> or <code>False</code>.</p></div></div></div></section><section class="slide practice-slide practice-divider">
+<div class="practice-inner">
+<div class="practice-copy">
+<span class="practice-kicker">HANDS-ON PRACTICE</span>
+<h1 class="practice-title">Let's Practice</h1>
+<p class="practice-text">Now, let's build and evaluate Boolean expressions in the Jupyter Notebook.</p>
+</div>
+<div class="practice-visual universal">
+<svg aria-hidden="true" class="practice-universal-svg" viewbox="0 0 560 470">
+<defs>
+<filter height="140%" id="practiceShadowW2_3" width="140%" x="-20%" y="-20%">
+<fedropshadow dx="0" dy="18" flood-color="#0b253c" flood-opacity=".18" stddeviation="18"></fedropshadow>
+</filter>
+</defs>
+<g filter="url(#practiceShadowW2_3)">
+<rect fill="#ffffff" height="312" rx="34" width="420" x="70" y="58"></rect>
+<rect fill="#2f5d50" height="72" rx="34" width="420" x="70" y="58"></rect>
+<circle cx="112" cy="94" fill="#dfeee8" r="8"></circle>
+<circle cx="142" cy="94" fill="#b8d8ca" r="8"></circle>
+<circle cx="172" cy="94" fill="#7fb79f" r="8"></circle>
+<rect fill="#dcebe6" height="28" rx="9" width="118" x="112" y="166"></rect>
+<rect fill="#e6f1fb" height="22" rx="8" width="294" x="112" y="215"></rect>
+<rect fill="#e6f1fb" height="22" rx="8" width="244" x="112" y="259"></rect>
+<rect fill="#e6f1fb" height="22" rx="8" width="318" x="112" y="303"></rect>
+<circle cx="432" cy="322" fill="#1b5fa4" r="58"></circle>
+<path d="M409 322h45M432 299v46" stroke="#ffffff" stroke-linecap="round" stroke-width="9"></path>
+</g>
+<path d="M394 156l42 42 77-88" fill="none" stroke="#2f5d50" stroke-linecap="round" stroke-linejoin="round" stroke-width="18"></path>
+</svg>
+</div>
+</div>
+</section><section class="slide section-slide"><div class="section-grid"></div><div class="section-copy"><span class="section-eyebrow">3</span><h1>Variables and<br/>Type Conversion</h1><p>How names are attached to objects, and how values move from one type to another.</p><div class="section-rule"></div><span class="section-brand">AI Programming Fundamentals</span></div><div class="section-art"><svg class="section-svg" viewbox="0 0 620 520">
+<defs><filter id="s3"><fedropshadow dx="0" dy="20" flood-color="#061525" flood-opacity=".28" stddeviation="20"></fedropshadow></filter></defs>
+<g filter="url(#s3)">
+<rect fill="#FAFCFD" height="356" rx="34" width="430" x="96" y="78"></rect>
+<rect fill="#225F98" height="72" rx="34" width="430" x="96" y="78"></rect>
+<path d="M96 118h430" opacity=".7" stroke="#A7B8C9" stroke-width="2"></path>
+<circle cx="141" cy="114" fill="#DDE3E9" r="8"></circle>
+<circle cx="170" cy="114" fill="#B1BFCD" r="8"></circle>
+<rect fill="#1B5FA4" height="66" rx="18" width="176" x="132" y="168"></rect>
+<text fill="#FFFFFF" font-family="Consolas, monospace" font-size="28" x="156" y="209">accuracy</text>
+<path d="M320 201h56m-14-13 14 13-14 13" fill="none" stroke="#7FA8CD" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"></path>
+<rect fill="#E3EAF1" height="66" rx="18" width="98" x="390" y="168"></rect>
+<text fill="#0C447C" font-family="Consolas, monospace" font-size="28" x="410" y="209">0.92</text>
+<rect fill="#ECF0F3" height="74" rx="20" width="176" x="132" y="262"></rect>
+<text fill="#5D7185" font-family="Consolas, monospace" font-size="26" x="158" y="308">'0.92'</text>
+<path d="M320 299h56m-14-13 14 13-14 13" fill="none" stroke="#58C7B0" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"></path>
+<rect fill="#58C7B0" height="74" rx="20" width="98" x="390" y="262"></rect>
+<text fill="#073A62" font-family="Consolas, monospace" font-size="26" x="404" y="308">float</text>
+<rect fill="#BCC8D4" height="30" rx="10" width="290" x="132" y="364"></rect>
+</g>
+</svg></div></section><section class="slide content-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">VARIABLES &amp; ASSIGNMENT</span><h2>Variables as Names</h2></div></header><div class="slide-body"><div class="code-demo-layout"><div class="example-stack"><div class="example-item"><p class="example-title">The three names</p><div class="example-row"><div class="ex-code"><pre><code>x = <span class="num">5</span>
+y = <span class="str">'Hello'</span>
+z = <span class="num">3.14</span>
+
+x, y, z</code></pre></div><div class="ex-out"><b>OUTPUT</b><pre>(5, 'Hello', 3.14)</pre></div></div></div><div class="example-item"><p class="example-title">Their types</p><div class="example-row"><div class="ex-code"><pre><code><span class="fn">type</span>(x), <span class="fn">type</span>(y), <span class="fn">type</span>(z)</code></pre></div><div class="ex-out"><b>OUTPUT</b><pre>(int, str, float)</pre></div></div></div></div><div class="code-explain"><span class="icon-box huge"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><path d="M20 12 12 20 3 11V4h7l10 8Z"></path><circle cx="7.5" cy="7.5" r="1.5"></circle></svg></span><h3>A variable is a name</h3><p>A <strong>variable</strong> is a name used to refer to an <strong>object</strong> in a program.</p><p>A box analogy helps at first, but more precisely the name is <strong>associated with an object</strong>.</p><div class="concept-chip">name → object</div></div></div></div></div></section><section class="slide content-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">VARIABLES &amp; ASSIGNMENT</span><h2>Assignment</h2></div></header><div class="slide-body"><div class="code-demo-layout"><div class="notebook-panel"><div class="nb-toolbar"><span class="run-dot">▶</span><span>Code cell</span><i></i></div><div class="code-wrap"><pre><code>x = <span class="num">3</span> + <span class="num">2</span>
+
+x</code></pre></div><div class="output-panel"><div class="output-label">Output</div><pre>5</pre></div></div><div class="code-explain"><span class="icon-box huge"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><path d="M5 9h14M5 15h14"></path></svg></span><h3>The right side goes first</h3><p><code>=</code> is the <strong>assignment operator</strong>.</p><p>Python evaluates the expression on the right, then binds the resulting object to the name on the left.</p><div class="variable-cards"><div><b>3 + 2</b><span>5</span></div><div><b>x</b><span>5</span></div></div></div></div></div></div></section><section class="slide content-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">VARIABLES &amp; ASSIGNMENT</span><h2><code>=</code> vs. <code>==</code></h2></div></header><div class="slide-body"><div class="code-demo-layout"><div class="notebook-panel"><div class="nb-toolbar"><span class="run-dot">▶</span><span>Code cell</span><i></i></div><div class="code-wrap"><pre><code>x = <span class="num">5</span>
+
+<span class="fn">print</span>(x)
+<span class="fn">print</span>(x == <span class="num">5</span>)</code></pre></div><div class="output-panel"><div class="output-label">Output</div><pre>5
+True</pre></div></div><div class="code-explain"><span class="icon-box huge"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><path d="M5 9h14M5 15h14"></path></svg></span><h3>One assigns, one compares</h3><p><code>=</code> gives a name to a value.</p><p><code>==</code> checks two values for equality and produces a Boolean value.</p><div class="variable-cards"><div><b>=</b><span>assign</span></div><div><b>==</b><span>compare</span></div></div></div></div></div></div></section><section class="slide content-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">VARIABLES &amp; ASSIGNMENT</span><h2>Reassignment</h2></div></header><div class="slide-body"><div class="code-demo-layout"><div class="notebook-panel"><div class="nb-toolbar"><span class="run-dot">▶</span><span>Code cell</span><i></i></div><div class="code-wrap"><pre><code>x = <span class="num">10</span>
+<span class="fn">print</span>(x, <span class="fn">type</span>(x))
+
+x = <span class="str">'Python'</span>
+<span class="fn">print</span>(x, <span class="fn">type</span>(x))</code></pre></div><div class="output-panel"><div class="output-label">Output</div><pre>10 &lt;class 'int'&gt;
+Python &lt;class 'str'&gt;</pre></div></div><div class="code-explain"><span class="icon-box huge"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><path d="M4 8h13l-3-3M20 16H7l3 3"></path></svg></span><h3>The name stays, but it refers to a new object</h3><p>A variable name can later refer to a <strong>different object</strong>.</p><p>The new object may also have a <strong>different type</strong> from the old one.</p><div class="concept-chip">int → str, same name</div></div></div></div></div></section><section class="slide content-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">VARIABLES &amp; ASSIGNMENT</span><h2>Naming Variables</h2></div></header><div class="slide-body"><div class="rule-list"><div class="rule-item"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><path d="M20 6 9 17l-5-5"></path></svg></span><p>Use <strong>meaningful names</strong> that describe the data.</p></div><div class="rule-item"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h13"></path></svg></span><p>Variable names may contain letters, digits, and underscores, but <strong>they cannot begin with a digit</strong>.</p></div><div class="rule-item"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg></span><p>Python variable names are <strong>case-sensitive</strong>.</p></div><div class="rule-item"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><path d="M20 12 12 20 3 11V4h7l10 8Z"></path><circle cx="7.5" cy="7.5" r="1.5"></circle></svg></span><p>Use <strong><code>snake_case</code></strong> for ordinary variable names in this course.</p></div></div><div class="wide-callout soft-callout"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><path d="M20 12 12 20 3 11V4h7l10 8Z"></path><circle cx="7.5" cy="7.5" r="1.5"></circle></svg></span><p>Examples: <strong>model_accuracy = 0.95</strong> and <strong>dataset_size = 10000</strong>.</p></div></div></div></section><section class="slide content-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">TYPE CONVERSION</span><h2>Explicit Type Conversion</h2></div></header><div class="slide-body"><div class="grid-4 feature-grid with-callout"><article class="card"><div class="card-top"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><path d="M9 4 7 20M17 4l-2 16M4 9h16M3 15h16"></path></svg></span></div><h3><code>int()</code></h3><p>Converts a value to an integer.</p></article><article class="card"><div class="card-top"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><rect height="8" rx="2" width="18" x="3" y="8"></rect><path d="M7 8v4M11 8v3M15 8v4M19 8v3"></path></svg></span></div><h3><code>float()</code></h3><p>Converts a value to a floating-point number.</p></article><article class="card"><div class="card-top"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h13"></path></svg></span></div><h3><code>str()</code></h3><p>Converts a value to its text form.</p></article><article class="card"><div class="card-top"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><rect height="10" rx="5" width="20" x="2" y="7"></rect><circle cx="17" cy="12" r="3"></circle></svg></span></div><h3><code>bool()</code></h3><p>Converts a value to <code>True</code> or <code>False</code>.</p></article></div><div class="wide-callout soft-callout"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><path d="M4 8h13l-3-3M20 16H7l3 3"></path></svg></span><p><strong>Type conversion</strong> changes a value from one data type to another.<br/>Python provides <code>int()</code>, <code>float()</code>, <code>str()</code>, and <code>bool()</code> for explicit conversion.</p></div></div></div></section><section class="slide content-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">TYPE CONVERSION</span><h2>Converting Text to Numbers</h2></div></header><div class="slide-body"><div class="lead-stack wide-code-examples"><p class="body-lead">Converting a string to an integer, and a string to a floating-point number.</p><div class="example-stack"><div class="example-item"><p class="example-title">Converting a string to an integer</p><div class="example-row"><div class="ex-code"><pre><code>str_num = <span class="str">'123'</span>
+int_num = <span class="fn">int</span>(str_num)
+
+str_num, <span class="fn">type</span>(str_num), int_num, <span class="fn">type</span>(int_num)</code></pre></div><div class="ex-out"><b>OUTPUT</b><pre>('123', str, 123, int)</pre></div></div></div><div class="example-item"><p class="example-title">Converting a string to a floating-point number</p><div class="example-row"><div class="ex-code"><pre><code>str_float = <span class="str">'3.14'</span>
+float_num = <span class="fn">float</span>(str_float)
+
+str_float, <span class="fn">type</span>(str_float), float_num, <span class="fn">type</span>(float_num)</code></pre></div><div class="ex-out"><b>OUTPUT</b><pre>('3.14', str, 3.14, float)</pre></div></div></div></div></div></div></div></section><section class="slide content-slide conv-stack-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">TYPE CONVERSION</span><h2>Converting Between Numbers and Text</h2></div></header><div class="slide-body"><p class="body-lead">Numbers can be converted to strings, and an integer converts cleanly to a floating-point number.</p><div class="example-stack"><div class="example-item"><p class="example-title">Converting numbers to strings</p><div class="example-row"><div class="ex-code"><pre><code>int_num = <span class="num">456</span>
+float_num = <span class="num">2.718</span>
+str_int = <span class="fn">str</span>(int_num)
+str_float = <span class="fn">str</span>(float_num)
+str_int, <span class="fn">type</span>(str_int), str_float, <span class="fn">type</span>(str_float)</code></pre></div><div class="ex-out"><b>OUTPUT</b><pre>('456', str, '2.718', str)</pre></div></div></div><div class="example-item"><p class="example-title">Converting an integer to a floating-point number</p><div class="example-row"><div class="ex-code"><pre><code>int_num = <span class="num">5</span>
+float_num = <span class="fn">float</span>(int_num)
+int_num, <span class="fn">type</span>(int_num), float_num, <span class="fn">type</span>(float_num)</code></pre></div><div class="ex-out"><b>OUTPUT</b><pre>(5, int, 5.0, float)</pre></div></div></div></div></div></div></section><section class="slide content-slide conv-stack-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">TYPE CONVERSION</span><h2><code>int()</code> Truncates, It Does Not Round</h2></div></header><div class="slide-body"><div class="chain-flow"><div class="chain-node"><b>7.8</b><span>float value</span></div><span class="chain-arrow">→</span><div class="chain-node"><b>int(7.8)</b><span>conversion</span></div><span class="chain-arrow">→</span><div class="chain-node accent"><b>7</b><span>int value</span></div></div><div class="example-stack"><div class="example-item"><p class="example-title">Converting a floating-point number to an integer</p><div class="example-row"><div class="ex-code"><pre><code>float_num = <span class="num">7.8</span>
+int_num = <span class="fn">int</span>(float_num)
+float_num, <span class="fn">type</span>(float_num), int_num, <span class="fn">type</span>(int_num)</code></pre></div><div class="ex-out"><b>OUTPUT</b><pre>(7.8, float, 7, int)</pre></div></div></div></div><div class="wide-callout insight-callout"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><path d="M12 4 3 20h18L12 4Z"></path><path d="M12 10v5M12 18h.01"></path></svg></span><p><code>int(7.8)</code> produces <strong>7</strong>. The decimal part is removed; the value is not rounded to <strong>8</strong>.</p></div></div></div></section><section class="slide content-slide conv-stack-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">DATA &amp; AI</span><h2>Type Conversion in Data and AI</h2></div></header><div class="slide-body"><p class="body-lead">Raw data rarely arrives in the type that a calculation needs.</p><div class="example-stack"><div class="example-item"><p class="example-title">Converting raw data to a numeric value</p><div class="example-row"><div class="ex-code"><pre><code>raw_data = <span class="str">'42'</span>
+processed_data = <span class="fn">int</span>(raw_data)
+processed_data, <span class="fn">type</span>(processed_data)</code></pre></div><div class="ex-out"><b>OUTPUT</b><pre>(42, int)</pre></div></div></div><div class="example-item"><p class="example-title">Converting accuracy to a percentage</p><div class="example-row"><div class="ex-code"><pre><code>accuracy = <span class="num">0.95</span>
+accuracy_percent = <span class="fn">int</span>(accuracy * <span class="num">100</span>)
+accuracy_percent</code></pre></div><div class="ex-out"><b>OUTPUT</b><pre>95</pre></div></div></div><div class="example-item"><p class="example-title">Converting a numeric label to a string</p><div class="example-row"><div class="ex-code"><pre><code>class_number = <span class="num">1</span>
+class_label = <span class="fn">str</span>(class_number)
+class_label, <span class="fn">type</span>(class_label)</code></pre></div><div class="ex-out"><b>OUTPUT</b><pre>('1', str)</pre></div></div></div></div></div></div></section><section class="slide content-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">DATA &amp; AI</span><h2>Putting the Concepts Together</h2></div></header><div class="slide-body"><div class="even-layout"><div class="notebook-panel"><div class="nb-toolbar"><span class="run-dot">▶</span><span>Code cell</span><i></i></div><div class="code-wrap"><pre><code>raw_accuracy = <span class="str">'0.92'</span>
+accuracy = <span class="fn">float</span>(raw_accuracy)
+passed_threshold = accuracy &gt;= <span class="num">0.90</span>
+
+<span class="fn">print</span>(accuracy)
+<span class="fn">print</span>(passed_threshold)</code></pre></div><div class="output-panel"><div class="output-label">Output</div><pre>0.92
+True</pre></div></div><div class="plain-explain"><h3>From text to a decision</h3><div class="vchain"><div><code>'0.92'</code> starts as a <b>string</b></div><div><code>float()</code> converts it to a <b>floating-point value</b></div><div><code>accuracy</code> is a <b>variable name</b> for that value</div><div><code>accuracy &gt;= 0.90</code> is a <b>Boolean expression</b></div><div>It evaluates to the Boolean value <code>True</code></div></div></div></div></div></div></section><section class="slide practice-slide practice-divider">
+<div class="practice-inner">
+<div class="practice-copy">
+<span class="practice-kicker">HANDS-ON PRACTICE</span>
+<h1 class="practice-title">Let's Practice</h1>
+<p class="practice-text">Now, let's combine variables, type conversion, and Boolean expressions in one short Python workflow.</p>
+</div>
+<div class="practice-visual universal">
+<svg aria-hidden="true" class="practice-universal-svg" viewbox="0 0 560 470">
+<defs>
+<filter height="140%" id="practiceShadowW2_4" width="140%" x="-20%" y="-20%">
+<fedropshadow dx="0" dy="18" flood-color="#0b253c" flood-opacity=".18" stddeviation="18"></fedropshadow>
+</filter>
+</defs>
+<g filter="url(#practiceShadowW2_4)">
+<rect fill="#ffffff" height="312" rx="34" width="420" x="70" y="58"></rect>
+<rect fill="#2f5d50" height="72" rx="34" width="420" x="70" y="58"></rect>
+<circle cx="112" cy="94" fill="#dfeee8" r="8"></circle>
+<circle cx="142" cy="94" fill="#b8d8ca" r="8"></circle>
+<circle cx="172" cy="94" fill="#7fb79f" r="8"></circle>
+<rect fill="#dcebe6" height="28" rx="9" width="118" x="112" y="166"></rect>
+<rect fill="#e6f1fb" height="22" rx="8" width="294" x="112" y="215"></rect>
+<rect fill="#e6f1fb" height="22" rx="8" width="244" x="112" y="259"></rect>
+<rect fill="#e6f1fb" height="22" rx="8" width="318" x="112" y="303"></rect>
+<circle cx="432" cy="322" fill="#1b5fa4" r="58"></circle>
+<path d="M409 322h45M432 299v46" stroke="#ffffff" stroke-linecap="round" stroke-width="9"></path>
+</g>
+<path d="M394 156l42 42 77-88" fill="none" stroke="#2f5d50" stroke-linecap="round" stroke-linejoin="round" stroke-width="18"></path>
+</svg>
+</div>
+</div>
+</section><section class="slide section-slide"><div class="section-grid"></div><div class="section-copy"><span class="section-eyebrow">SUMMARY</span><h1>Key Takeaways</h1><p>What to carry forward from Week 02, and where the course goes next.</p><div class="section-rule"></div><span class="section-brand">SEOUL CYBER UNIVERSITY</span></div><div class="section-art"><svg class="section-svg" viewbox="0 0 620 520">
+<defs><filter id="s4"><fedropshadow dx="0" dy="20" flood-color="#061525" flood-opacity=".28" stddeviation="20"></fedropshadow></filter></defs>
+<g filter="url(#s4)">
+<rect fill="#FAFCFD" height="352" rx="34" width="424" x="100" y="80"></rect>
+<rect fill="#225F98" height="70" rx="34" width="424" x="100" y="80"></rect>
+<path d="M100 120h424" opacity=".7" stroke="#A7B8C9" stroke-width="2"></path>
+<circle cx="145" cy="115" fill="#DDE3E9" r="8"></circle>
+<circle cx="174" cy="115" fill="#B1BFCD" r="8"></circle>
+<g>
+<circle cx="164" cy="184" fill="#1B5FA4" r="22"></circle>
+<path d="m154 184 7 7 13-14" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"></path>
+<rect fill="#DFE6EC" height="20" rx="9" width="264" x="200" y="174"></rect>
+<circle cx="164" cy="250" fill="#1B5FA4" r="22"></circle>
+<path d="m154 250 7 7 13-14" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"></path>
+<rect fill="#DFE6EC" height="20" rx="9" width="222" x="200" y="240"></rect>
+<circle cx="164" cy="316" fill="#1B5FA4" r="22"></circle>
+<path d="m154 316 7 7 13-14" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"></path>
+<rect fill="#DFE6EC" height="20" rx="9" width="286" x="200" y="306"></rect>
+<circle cx="164" cy="382" fill="#58C7B0" r="22"></circle>
+<path d="m154 382 7 7 13-14" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"></path>
+<rect fill="#CFE0EC" height="20" rx="9" width="196" x="200" y="372"></rect>
+</g>
+</g>
+</svg></div></section><section class="slide content-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">KEY TAKEAWAYS</span><h2>Summary</h2></div></header><div class="slide-body"><div class="summary-grid"><div class="summary-card"><span>01</span><h3>Objects and Types</h3><p>Python programs work with objects, and each object has a type that determines how it can be used.</p></div><div class="summary-card"><span>02</span><h3>Basic Data Types and Expressions</h3><p>Types such as <code>int</code>, <code>float</code>, and <code>str</code> combine with operators to form expressions that produce results.</p></div><div class="summary-card"><span>03</span><h3>Boolean Expressions</h3><p>Comparison and logical operators create Boolean expressions that evaluate to <code>True</code> or <code>False</code>.</p></div><div class="summary-card"><span>04</span><h3>Variables and Type Conversion</h3><p>Variables refer to values, while type conversion changes values from one data type to another.</p></div></div></div></div></section><section class="slide content-slide slide-keyterms-pattern"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">KEY TAKEAWAYS</span><h2>Key Terms</h2></div></header><div class="slide-body"><div class="term-cloud"><span>object</span><span>type</span><span>scalar object</span><span>non-scalar object</span><span>expression</span><span>string</span><span>Boolean</span><span>variable</span><span>type conversion</span></div><div class="closing-line"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M8.5 12h7M12.5 8.5 16 12l-3.5 3.5"></path></svg></span><b>Next: Lists and Tuples</b></div></div></div></section></div><div aria-label="Previous slide" class="nav-zone prev" title="Previous slide"></div><div aria-label="Next slide" class="nav-zone next" title="Next slide"></div><script>
+(function(){
+ const slides=[...document.querySelectorAll('.slide')];let current=0,wheelLock=false;const total=slides.length;
+ function scale(){document.documentElement.style.setProperty('--scale',Math.min(innerWidth/1600,innerHeight/900));}
+ function show(i){current=Math.max(0,Math.min(total-1,i));slides.forEach((s,n)=>s.classList.toggle('active',n===current));history.replaceState(null,'','#'+(current+1));}
+ function next(){show(current+1)} function prev(){show(current-1)}
+ addEventListener('resize',scale);scale();
+ document.addEventListener('keydown',e=>{if(['ArrowRight','ArrowDown','PageDown',' ','Enter'].includes(e.key)){e.preventDefault();next();}else if(['ArrowLeft','ArrowUp','PageUp','Backspace'].includes(e.key)){e.preventDefault();prev();}else if(e.key==='Home'){e.preventDefault();show(0);}else if(e.key==='End'){e.preventDefault();show(total-1);}else if(e.key.toLowerCase()==='f'){e.preventDefault();document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen();}});
+ document.addEventListener('wheel',e=>{e.preventDefault();if(wheelLock)return;wheelLock=true;(e.deltaY>0||e.deltaX>0)?next():prev();setTimeout(()=>wheelLock=false,650);},{passive:false});
+ let sx=null,sy=null;document.addEventListener('touchstart',e=>{if(!e.touches.length)return;sx=e.touches[0].clientX;sy=e.touches[0].clientY;},{passive:true});document.addEventListener('touchend',e=>{if(sx===null||!e.changedTouches.length)return;const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;if(Math.abs(dx)>60||Math.abs(dy)>60){(dx<0||dy<0)?next():prev();}sx=sy=null;},{passive:true});
+ document.querySelector('.nav-zone.prev').addEventListener('click',prev);document.querySelector('.nav-zone.next').addEventListener('click',next);
+ const hash=parseInt(location.hash.slice(1),10);show(Number.isFinite(hash)&&hash>=1&&hash<=total?hash-1:0);
+ window.__deck={show,next,prev,total,slides};
+})();
+</script></body></html>
