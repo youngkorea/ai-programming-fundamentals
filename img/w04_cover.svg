@@ -1,33 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="360" viewBox="0 0 900 360">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#113A30"/>
-      <stop offset="1" stop-color="#0F6E56"/>
-    </linearGradient>
-    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#0A241D" flood-opacity=".22"/>
-    </filter>
-  </defs>
-  <rect width="900" height="360" rx="26" fill="url(#bg)"/>
-  <circle cx="790" cy="60" r="155" fill="#FFFFFF" opacity=".055"/>
-  <circle cx="830" cy="300" r="190" fill="#FFFFFF" opacity=".035"/>
-  <text x="56" y="58" fill="#BFE1D5" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" letter-spacing="2">SEOUL CYBER UNIVERSITY</text>
-  <text x="56" y="126" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700">AI Programming Fundamentals</text>
-  <rect x="56" y="158" width="122" height="42" rx="21" fill="#BFE6D8"/>
-  <text x="117" y="186" text-anchor="middle" fill="#113A30" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="800">WEEK 04</text>
-  <text x="56" y="252" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="800">Dictionaries and Sets</text>
-  <text x="58" y="294" fill="#D9EEE7" font-family="Arial, Helvetica, sans-serif" font-size="22">Map · Retrieve · Update · Deduplicate</text>
-  <g transform="translate(650 98)" filter="url(#shadow)">
-    <rect x="0" y="0" width="184" height="176" rx="24" fill="#FFFFFF"/>
-    <rect x="22" y="24" width="140" height="34" rx="10" fill="#E7F4EF"/>
-    <text x="38" y="47" fill="#0F6E56" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="800">{ key: value }</text>
-    <g fill="none" stroke="#0F6E56" stroke-width="5" stroke-linecap="round">
-      <path d="M36 91h36M91 91h55"/>
-      <path d="M36 121h36M91 121h55"/>
-      <path d="M36 151h36M91 151h55"/>
-    </g>
-    <circle cx="75" cy="91" r="4" fill="#4E9D83"/>
-    <circle cx="75" cy="121" r="4" fill="#4E9D83"/>
-    <circle cx="75" cy="151" r="4" fill="#4E9D83"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="300" viewBox="0 0 900 300">
+  <rect width="900" height="300" rx="20" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="14" height="300" rx="7" fill="#0F6E56"/>
+  <rect x="42" y="42" width="120" height="36" rx="18" fill="#EAF5F0"/>
+  <text x="102" y="66" text-anchor="middle" fill="#0F6E56" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">WEEK 04</text>
+  <text x="42" y="125" fill="#0F6E56" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">AI Programming Fundamentals</text>
+  <text x="42" y="191" fill="#0F6E56" font-family="Arial, Helvetica, sans-serif" font-size="50" font-weight="800">Dictionaries and Sets</text>
+  <text x="42" y="234" fill="#5B6E67" font-family="Arial, Helvetica, sans-serif" font-size="21">Organize mappings and work with unique values</text>
+  <g transform="translate(700 67)">
+    <rect x="0" y="0" width="145" height="155" rx="18" fill="#F7FBF9" stroke="#0F6E56" stroke-width="2"/>
+    <text x="24" y="42" fill="#0F6E56" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700">key</text>
+    <text x="73" y="42" fill="#5B6E67" font-family="Arial, Helvetica, sans-serif" font-size="17">:</text>
+    <text x="91" y="42" fill="#0F6E56" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700">value</text>
+    <line x1="24" y1="62" x2="121" y2="62" stroke="#BFD9CF" stroke-width="2"/>
+    <circle cx="42" cy="91" r="10" fill="#0F6E56"/>
+    <circle cx="73" cy="91" r="10" fill="#BFD9CF"/>
+    <circle cx="104" cy="91" r="10" fill="#0F6E56"/>
+    <circle cx="57" cy="121" r="10" fill="#BFD9CF"/>
+    <circle cx="88" cy="121" r="10" fill="#0F6E56"/>
   </g>
 </svg>
