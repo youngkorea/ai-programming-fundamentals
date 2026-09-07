@@ -17,8 +17,6 @@ Prof. Shin,
 Department of Bigdata and Information Security,
 Seoul Cyber University
 
----
-
-## Copyright and Use
+#### Copyright and Use
 
 The course materials in this repository are protected by copyright and are provided for educational purposes. Unauthorized reproduction, redistribution, or commercial use is prohibited.
