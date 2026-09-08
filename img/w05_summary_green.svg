@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="492" viewBox="0 0 900 492">
+<rect x="1" y="1" width="898" height="490" rx="10" fill="#F2FBF7" stroke="#C9E7DC" stroke-width="1.5"/>
+<rect x="1" y="1" width="898" height="6" rx="3" fill="#0F6E56"/>
+<rect x="1" y="4" width="898" height="4" fill="#0F6E56"/>
+
+<circle cx="35" cy="40" r="9" fill="#0F6E56"/>
+<path d="M 31 40 l 3 3.5 l 6 -7" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="56" y="48" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#04342C">Basic Conditional Statements</text>
+<text x="56" y="80" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#2C4A41">Use if and if-else statements to make a program perform different</text>
+<text x="56" y="110" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#2C4A41">actions depending on whether a condition is True or False.</text>
+<rect x="26" y="124" width="848" height="1" fill="#C9E7DC"/>
+
+<circle cx="35" cy="158" r="9" fill="#0F6E56"/>
+<path d="M 31 158 l 3 3.5 l 6 -7" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="56" y="166" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#04342C">Compound Conditions</text>
+<text x="56" y="198" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#2C4A41">Use if-elif-else, nested conditions, and logical operators to handle</text>
+<text x="56" y="228" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#2C4A41">more than one condition.</text>
+<rect x="26" y="242" width="848" height="1" fill="#C9E7DC"/>
+
+<circle cx="35" cy="276" r="9" fill="#0F6E56"/>
+<path d="M 31 276 l 3 3.5 l 6 -7" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="56" y="284" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#04342C">Conditional Expressions</text>
+<text x="56" y="316" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#2C4A41">A conditional expression writes a simple if-else decision in one</text>
+<text x="56" y="346" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#2C4A41">line when the logic remains easy to read.</text>
+<rect x="26" y="360" width="848" height="1" fill="#C9E7DC"/>
+
+<circle cx="35" cy="394" r="9" fill="#0F6E56"/>
+<path d="M 31 394 l 3 3.5 l 6 -7" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="56" y="402" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#04342C">Data and AI Applications</text>
+<text x="56" y="434" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#2C4A41">Conditional logic is useful for preprocessing data, checking model</text>
+<text x="56" y="464" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#2C4A41">results, detecting abnormal values, and creating simple labels.</text>
+</svg>
