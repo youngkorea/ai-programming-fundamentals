@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>AI Programming Fundamentals — Week 07 · Review: Python Fundamentals</title><style>
+:root{--W:1600px;--H:900px;--brand:#1B5FA4;--brand-deep:#0C447C;--brand-dark:#08355F;--mint:#E6F1FB;--mint-2:#D8E8F7;--mint-3:#BFD7EE;--sage:#7FA8CD;--paper:#fff;--paper-2:#F8FBFE;--ink:#1A3148;--muted:#5D7185;--line:#D4E2EE;--code:#092D50;--accent:#58C7B0;--green:#2F5D50;--shadow:0 18px 50px rgba(12,68,124,.14);--shadow-soft:0 8px 24px rgba(12,68,124,.10)}
+*{box-sizing:border-box}::-webkit-scrollbar{display:none}html{scrollbar-width:none}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#DCE7F0}body{font-family:Arial,"Helvetica Neue","Segoe UI",sans-serif;color:var(--ink);font-weight:400}code{font-family:"Cascadia Code",Consolas,"Liberation Mono",monospace}
+#viewport{position:relative;width:100vw;height:100vh;overflow:hidden;background:radial-gradient(circle at 28% 20%,#EFF5FA,#D7E3EE 64%,#CCD9E5)}
+.slide{position:absolute;left:50%;top:50%;width:var(--W);height:var(--H);transform:translate(-50%,-50%) scale(var(--scale,1));transform-origin:center;display:none;overflow:hidden;background:var(--paper);box-shadow:0 30px 90px rgba(18,32,46,.24)}.slide.active{display:block;animation:fade .16s ease-out}@keyframes fade{from{opacity:.76}to{opacity:1}}
+.frame{position:absolute;inset:48px 72px 38px 72px}.content-slide{background:linear-gradient(145deg,#FFFFFF 0%,#F8FBFE 100%)}.soft-orb{position:absolute;border-radius:50%;pointer-events:none}.orb-one{width:430px;height:430px;right:-225px;top:-250px;background:radial-gradient(circle,rgba(59,121,182,.13),rgba(59,121,182,0) 70%)}.orb-two{width:500px;height:500px;left:-300px;bottom:-330px;background:radial-gradient(circle,rgba(27,95,164,.08),rgba(27,95,164,0) 70%)}
+.slide-header{height:118px;display:flex;align-items:flex-start;justify-content:space-between;border-bottom:1px solid var(--line)}.slide-header h2{margin:15px 0 0;font-size:54px;line-height:1.04;font-weight:700;letter-spacing:-.035em;color:var(--ink)}.slide-header h2 code{color:var(--brand);font-weight:800}.kicker{display:inline-flex;align-items:center;height:38px;padding:0 15px;border-radius:8px;background:var(--mint);color:var(--brand);font-size:27px;font-weight:750;letter-spacing:.035em;text-transform:uppercase}.slide-note .kicker{background:var(--brand);color:#fff;border:1px solid var(--brand)}.slide-body{position:absolute;left:0;right:0;top:122px;bottom:42px;overflow:hidden}
+.cover-slide,.section-slide{background:linear-gradient(132deg,#08355F 0%,#0C447C 60%,#155F9F 100%);color:#fff}.cover-grid,.section-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(190,216,239,.075) 1px,transparent 1px),linear-gradient(90deg,rgba(190,216,239,.075) 1px,transparent 1px);background-size:55px 55px;mask-image:linear-gradient(90deg,#000 0%,rgba(0,0,0,.78) 58%,rgba(0,0,0,.2) 100%)}.cover-slide:before,.section-slide:before{content:"";position:absolute;width:720px;height:720px;border-radius:50%;right:-250px;top:-260px;background:radial-gradient(circle,rgba(93,157,213,.28),rgba(93,157,213,0) 68%)}.cover-slide::after,.section-slide::after{content:"SEOUL CYBER UNIVERSITY";position:absolute;left:82px;bottom:48px;z-index:8;color:#C5D9EC;font-size:27px;line-height:1;letter-spacing:.11em;font-weight:700;text-transform:uppercase;pointer-events:none}.cover-left{position:absolute;left:82px;top:72px;bottom:70px;width:820px;display:flex;flex-direction:column;justify-content:center}.cover-brand{position:absolute;top:0;font-size:27px;letter-spacing:.11em;font-weight:700;color:#C5D9EC}.cover-tag{display:flex;align-items:center;gap:18px;margin-bottom:36px}.cover-tag span{padding:12px 19px;border-radius:9px;background:var(--accent);color:#073A62;font-size:29px;font-weight:800}.cover-tag b{font-size:29px;color:#BDD7EF;letter-spacing:.035em}.cover-left h1{margin:0;font-size:92px;line-height:1.02;letter-spacing:-.045em;font-weight:760}.cover-left p{margin:28px 0 0;font-size:34px;line-height:1.35;color:#C8DBED}.cover-right{position:absolute;right:34px;top:75px;width:680px;height:650px;display:flex;align-items:center;justify-content:center}.loop-visual{width:560px;height:560px;border-radius:36px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px}.flow-card{width:290px;height:86px;border-radius:22px;background:#fff;color:var(--brand-deep);display:flex;align-items:center;justify-content:center;font-size:31px;font-weight:800}.flow-card.muted{background:#D8E8F7}.flow-ring{width:230px;height:230px;border-radius:50%;border:24px solid var(--accent);display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fff;color:var(--brand-deep);box-shadow:0 0 0 18px rgba(88,199,176,.14)}.flow-ring b{font-size:38px}.flow-ring span{font-size:25px;margin-top:8px;color:var(--muted)}
+.section-copy{position:absolute;left:82px;top:118px;width:790px}.section-eyebrow{display:inline-flex;padding:12px 18px;border-radius:9px;background:var(--accent);color:#073A62;font-size:29px;font-weight:800}.section-copy h1{margin:34px 0 0;font-size:76px;line-height:1.08;letter-spacing:-.04em}.section-copy p{margin:26px 0 0;width:720px;font-size:32px;line-height:1.45;color:#C5D9EC}.section-rule{width:150px;height:7px;border-radius:99px;background:linear-gradient(90deg,var(--accent),#8EC2E5);margin-top:38px}.section-art{position:absolute;right:62px;top:134px;width:650px;height:560px;display:flex;align-items:center;justify-content:center}.unit-art{width:540px;height:460px;border-radius:34px;background:rgba(255,255,255,.86);border:1px solid rgba(47,93,80,.20);box-shadow:var(--shadow);padding:38px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px}.code-window{width:400px;border-radius:24px;background:var(--code);color:#EDF0F4;padding:32px 34px;box-shadow:var(--shadow-soft);position:relative}.code-window i{position:absolute;top:18px;width:12px;height:12px;border-radius:50%;background:#D8E8F7}.code-window i:nth-child(1){left:26px}.code-window i:nth-child(2){left:48px}.code-window i:nth-child(3){left:70px}.code-window pre{margin:20px 0 0;font-family:Consolas,monospace;font-size:31px;line-height:1.35}.code-window.small pre{margin:0}.loop-pill{padding:17px 28px;border-radius:999px;background:var(--green);color:#fff;font-size:27px;font-weight:800}.items-row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}.items-row span,.tool-grid span{padding:16px 22px;border-radius:18px;background:var(--mint);color:var(--brand-deep);font-size:27px;font-weight:800}.tool-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;text-align:center}.takeaway-orbit{position:relative;width:360px;height:360px;border-radius:50%;background:var(--mint);display:flex;align-items:center;justify-content:center}.takeaway-orbit b{font-size:48px;color:var(--brand-deep)}.takeaway-orbit span{position:absolute;padding:12px 18px;border-radius:999px;background:#fff;color:var(--brand);font-weight:800;font-size:25px}.takeaway-orbit span:nth-child(1){top:38px}.takeaway-orbit span:nth-child(2){left:24px;bottom:94px}.takeaway-orbit span:nth-child(3){right:18px;bottom:94px}
+.week-objectives-intro{margin:0 0 22px 0;font-size:31px;line-height:1.4;color:var(--muted);font-weight:560}.horizontal-objectives .slide-body{display:flex;flex-direction:column;justify-content:center}.objective-list{height:450px;display:grid;grid-template-columns:1fr;grid-template-rows:repeat(3,1fr);gap:20px}.objective-card{padding:28px 36px;border-radius:24px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft);display:grid;grid-template-columns:72px 1fr;gap:28px;align-items:center}.objective-card span{width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--brand);color:#fff;font-size:27px;font-weight:800}.objective-card p{margin:0;font-size:31px;line-height:1.38;color:var(--ink)}.objective-card strong{color:var(--brand);font-weight:850}
+.body-lead{margin:0 0 18px;font-size:31px;line-height:1.40;color:var(--ink)}.body-lead strong{color:var(--brand);font-weight:850}.body-lead code{color:var(--brand-deep);font-weight:800}.lead-stack{height:100%;display:flex;flex-direction:column;justify-content:flex-start;padding-top:22px}.lead-stack > .concept-grid,.lead-stack > .range-grid{flex:1;align-content:center}.concept-grid{display:grid;gap:24px;height:500px}.concept-grid.cols-3{grid-template-columns:repeat(3,1fr)}.concept-card{border-radius:28px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft);padding:34px;display:flex;flex-direction:column;justify-content:center}.concept-card>span{display:inline-flex;align-self:flex-start;height:46px;align-items:center;padding:0 17px;border-radius:999px;background:var(--brand);color:#fff;font-size:23px;font-weight:850;letter-spacing:.04em;text-transform:uppercase}.concept-card h3{margin:24px 0 12px;font-size:34px;line-height:1.15;color:var(--brand-deep)}.concept-card p{margin:0;font-size:28px;line-height:1.38;color:var(--muted)}
+.code-demo-layout{height:100%;display:grid;grid-template-columns:1.22fr .78fr;gap:40px;align-items:center;padding-top:20px}.notebook-panel{border-radius:27px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);overflow:hidden}.nb-toolbar{height:58px;background:#EDF4FA;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:15px;padding:0 22px;color:var(--muted);font-size:25px}.run-dot{width:39px;height:39px;border-radius:50%;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-size:25px;padding-left:3px}.nb-toolbar i{margin-left:auto;width:70px;height:8px;border-radius:99px;background:#cbd2d9}.code-wrap{background:var(--code);padding:18px 26px}.code-wrap pre,.output-panel pre{margin:0;white-space:pre-wrap}.code-wrap code{font-family:"Cascadia Code",Consolas,"Liberation Mono",monospace;font-size:25px;line-height:1.16;color:#EDF0F4;white-space:pre-wrap}.compact .code-wrap{padding:15px 23px}.compact .code-wrap code{font-size:22.5px;line-height:1.10}.output-panel{padding:12px 26px 14px;background:#f6f7f8}.output-label{font-size:23px;font-weight:750;color:var(--brand);margin-bottom:5px}.output-panel pre{font-family:"Cascadia Code",Consolas,monospace;font-size:23px;line-height:1.18;color:var(--ink)}.compact .output-panel pre{font-size:21px;line-height:1.12}.code-explain{padding:24px}.code-explain h3{font-size:40px;line-height:1.16;margin:24px 0 12px;color:var(--brand-deep)}.code-explain p{font-size:29px;line-height:1.38;color:var(--muted);margin:0 0 18px}.icon-box{width:58px;height:58px;display:inline-flex;align-items:center;justify-content:center;border-radius:16px;background:var(--mint);color:var(--brand);flex:0 0 auto;font-weight:800}.icon-box.huge{width:88px;height:88px;border-radius:24px;background:var(--mint);font-size:48px}.concept-chip{display:inline-flex;align-items:center;justify-content:center;text-align:center;min-height:52px;padding:13px 18px;border-radius:13px;background:var(--mint);color:var(--brand);font-size:26px;font-weight:800}.kw{color:#7FB2E8!important;font-weight:850}.fn{color:#AFC8E2!important;font-weight:760}.var{color:#FFFFFF!important}.str{color:#B7CEDF!important}.num{color:#BFE1FF!important;font-weight:720}.com{color:#8EA0AD!important;font-style:italic}.op{color:#8ED6C4!important;font-weight:850}.punct{color:#DCE8F3!important}
+.two-code-layout{height:100%;display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center;padding-top:20px}.two-code-slide .notebook-panel{align-self:center}.three-code-layout{height:100%;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:center;padding-top:18px}.three-code-layout .code-wrap code{font-size:22px;line-height:1.10}.three-code-layout .output-panel pre{font-size:21px;line-height:1.10}.range-grid{display:grid;grid-template-columns:1fr;gap:22px}.range-grid div{min-height:120px;border-radius:24px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft);display:grid;grid-template-columns:330px 1fr;align-items:center;padding:24px 32px;gap:26px}.range-grid b{display:flex;align-items:center;justify-content:center;height:66px;border-radius:16px;background:var(--brand);color:#fff;font-family:Consolas,monospace;font-size:29px}.range-grid span{font-size:31px;color:var(--ink)}.compare-grid{height:100%;display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center;padding-top:30px}.compare-card{height:460px;border-radius:30px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft);padding:42px;display:flex;flex-direction:column;justify-content:center}.compare-card h3{font-size:40px;margin:0 0 22px;color:var(--brand-deep)}.compare-card p{font-size:30px;line-height:1.42;color:var(--muted);margin:0 0 24px}.compare-card .concept-chip{margin-top:auto}
+.practice-slide{background:linear-gradient(135deg,#eff8f3 0%,#d9ede5 38%,#e6f1fb 100%);color:var(--ink)}.practice-slide:before{content:"";position:absolute;right:-260px;top:-260px;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(27,95,164,.20),rgba(27,95,164,0) 70%)}.practice-slide:after{content:"";position:absolute;left:-300px;bottom:-330px;width:740px;height:740px;border-radius:50%;background:radial-gradient(circle,rgba(47,93,80,.24),rgba(47,93,80,0) 70%)}.practice-inner{position:absolute;inset:82px 90px;display:grid;grid-template-columns:1fr .92fr;gap:70px;align-items:center;z-index:2}.practice-kicker{display:inline-flex;align-items:center;height:46px;padding:0 18px;border-radius:999px;background:#2f5d50;color:#fff;font-size:28px;font-weight:800;letter-spacing:.08em;box-shadow:0 10px 22px rgba(47,93,80,.20)}.practice-title{color:#2f5d50;font-size:100px;line-height:.98;margin:32px 0 18px;letter-spacing:-.055em;font-weight:780}.practice-text{font-size:37px;line-height:1.34;color:#314b42;max-width:760px;margin:0}.practice-visual.universal{height:560px;border-radius:34px;background:rgba(255,255,255,.84);border:1px solid rgba(47,93,80,.20);box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;padding:52px}.practice-visual ol{margin:0;padding-left:44px}.practice-visual li{font-size:34px;line-height:1.5;margin:14px 0;color:var(--ink)}
+.summary-grid{height:500px;margin:48px auto 0;width:96%;display:grid;grid-template-columns:repeat(2,1fr);grid-auto-rows:1fr;gap:22px}.summary-card{padding:24px 30px;border-radius:24px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft);display:grid;grid-template-columns:70px 1fr;grid-template-rows:auto 1fr;column-gap:20px}.summary-card>span{grid-row:1/3;width:58px;height:58px;border-radius:50%;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-size:27px;font-weight:800}.summary-card h3{font-size:32px;line-height:1.15;margin:6px 0 8px}.summary-card p{font-size:26.5px;line-height:1.34;color:var(--muted);margin:0}.term-cloud{height:calc(100% - 132px);display:flex;align-content:center;justify-content:center;align-items:center;flex-wrap:wrap;gap:20px 18px;padding:22px 90px 10px}.term-cloud span{padding:16px 23px;border-radius:999px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft);font-size:31px;font-weight:650;color:var(--brand-deep)}.term-cloud span:nth-child(odd){background:var(--brand);color:#fff;border-color:var(--brand)}.closing-line{position:absolute;left:0;right:0;bottom:0;height:105px;border-radius:22px;background:var(--mint);display:flex;align-items:center;justify-content:center;gap:20px}.closing-line .icon-box{width:58px;height:58px;border-radius:16px;background:var(--mint-2);color:var(--brand);font-size:35px}.closing-line b{font-size:34px;color:var(--brand-deep);font-weight:800}
+.data-ai-slide .code-demo-layout{grid-template-columns:1.27fr .73fr}.data-ai-slide .code-wrap code{font-size:22px;line-height:1.08}.data-ai-slide .output-panel pre{font-size:21px;line-height:1.10}.compact-code-slide .code-wrap code{font-size:22px;line-height:1.08}.compact-code-slide .output-panel pre{font-size:21px;line-height:1.10}.nav-zone{position:fixed;top:0;bottom:0;width:clamp(42px,4vw,68px);z-index:999;cursor:pointer}.nav-zone.prev{left:0}.nav-zone.next{right:0}@media print{@page{size:1600px 900px;margin:0}html,body{width:1600px;height:auto;overflow:visible!important;background:#fff!important}#viewport{width:1600px;height:auto;overflow:visible!important;background:#fff!important}.slide{position:relative!important;left:auto!important;top:auto!important;width:1600px!important;height:900px!important;transform:none!important;display:block!important;box-shadow:none!important;break-after:page;page-break-after:always}.slide:last-of-type{break-after:auto;page-break-after:auto}.nav-zone{display:none!important}}
+
+/* ===== 2026-09-14 v02: Week 06 title pages aligned with Week 04 reference ===== */
+
+/* Institution label: same bottom-left placement on cover and section divider pages. */
+.cover-slide.cover-refined .cover-brand,
+.section-slide .section-brand{
+  display:none !important;
+}
+.cover-slide.cover-refined::after,
+.section-slide::after{
+  content:"SEOUL CYBER UNIVERSITY";
+  position:absolute;
+  left:82px;
+  bottom:48px;
+  z-index:8;
+  color:#C5D9EC;
+  font-size:27px;
+  line-height:1;
+  letter-spacing:.11em;
+  font-weight:700;
+  text-transform:uppercase;
+  pointer-events:none;
+}
+
+/* Cover: same hierarchy, position, and font scale as Week 04. */
+.cover-slide.cover-refined .cover-left{
+  position:absolute;
+  left:82px;
+  top:72px;
+  bottom:70px;
+  width:820px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.cover-slide.cover-refined .cover-left h1{
+  margin:0;
+  font-size:82px !important;
+  line-height:1.02;
+  letter-spacing:-.045em;
+  font-weight:760;
+}
+.cover-slide.cover-refined .cover-tag{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  margin:25px 0 0 !important;
+}
+.cover-slide.cover-refined .cover-tag span{
+  padding:12px 19px;
+  border-radius:9px;
+  background:var(--accent);
+  color:#073A62;
+  font-size:29px;
+  font-weight:800;
+}
+.cover-slide.cover-refined .cover-tag b{
+  font-size:29px;
+  color:#BDD7EF;
+  letter-spacing:.035em;
+}
+.cover-slide.cover-refined .cover-left p{
+  margin:28px 0 0 !important;
+  font-size:34px;
+  line-height:1.35;
+  color:#C8DBED;
+}
+.cover-slide.cover-refined .cover-right{
+  position:absolute;
+  right:34px;
+  top:75px;
+  width:680px;
+  height:650px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* Cover illustration: keep the title-page artwork within the same visual area,
+   with a white background card like the reference title illustrations. */
+.cover-slide.cover-refined .loop-visual{
+  width:560px !important;
+  height:560px !important;
+  border-radius:36px;
+  background:rgba(255,255,255,.88) !important;
+  border:1px solid rgba(255,255,255,.22);
+  box-shadow:var(--shadow);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:30px;
+}
+.cover-slide.cover-refined .loop-visual .flow-card{
+  background:var(--mint) !important;
+  border:1px solid var(--line);
+}
+.cover-slide.cover-refined .loop-visual .flow-ring{
+  background:#FFFFFF !important;
+}
+
+/* Unit title pages: same text position and font scale as Week 04. */
+.section-slide .section-copy{
+  position:absolute;
+  left:82px !important;
+  top:118px !important;
+  width:790px !important;
+}
+.section-slide .section-eyebrow{
+  display:inline-flex;
+  padding:12px 18px;
+  border-radius:9px;
+  background:var(--accent);
+  color:#073A62;
+  font-size:29px !important;
+  font-weight:800;
+}
+.section-slide .section-copy h1{
+  margin:34px 0 0 !important;
+  font-size:76px !important;
+  line-height:1.08 !important;
+  letter-spacing:-.04em !important;
+}
+.section-slide .section-copy p{
+  margin:26px 0 0 !important;
+  width:720px !important;
+  font-size:32px !important;
+  line-height:1.45 !important;
+  color:#C5D9EC !important;
+}
+.section-slide .section-rule{
+  width:150px !important;
+  height:7px !important;
+  border-radius:99px;
+  margin-top:38px !important;
+  background:linear-gradient(90deg,var(--accent),#8EC2E5);
+}
+.section-slide .section-art{
+  position:absolute;
+  right:62px !important;
+  top:134px !important;
+  width:650px !important;
+  height:560px !important;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* Keep the Unit 1-3 artwork cards uniform in size and on a white background. */
+.section-slide.unit-title-twoline .unit-art,
+.section-slide.unit-title-singleline .unit-art,
+.section-slide.key-takeaways-singleline .unit-art{
+  width:540px !important;
+  height:460px !important;
+  border-radius:34px;
+  background:rgba(255,255,255,.88) !important;
+  border:1px solid rgba(47,93,80,.20);
+  box-shadow:var(--shadow);
+  padding:38px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:28px;
+}
+
+/* Key Takeaways keeps a one-line heading, matching the reference. */
+.section-slide.key-takeaways-singleline .section-copy h1{
+  white-space:nowrap !important;
+}
+
+
+/* ===== 2026-09-14 v03: cover/practice aligned to Week 04 + indentation audit ===== */
+.cover-slide.cover-refined .cover-left h1{font-size:82px !important;}
+.cover-slide.cover-refined .cover-right{right:34px !important;top:75px !important;width:680px !important;height:650px !important;}
+.cover-slide.cover-refined .hero-svg{width:100% !important;height:100% !important;display:block;}
+
+/* Same Let's Practice divider geometry and artwork treatment as the Week 04 HTML. */
+.practice-slide{background:linear-gradient(135deg,#eff8f3 0%,#d9ede5 38%,#e6f1fb 100%) !important;color:var(--ink)}
+.practice-slide:before{content:"";position:absolute;right:-260px;top:-260px;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(27,95,164,.20),rgba(27,95,164,0) 70%)}
+.practice-slide:after{content:"";position:absolute;left:-300px;bottom:-330px;width:740px;height:740px;border-radius:50%;background:radial-gradient(circle,rgba(47,93,80,.24),rgba(47,93,80,0) 70%)}
+.practice-divider .practice-inner{position:absolute;inset:82px 90px !important;display:grid;grid-template-columns:1fr .92fr;gap:70px;align-items:center;z-index:2;}
+.practice-divider .practice-copy{min-width:0;transform:none !important;}
+.practice-divider .practice-kicker{display:inline-flex;align-items:center;height:46px;padding:0 18px;border-radius:999px;background:#2f5d50;color:#fff;font-size:28px;font-weight:800;letter-spacing:.08em;box-shadow:0 10px 22px rgba(47,93,80,.20)}
+.practice-divider .practice-title{color:#2f5d50;font-size:100px !important;line-height:.98;margin:32px 0 18px;letter-spacing:-.055em;font-weight:780;white-space:nowrap;}
+.practice-divider .practice-text{font-size:37px;line-height:1.34;color:#314b42;max-width:760px;margin:0;}
+.practice-divider .practice-visual.universal{height:560px !important;border-radius:34px;background:rgba(255,255,255,.84);border:1px solid rgba(47,93,80,.20);box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;padding:26px !important;position:relative;overflow:hidden;}
+.practice-universal-svg{width:100%;height:100%;display:block;}
+.practice-visual ol,.practice-visual li{display:none !important;}
+
+/* Code cells: ordinary 4-space indentation, no artificial blank lines, compact line height. */
+.code-wrap pre,.ex-code pre,.code-wrap code,.ex-code code{white-space:pre-wrap !important;}
+.code-wrap code,.ex-code code{font-size:25px;line-height:1.14 !important;}
+.compact .code-wrap code,.compact-code-slide .code-wrap code,.data-ai-slide .code-wrap code,.three-code-layout .code-wrap code{line-height:1.08 !important;}
+.two-code-layout .code-wrap code{line-height:1.10 !important;}
+.code-line,.code-line::before{all:unset !important;content:none !important;}
+
+/* ===== 2026-09-14 v04: format audit against existing Week 04 HTML ===== */
+body{font-family:Arial,"Helvetica Neue","Segoe UI",sans-serif !important;font-weight:400}
+code,kbd,.code-wrap code,.ex-code code,.output-panel pre,.ex-out pre{font-family:Consolas,"Cascadia Code","Liberation Mono",monospace !important}
+
+.cover-slide.cover-refined .cover-left{left:82px !important;top:72px !important;bottom:70px !important;width:820px !important;justify-content:center !important}
+.cover-slide.cover-refined .cover-left h1{font-size:82px !important;line-height:1.02 !important;letter-spacing:-.045em !important}
+.cover-slide.cover-refined .cover-tag{margin:25px 0 0 !important;gap:18px !important}
+.cover-slide.cover-refined .cover-left p{margin:28px 0 0 !important;font-size:34px !important;line-height:1.35 !important}
+.cover-slide.cover-refined .cover-right{right:34px !important;top:75px !important;width:680px !important;height:650px !important}
+.cover-slide.cover-refined .hero-svg{width:100% !important;height:100% !important;display:block !important}
+
+.section-slide .section-copy{left:82px !important;top:118px !important;width:790px !important}
+.section-slide .section-eyebrow{font-size:29px !important;padding:12px 18px !important;border-radius:9px !important;background:var(--accent) !important;color:#073A62 !important}
+.section-slide .section-copy h1{margin:34px 0 0 !important;font-size:76px !important;line-height:1.08 !important;letter-spacing:-.04em !important}
+.section-slide .section-copy p{margin:26px 0 0 !important;width:720px !important;font-size:32px !important;line-height:1.45 !important;color:#C5D9EC !important}
+.section-slide .section-rule{width:150px !important;height:7px !important;margin-top:38px !important;background:linear-gradient(90deg,var(--accent),#8EC2E5) !important}
+.section-slide .section-art{right:62px !important;top:134px !important;width:650px !important;height:560px !important;display:flex !important;align-items:center !important;justify-content:center !important}
+.section-slide .section-svg{width:100% !important;height:100% !important;display:block !important}
+.section-slide.key-takeaways-singleline .section-copy h1{white-space:nowrap !important}
+
+.practice-slide{background:linear-gradient(135deg,#eff8f3 0%,#d9ede5 38%,#e6f1fb 100%) !important;color:var(--ink) !important}
+.practice-slide:before{content:"";position:absolute;right:-260px;top:-260px;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(27,95,164,.20),rgba(27,95,164,0) 70%)}
+.practice-slide:after{content:"";position:absolute;left:-300px;bottom:-330px;width:740px;height:740px;border-radius:50%;background:radial-gradient(circle,rgba(47,93,80,.24),rgba(47,93,80,0) 70%)}
+.practice-divider .practice-inner{position:absolute;inset:82px 90px !important;display:grid !important;grid-template-columns:1fr .92fr !important;gap:70px !important;align-items:center !important;z-index:2 !important}
+.practice-divider .practice-kicker{display:inline-flex !important;align-items:center !important;height:46px !important;padding:0 18px !important;border-radius:999px !important;background:#2f5d50 !important;color:#fff !important;font-size:28px !important;font-weight:800 !important;letter-spacing:.08em !important;box-shadow:0 10px 22px rgba(47,93,80,.20) !important}
+.practice-divider .practice-title{color:#2f5d50 !important;font-size:100px !important;line-height:.98 !important;margin:32px 0 18px !important;letter-spacing:-.055em !important;font-weight:780 !important}
+.practice-divider .practice-text{font-size:37px !important;line-height:1.34 !important;color:#314b42 !important;max-width:760px !important;margin:0 !important}
+.practice-divider .practice-visual.universal{height:560px !important;border-radius:34px !important;background:rgba(255,255,255,.84) !important;border:1px solid rgba(47,93,80,.20) !important;box-shadow:var(--shadow) !important;display:flex !important;align-items:center !important;justify-content:center !important;padding:26px !important}
+.practice-universal-svg{width:100% !important;height:100% !important;display:block !important}
+
+.code-wrap pre,.ex-code pre,.code-wrap pre code,.ex-code pre code{white-space:pre-wrap !important}
+.code-line,.code-line::before{all:unset !important;content:none !important}
+.code-wrap code,.ex-code code{line-height:1.16 !important}
+.compact-code-slide .code-wrap code,.data-ai-slide .code-wrap code,.three-code-layout .code-wrap code{line-height:1.10 !important}
+
+.code-with-lead-v04 .slide-body{display:flex !important;flex-direction:column !important;justify-content:flex-start !important}
+.code-with-lead-v04 .code-lead{margin:0 0 18px 0 !important;font-size:31px !important;line-height:1.36 !important;color:var(--ink) !important}
+.code-with-lead-v04 .two-code-layout,.code-with-lead-v04 .three-code-layout{flex:1 1 auto !important;height:auto !important;min-height:0 !important;padding-top:0 !important;align-items:center !important}
+.code-with-lead-v04.three-code-slide .three-code-layout{gap:22px !important}
+.code-with-lead-v04.three-code-slide .code-wrap{padding-top:15px !important;padding-bottom:15px !important}
+.code-with-lead-v04.three-code-slide .code-wrap code{font-size:21px !important;line-height:1.08 !important}
+
+.range-grid{gap:20px !important}
+.range-grid div{min-height:112px !important;grid-template-columns:450px 1fr !important;gap:28px !important;padding:22px 32px !important}
+.range-grid b{width:100% !important;min-width:0 !important;height:64px !important;padding:0 20px !important;white-space:nowrap !important;font-size:27px !important;letter-spacing:-.02em !important}
+.range-grid span{font-size:30px !important;line-height:1.28 !important}
+
+.keyterms-slide .term-cloud{height:calc(100% - 132px) !important;padding:22px 130px 10px !important;gap:20px 18px !important}
+.keyterms-slide .term-cloud span{font-size:31px !important}
+.keyterms-slide .closing-line .icon-box{width:58px !important;height:58px !important;border-radius:16px !important;background:var(--mint-2) !important;color:var(--brand) !important;display:inline-flex !important;align-items:center !important;justify-content:center !important}
+.keyterms-slide .closing-line .icon-box .line-icon{width:100% !important;height:100% !important;fill:none !important;stroke:currentColor !important;stroke-width:1.8 !important;stroke-linecap:round !important;stroke-linejoin:round !important}
+
+/* ===== 2026-09-14 v05: one-line short unit titles + Unit 1 arrow refinement ===== */
+
+/* Short unit titles should stay on one line when they fit comfortably. */
+.section-slide.unit-title-singleline-v05 .section-copy h1{
+  white-space:nowrap !important;
+  font-size:76px !important;
+  line-height:1.08 !important;
+}
+
+/* Keep the section illustration frame unchanged; only the Unit 1 internal loop arrow was adjusted. */
+
+/* ===== 2026-09-14 v06: cover-page green arrow refinement ===== */
+/* Cover illustration frame remains unchanged; only the internal while-loop arrow was shortened and repositioned. */
+
+/* ===== 2026-09-14 v07: Week02 practice screen + Week03 unit-title frame + icon audit ===== */
+
+/* Unit title art uses the Week 03 reference frame: white browser card, no extra dark outer box. */
+.section-slide .section-art{
+  right:62px !important;
+  top:134px !important;
+  width:650px !important;
+  height:560px !important;
+}
+.section-slide .section-svg{
+  width:100% !important;
+  height:100% !important;
+  display:block !important;
+}
+
+/* Short unit titles stay on one line. */
+.section-slide.unit-title-singleline-v05 .section-copy h1{
+  white-space:nowrap !important;
+}
+
+/* Let’s Practice pages: preserve the Week 02 visual frame and layout. */
+.practice-slide.week02-practice-after-expressions{
+  background:linear-gradient(135deg,#eff8f3 0%,#d9ede5 38%,#e6f1fb 100%) !important;
+  color:var(--ink) !important;
+}
+.practice-slide.week02-practice-after-expressions:before{
+  content:"";
+  position:absolute;
+  right:-260px;
+  top:-260px;
+  width:700px;
+  height:700px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(27,95,164,.20),rgba(27,95,164,0) 70%);
+}
+.practice-slide.week02-practice-after-expressions:after{
+  content:"";
+  position:absolute;
+  left:-300px;
+  bottom:-330px;
+  width:740px;
+  height:740px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(47,93,80,.24),rgba(47,93,80,0) 70%);
+}
+.practice-slide.week02-practice-after-expressions .practice-inner{
+  position:absolute;
+  inset:82px 90px !important;
+  display:grid !important;
+  grid-template-columns:1fr .92fr !important;
+  gap:70px !important;
+  align-items:center !important;
+  z-index:2;
+}
+.practice-slide.week02-practice-after-expressions .practice-kicker{
+  display:inline-flex;
+  align-items:center;
+  height:46px;
+  padding:0 18px;
+  border-radius:999px;
+  background:#2f5d50;
+  color:#fff;
+  font-size:28px;
+  font-weight:800;
+  letter-spacing:.08em;
+  box-shadow:0 10px 22px rgba(47,93,80,.20);
+}
+.practice-slide.week02-practice-after-expressions .practice-title{
+  margin:32px 0 18px;
+  font-size:100px;
+  line-height:.98;
+  letter-spacing:-.055em;
+  color:#2f5d50;
+  font-weight:780;
+}
+.practice-slide.week02-practice-after-expressions .practice-text{
+  margin:0;
+  font-size:37px;
+  line-height:1.34;
+  color:#314b42;
+  max-width:760px;
+}
+.practice-slide.week02-practice-after-expressions .practice-visual.universal{
+  height:560px;
+  border-radius:34px;
+  background:rgba(255,255,255,.84);
+  border:1px solid rgba(47,93,80,.20);
+  box-shadow:var(--shadow);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:26px;
+}
+.practice-slide.week02-practice-after-expressions .practice-universal-svg{
+  width:100%;
+  height:100%;
+  display:block;
+}
+
+/* Icon audit: avoid repeated refresh glyphs; keep line icons centred inside the blue boxes. */
+.code-explain .icon-box.huge{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  font-size:0 !important;
+}
+.code-explain .icon-box.huge .line-icon{
+  width:54px !important;
+  height:54px !important;
+  fill:none !important;
+  stroke:currentColor !important;
+  stroke-width:1.9 !important;
+  stroke-linecap:round !important;
+  stroke-linejoin:round !important;
+}
+
+/* Remove any remaining refresh-glyph visual sizing if old content is cached. */
+.code-explain .icon-box.huge:not(:has(svg)){
+  font-size:0 !important;
+}
+
+/* ===== 2026-09-16 v08: title-page art refinements + body-text spacing ===== */
+.content-slide .body-lead{margin-top:12px !important; margin-bottom:18px !important;}
+.content-slide .lead-stack{padding-top:36px !important;}
+.content-slide .week-objectives-intro{margin-top:12px !important; margin-bottom:22px !important;}
+.content-slide .code-with-lead-v04 > .body-lead,
+.content-slide .slide-body > .body-lead.code-lead{margin-top:12px !important;}
+
+/* ===== 2026-09-16 v09: cover-art cleanup + text position alignment ===== */
+.content-slide .lead-stack{padding-top:34px !important;}
+.content-slide .lead-stack > .body-lead{margin-top:0 !important; margin-bottom:14px !important;}
+.content-slide .slide-body > .body-lead{margin-top:34px !important; margin-bottom:14px !important;}
+.content-slide .week-objectives-intro{margin-top:34px !important; margin-bottom:14px !important;}
+.content-slide .slide-body > .body-lead + .concept-grid,
+.content-slide .slide-body > .body-lead + .comparison-grid,
+.content-slide .slide-body > .body-lead + .example-grid,
+.content-slide .slide-body > .body-lead + .code-demo-layout,
+.content-slide .slide-body > .body-lead + .two-column-note,
+.content-slide .slide-body > .body-lead + .ai-grid,
+.content-slide .slide-body > .body-lead + .loop-tools-grid{margin-top:0 !important;}
+
+/* ===== 2026-09-16 v10: reference cover, completed practice pages, aligned body text ===== */
+.cover-slide.cover-refined .cover-right{right:34px !important;top:75px !important;width:680px !important;height:650px !important;}
+.cover-slide.cover-refined .hero-svg{width:100% !important;height:100% !important;display:block !important;}
+.cover-slide.cover-refined .cover-left p code{color:#C8DBED !important;background:transparent !important;font-size:1em !important;}
+
+/* General body text starts at the same vertical position as “Basic Structure of a while Loop.” */
+.content-slide .slide-body{top:143px !important;bottom:55px !important;}
+.content-slide .lead-stack{padding-top:34px !important;justify-content:flex-start !important;}
+.content-slide .lead-stack > .body-lead{position:static !important;top:auto !important;margin:0 0 16px !important;}
+.content-slide .slide-body > .body-lead{position:static !important;top:auto !important;margin:34px 0 16px !important;}
+.content-slide .week-objectives-intro{position:static !important;top:auto !important;margin:34px 0 16px !important;}
+.content-slide .lead-stack > .example-stack,
+.content-slide .lead-stack > .concept-grid,
+.content-slide .lead-stack > .range-grid,
+.content-slide .lead-stack > .summary-grid,
+.content-slide .lead-stack > .loop-tools-grid{margin-top:0 !important;}
+.content-slide .body-lead + .concept-grid,
+.content-slide .body-lead + .comparison-grid,
+.content-slide .body-lead + .range-grid,
+.content-slide .body-lead + .result-grid,
+.content-slide .body-lead + .example-stack,
+.content-slide .body-lead + .code-demo-layout{margin-top:0 !important;}
+
+/* Completed Week 02/04-style practice screen. */
+.practice-slide.week02-practice-complete-v10{background:linear-gradient(135deg,#eff8f3 0%,#d9ede5 38%,#e6f1fb 100%) !important;color:var(--ink) !important;}
+.practice-slide.week02-practice-complete-v10:before{content:"";position:absolute;right:-260px;top:-260px;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(27,95,164,.20),rgba(27,95,164,0) 70%);}
+.practice-slide.week02-practice-complete-v10:after{content:"";position:absolute;left:-300px;bottom:-330px;width:740px;height:740px;border-radius:50%;background:radial-gradient(circle,rgba(47,93,80,.24),rgba(47,93,80,0) 70%);}
+.practice-slide.week02-practice-complete-v10 .practice-inner{position:absolute;inset:82px 90px !important;display:grid !important;grid-template-columns:1fr .92fr !important;gap:70px !important;align-items:center !important;z-index:2 !important;}
+.practice-slide.week02-practice-complete-v10 .practice-kicker{display:inline-flex !important;align-items:center !important;height:46px !important;padding:0 18px !important;border-radius:999px !important;background:#2f5d50 !important;color:#fff !important;font-size:28px !important;font-weight:800 !important;letter-spacing:.08em !important;box-shadow:0 10px 22px rgba(47,93,80,.20) !important;}
+.practice-slide.week02-practice-complete-v10 .practice-title{margin:32px 0 18px !important;font-size:100px !important;line-height:.98 !important;letter-spacing:-.055em !important;color:#2f5d50 !important;font-weight:780 !important;}
+.practice-slide.week02-practice-complete-v10 .practice-text{margin:0 !important;font-size:37px !important;line-height:1.34 !important;color:#314b42 !important;max-width:760px !important;}
+.practice-slide.week02-practice-complete-v10 .practice-visual.universal{height:560px !important;border-radius:34px !important;background:rgba(255,255,255,.84) !important;border:1px solid rgba(47,93,80,.20) !important;box-shadow:var(--shadow) !important;display:flex !important;align-items:center !important;justify-content:center !important;padding:26px !important;position:relative !important;overflow:hidden !important;}
+.practice-slide.week02-practice-complete-v10 .practice-universal-svg{width:100% !important;height:100% !important;display:block !important;}
+.practice-slide.week02-practice-complete-v10 .practice-text code{font-size:1em !important;color:#2f5d50 !important;background:rgba(255,255,255,.45);border-radius:7px;padding:1px 6px;}
+
+
+/* === ported from Week02 CSS === */
+.feature-grid.with-callout + .wide-callout{margin-top:16px;min-height:100px;padding:18px 30px}
+.wide-callout{margin-top:26px;min-height:110px;padding:23px 30px;border-radius:22px;background:var(--brand-deep);color:#fff;display:flex;align-items:center;gap:24px;box-shadow:var(--shadow)}
+.wide-callout.subtle{background:var(--mint);color:var(--ink);box-shadow:none;border:1px solid var(--line)}
+.wide-callout p{margin:0;font-size:30px;line-height:1.42}
+.wide-callout strong{color:#c4ced8}
+.wide-callout.subtle strong{color:var(--brand)}
+.bottom-strip,.wide-callout{background:var(--brand-deep)}
+.wide-callout strong{color:#C6DFF3}
+/* Course level emphasis */
+.slide-course-level .wide-callout strong{color:var(--brand);font-weight:800}
+/* Expression -> result reference grid */
+.result-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px 26px;padding-top:16px}
+.result-item{min-height:80px;display:grid;grid-template-columns:1fr auto;align-items:center;padding:14px 28px;border-radius:19px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft)}
+.result-item code{font-family:Consolas,"Cascadia Code",monospace;font-size:32px;color:var(--brand-deep)}
+.result-item b{font-family:Consolas,"Cascadia Code",monospace;font-size:32px;color:var(--brand)}
+.result-item.wide{grid-column:1/-1}
+/* ===== v16 ===== */
+/* Week 01 green insight box: nudge the glyph inside its badge */
+.wide-callout.insight-callout{background:linear-gradient(135deg,#eaf5ef,#f4faf6);color:var(--ink);
+  border:1px solid rgba(47,93,80,.22);border-left:14px solid #2f5d50;border-radius:22px;
+  box-shadow:0 14px 30px rgba(20,53,86,.10)}
+.wide-callout.insight-callout .icon-box{background:#2f5d50;border-color:#2f5d50;color:#fff}
+.wide-callout.insight-callout .icon-box .line-icon{stroke:#fff;transform:translateX(-4px)}
+.wide-callout.insight-callout p{color:var(--ink)}
+.wide-callout.insight-callout strong{color:#2f5d50;font-weight:850}
+/* pp.7, 11, 14, 15 : light sky-blue panel with a dark navy badge (Week 01 pattern) */
+.wide-callout.soft-callout{background:var(--mint);border:1px solid var(--line);box-shadow:none;
+  color:var(--brand-deep)}
+.wide-callout.soft-callout .icon-box{background:var(--brand-deep);border-color:var(--brand-deep);color:#fff}
+.wide-callout.soft-callout .icon-box .line-icon{stroke:#fff;transform:translateX(-4px)}
+.wide-callout.soft-callout p{color:var(--brand-deep);font-weight:650}
+.wide-callout.soft-callout strong{color:var(--brand);font-weight:850}
+/* ===== v19 ===== */
+/* Badge glyphs sit centred; only the spark icon needs the optical nudge */
+.wide-callout.soft-callout .icon-box .line-icon{transform:none}
+.operators-slide .wide-callout.soft-callout .icon-box .line-icon{transform:translateX(-4px)}
+/* pp.14-15 : bottom panel drops further down the slide */
+.operators-slide .wide-callout{margin-top:70px}
+.results-slide .wide-callout{margin-top:60px}
+/* ===== v21 ===== */
+/* Badges in the bottom panels use the same blue as the tagged bands */
+.wide-callout.soft-callout .icon-box{background:var(--brand);border-color:var(--brand)}
+.slicing-slide .result-grid{padding-top:54px}
+/* p.29 : bottom panel drops further down */
+.comparison-ops-slide .wide-callout{margin-top:90px}
+/* p.37 : panel tuned so the three examples and the note both fit */
+.slide-boolapps .wide-callout{margin-top:10px;min-height:0;padding:16px 26px}
+/* ===== v24 ===== */
+/* p.48 : Week 01 green insight box for the truncation caution */
+.wide-callout.insight-callout{background:linear-gradient(135deg,#eaf5ef,#f4faf6);color:var(--ink);
+  border:1px solid rgba(47,93,80,.22);border-left:14px solid #2f5d50;border-radius:22px;
+  box-shadow:0 14px 30px rgba(20,53,86,.10)}
+.wide-callout.insight-callout .icon-box .line-icon{stroke:#fff;transform:none}
+.wide-callout.insight-callout p{color:var(--ink);font-weight:650}
+.wide-callout.insight-callout code{color:#2f5d50;font-weight:750}
+.comparison-ops-slide .wide-callout{margin-top:56px}
+/* p.33 : bottom panel drops further down */
+.logical-ops-slide .wide-callout{margin-top:46px}
+/* p.23 : result boxes sit further below the character strip */
+.indexing-slide .result-grid{padding-top:56px}
+.logical-ops-slide .wide-callout{margin-top:70px}
+.bool-convert-slide .wide-callout{margin-top:28px}
+.slide-boolapps .wide-callout{margin-top:20px}
+.logical-ops-slide .wide-callout{margin-top:98px}
+/* === Week 07 review additions === */
+.concept-grid.cols-4{grid-template-columns:repeat(4,1fr)}
+.ds-table{display:grid;grid-template-columns:1.25fr repeat(4,1fr);border:1px solid var(--line);border-radius:24px;overflow:hidden;background:#fff;box-shadow:0 18px 40px rgba(12,46,80,.08)}
+.ds-table>div{padding:20px 22px;font-size:27px;display:flex;align-items:center;justify-content:center;text-align:center;border-top:1px solid var(--line);line-height:1.25}
+.ds-table>div:nth-child(-n+5){border-top:none;background:var(--brand-deep);color:#fff;font-weight:750;font-size:26px}
+.ds-table>div:nth-child(5n+1){justify-content:flex-start;text-align:left;font-weight:700;color:var(--brand-deep);background:var(--mint)}
+.ds-table>div:nth-child(1){background:var(--brand-deep);color:#fff}
+.ds-table code{font-size:25px}
+.ds-yes{color:var(--brand);font-weight:750}
+.ds-no{color:#B0553A;font-weight:750}
+.quiz-list{display:flex;flex-direction:column;gap:26px;height:100%;justify-content:center}
+.quiz-row{display:grid;grid-template-columns:64px 1fr 68px 470px;align-items:center;gap:22px}
+.quiz-row .qnum{width:56px;height:56px;border-radius:50%;background:var(--brand);color:#fff;font-weight:800;font-size:26px;display:flex;align-items:center;justify-content:center}
+.quiz-row pre{margin:0;background:#0E2A44;color:#EAF2F9;border-radius:18px;padding:18px 26px;font-family:'Cascadia Code',Consolas,monospace;font-size:26px;line-height:1.4;overflow:hidden}
+.quiz-row .qarrow{font-size:40px;color:var(--sage);text-align:center;font-weight:700}
+.quiz-ans{background:var(--mint);border:1px solid var(--line);border-radius:18px;padding:14px 22px;cursor:pointer}
+.quiz-ans small{display:block;font-size:20px;letter-spacing:.08em;color:var(--muted);font-weight:750;margin-bottom:4px}
+.quiz-ans pre{background:transparent;color:var(--brand-deep);padding:0;border-radius:0;font-size:26px;font-weight:700;filter:blur(9px);transition:filter .2s}
+.quiz-ans.show pre{filter:none}
+.quiz-hint{text-align:center;font-size:24px;color:var(--muted);margin-top:18px}
+.pit-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;height:100%;align-content:center}
+.pit-item{display:flex;align-items:center;gap:18px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px 24px;font-size:26.5px;line-height:1.3}
+.pit-item svg{width:34px;height:34px;flex:0 0 auto;stroke:var(--brand);stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.pit-item code{font-size:24.5px}
+
+/* === alignment fixes === */
+.concept-card{justify-content:flex-start !important}
+.concept-card span{align-self:flex-start}
+.quiz-list{justify-content:center;gap:18px;padding-top:4px}
+.quiz-row{align-items:center;grid-template-columns:64px 1fr 60px 470px}
+.quiz-row .qnum{align-self:center}
+.quiz-row .qarrow{align-self:center}
+.quiz-row pre{font-size:24px;padding:14px 22px}
+.quiz-ans{display:flex;flex-direction:column;justify-content:center;padding:12px 22px;align-self:stretch}
+.quiz-ans pre{font-size:24px;padding:0;background:transparent}
+.quiz-hint{margin-top:8px;font-size:22px}
+</style></head><body><div id="viewport"><section class="slide cover-slide cover-refined active">
+<div class="cover-grid"></div>
+<div class="cover-left"><span class="cover-brand">SEOUL CYBER UNIVERSITY</span><h1>AI Programming<br>Fundamentals</h1><div class="cover-tag"><span>WEEK 07</span><b>REVIEW: PYTHON FUNDAMENTALS</b></div><p><span>Objects &amp; Types · Data Structures · Control Flow</span></p></div>
+<div class="cover-right"><svg aria-label="Week 07 cover illustration" class="hero-svg" role="img" viewBox="0 0 680 600">
+<defs><filter height="160%" id="w07CoverShadow" width="140%" x="-20%" y="-20%"><fedropshadow dx="0" dy="18" flood-color="#071A2C" flood-opacity=".24" stdDeviation="18"></fedropshadow></filter>
+<lineargradient id="w07CoverCard" x1="0" x2="1" y1="0" y2="1"><stop offset="0%" stop-color="#FCFEFF"></stop><stop offset="100%" stop-color="#EEF5FB"></stop></lineargradient></defs>
+<circle cx="546" cy="92" fill="#286AA7" opacity=".30" r="78"></circle>
+<circle cx="592" cy="182" fill="#A5B6C8" r="13"></circle><circle cx="494" cy="30" fill="#A5B6C8" r="8"></circle>
+<g opacity=".32" stroke="#91A6BB" stroke-width="2"><path d="M546 92 592 182 494 30 430 100 546 92Z"></path><path d="M430 100 366 54M592 182l46 34M494 30l40-20"></path></g>
+<g filter="url(#w07CoverShadow)">
+<rect fill="url(#w07CoverCard)" height="368" rx="36" width="552" x="64" y="108"></rect>
+<rect fill="#1B5FA4" height="72" rx="36" width="552" x="64" y="108"></rect>
+<circle cx="110" cy="144" fill="#DDE3E9" r="8"></circle><circle cx="138" cy="144" fill="#B6C6D5" r="8"></circle><circle cx="166" cy="144" fill="#8FB8DE" r="8"></circle>
+<g>
+<circle cx="140" cy="240" fill="#1B5FA4" r="24"></circle><path d="m129 240 8 8 14-16" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"></path>
+<text fill="#0C447C" font-family="Arial" font-size="25" font-weight="700" x="182" y="249">Objects, Types &amp; Expressions</text>
+<circle cx="140" cy="316" fill="#1B5FA4" r="24"></circle><path d="m129 316 8 8 14-16" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"></path>
+<text fill="#0C447C" font-family="Arial" font-size="25" font-weight="700" x="182" y="325">Lists · Tuples · Dicts · Sets</text>
+<circle cx="140" cy="392" fill="#58C7B0" r="24"></circle><path d="m129 392 8 8 14-16" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"></path>
+<text fill="#0C447C" font-family="Arial" font-size="25" font-weight="700" x="182" y="401">Conditionals &amp; Loops</text>
+</g></g></svg></div></section><section class="slide content-slide horizontal-objectives"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">WEEK 07</span><h2>Week Learning Objectives</h2></div></header><div class="slide-body"><p class="week-objectives-intro">By the end of this review, you will be able to:</p><div class="objective-list"><article class="objective-card"><span>01</span><p><strong>Explain</strong> how expressions evaluate to values with types, and how variables and type conversion behave.</p></article><article class="objective-card"><span>02</span><p><strong>Choose</strong> the right data structure — list, tuple, dictionary, or set — and use its core operations.</p></article><article class="objective-card"><span>03</span><p><strong>Trace</strong> conditionals and loops step by step to predict what a program prints.</p></article></div></div></div></section><section class="slide content-slide concept-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">WEEK 07</span><h2>The Map of Weeks 1–6</h2></div></header><div class="slide-body"><div class="lead-stack"><p class="body-lead">Six weeks of material organizes into <strong>three big ideas</strong>. This review follows the ideas, not the week numbers.</p><div class="concept-grid cols-3"><article class="concept-card"><span>weeks 01–02</span><h3>Objects &amp; Expressions</h3><p>Values, types, operators, variables, and type conversion — the rules every line of code follows.</p></article><article class="concept-card"><span>weeks 03–04</span><h3>Data Structures</h3><p>Lists, tuples, dictionaries, and sets — four containers, four different jobs.</p></article><article class="concept-card"><span>weeks 05–06</span><h3>Control Flow</h3><p>Conditionals choose an action; loops repeat one. Together they shape every program.</p></article></div></div></div></div></section><section class="slide section-slide unit-title-singleline-v05"><div class="section-grid"></div><div class="section-copy"><span class="section-eyebrow">1</span><h1>Objects, Types,<br>and Expressions</h1><p>Values, variables, and conversion — the rules behind every line.</p><div class="section-rule"></div><span class="section-brand">SEOUL CYBER UNIVERSITY</span></div><div class="section-art"><svg class="section-svg" viewBox="0 0 620 520"><defs><filter id="w07s1"><fedropshadow dx="0" dy="20" flood-color="#061525" flood-opacity=".28" stdDeviation="20"></fedropshadow></filter></defs><g filter="url(#w07s1)"><rect fill="#FAFCFD" height="358" rx="34" width="426" x="98" y="76"></rect><rect fill="#225F98" height="74" rx="34" width="426" x="98" y="76"></rect><path d="M98 118h426" opacity=".7" stroke="#A7B8C9" stroke-width="2"></path><circle cx="143" cy="113" fill="#DDE3E9" r="8"></circle><circle cx="172" cy="113" fill="#B1BFCD" r="8"></circle><circle cx="164" cy="190" fill="#1B5FA4" r="22"></circle><path d="m154 190 7 7 13-14" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"></path><rect fill="#DFE6EC" height="20" rx="9" width="264" x="200" y="180"></rect><circle cx="164" cy="258" fill="#1B5FA4" r="22"></circle><path d="m154 258 7 7 13-14" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"></path><rect fill="#DFE6EC" height="20" rx="9" width="222" x="200" y="248"></rect><circle cx="164" cy="326" fill="#1B5FA4" r="22"></circle><path d="m154 326 7 7 13-14" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"></path><rect fill="#DFE6EC" height="20" rx="9" width="286" x="200" y="316"></rect><circle cx="164" cy="394" fill="#58C7B0" r="22"></circle><path d="m154 394 7 7 13-14" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"></path><rect fill="#DFE6EC" height="20" rx="9" width="196" x="200" y="384"></rect></g></svg></div></section><section class="slide content-slide concept-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">OBJECTS &amp; TYPES</span><h2>Expression → Value → Type</h2></div></header><div class="slide-body"><div class="lead-stack"><p class="body-lead">Python evaluates an <strong>expression</strong> to produce a <strong>value</strong>, and every value is an <strong>object with a type</strong>.</p><div class="concept-grid cols-3"><article class="concept-card"><span>expression</span><h3><code>10 / 4</code></h3><p>Operators combine objects into expressions that Python evaluates.</p></article><article class="concept-card"><span>value</span><h3><code>2.5</code></h3><p>Evaluation produces a single value.</p></article><article class="concept-card"><span>type</span><h3><code>float</code></h3><p>The type decides what the value can do next.</p></article></div></div></div></div></section><section class="slide content-slide concept-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">OBJECTS &amp; TYPES</span><h2>The Four Basic Types</h2></div></header><div class="slide-body"><div class="lead-stack"><p class="body-lead">Four types cover most beginner programs. Three are <strong>scalar</strong>; strings are <strong>non-scalar</strong> — they have parts you can index.</p><div class="concept-grid cols-4"><article class="concept-card"><span><code>int</code></span><h3>42</h3><p>Whole numbers. Scalar.</p></article><article class="concept-card"><span><code>float</code></span><h3>3.14</h3><p>Numbers with a decimal point. Scalar.</p></article><article class="concept-card"><span><code>bool</code></span><h3>True / False</h3><p>Result of comparisons. Scalar.</p></article><article class="concept-card"><span><code>str</code></span><h3>'Python'</h3><p>Text in quotes. Non-scalar — indexable.</p></article></div></div></div></div></section><section class="slide content-slide results-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">OBJECTS &amp; TYPES</span><h2>Operators and Result Types</h2></div></header><div class="slide-body"><div class="result-grid"><div class="result-item"><code>10 / 3</code><b>3.33… (float)</b></div><div class="result-item"><code>10 // 3</code><b>3</b></div><div class="result-item"><code>10 % 3</code><b>1</b></div><div class="result-item"><code>2 ** 3</code><b>8</b></div><div class="result-item"><code>'py' + 'thon'</code><b>'python'</b></div><div class="result-item"><code>'ab' * 2</code><b>'abab'</b></div><div class="result-item wide"><code>10 &gt; 3</code><b>True (bool)</b></div></div><div class="wide-callout soft-callout"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewBox="0 0 24 24"><path d="M4 21V4"/><path d="M4 4h12l-2 4 2 4H4"/></svg></span><p><strong>/</strong> always returns a float — even when it divides evenly. <strong>//</strong> floors the quotient, <strong>%</strong> keeps the remainder, and <strong>+</strong> and <strong>*</strong> also work on strings.</p></div></div></div></section><section class="slide content-slide code-slide "><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">VARIABLES</span><h2>Variables, Assignment, and <code>=</code> vs. <code>==</code></h2></div></header><div class="slide-body"><div class="code-demo-layout"><div class="notebook-panel"><div class="nb-toolbar"><span class="run-dot">▶</span><span>Code cell</span><i></i></div><div class="code-wrap"><pre><code><span class="var">score</span> <span class="op">=</span> <span class="num">80</span>        <span class="com"># = binds a name</span>
+<span class="var">score</span> <span class="op">=</span> <span class="var">score</span> <span class="op">+</span> <span class="num">5</span> <span class="com"># reassignment</span>
+<span class="fn">print</span><span class="punct">(</span><span class="var">score</span><span class="punct">)</span>
+<span class="fn">print</span><span class="punct">(</span><span class="var">score</span> <span class="op">==</span> <span class="num">85</span><span class="punct">)</span> <span class="com"># == compares</span></code></pre></div><div class="output-panel"><div class="output-label">Output</div><pre>85
+True</pre></div></div><div class="code-explain"><span class="icon-box huge"><svg aria-hidden="true" class="line-icon" viewBox="0 0 24 24"><path d="M7 4v12M7 4 4 7M7 4l3 3"/><path d="M17 20V8M17 20l3-3M17 20l-3-3"/></svg></span><h3>A variable is a name</h3><p>Assignment binds a name to an object; reassigning simply moves the name. One <code>=</code> assigns, two <code>==</code> compare — mixing them up is a classic exam trap.</p><div class="concept-chip">= assigns · == compares</div></div></div></div></div></section><section class="slide content-slide code-slide "><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">TYPE CONVERSION</span><h2>Type Conversion — <code>int()</code> Truncates</h2></div></header><div class="slide-body"><div class="code-demo-layout"><div class="notebook-panel"><div class="nb-toolbar"><span class="run-dot">▶</span><span>Code cell</span><i></i></div><div class="code-wrap"><pre><code><span class="fn">print</span><span class="punct">(</span><span class="fn">int</span><span class="punct">(</span><span class="str">'42'</span><span class="punct">)</span> <span class="op">+</span> <span class="num">8</span><span class="punct">)</span>
+<span class="fn">print</span><span class="punct">(</span><span class="fn">int</span><span class="punct">(</span><span class="num">3.9</span><span class="punct">)</span><span class="punct">)</span>
+<span class="fn">print</span><span class="punct">(</span><span class="fn">float</span><span class="punct">(</span><span class="str">'3.5'</span><span class="punct">)</span><span class="punct">)</span>
+<span class="fn">print</span><span class="punct">(</span><span class="fn">str</span><span class="punct">(</span><span class="num">10</span><span class="punct">)</span> <span class="op">+</span> <span class="str">'!'</span><span class="punct">)</span></code></pre></div><div class="output-panel"><div class="output-label">Output</div><pre>50
+3
+3.5
+10!</pre></div></div><div class="code-explain"><span class="icon-box huge"><svg aria-hidden="true" class="line-icon" viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="13" rx="2"/><path d="M4 11h16M9 7V4h6v3"/></svg></span><h3>Convert on purpose</h3><p>Text from input arrives as <code>str</code> — convert before arithmetic. And remember: <code>int(3.9)</code> is <strong>3</strong>, because <code>int()</code> cuts off the decimal part. It does not round.</p><div class="concept-chip">int() truncates, never rounds</div></div></div></div></div></section><section class="slide content-slide code-slide "><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">STRINGS</span><h2>String Indexing and Slicing</h2></div></header><div class="slide-body"><div class="code-demo-layout"><div class="notebook-panel"><div class="nb-toolbar"><span class="run-dot">▶</span><span>Code cell</span><i></i></div><div class="code-wrap"><pre><code><span class="var">word</span> <span class="op">=</span> <span class="str">'Python'</span>
+<span class="fn">print</span><span class="punct">(</span><span class="var">word</span><span class="punct">[</span><span class="num">0</span><span class="punct">]</span><span class="punct">,</span> <span class="var">word</span><span class="punct">[</span><span class="op">-</span><span class="num">1</span><span class="punct">]</span><span class="punct">)</span>
+<span class="fn">print</span><span class="punct">(</span><span class="var">word</span><span class="punct">[</span><span class="num">0</span><span class="punct">:</span><span class="num">3</span><span class="punct">]</span><span class="punct">)</span>
+<span class="fn">print</span><span class="punct">(</span><span class="var">word</span><span class="punct">[</span><span class="num">2</span><span class="punct">:</span><span class="punct">]</span><span class="punct">)</span></code></pre></div><div class="output-panel"><div class="output-label">Output</div><pre>P n
+Pyt
+thon</pre></div></div><div class="code-explain"><span class="icon-box huge"><svg aria-hidden="true" class="line-icon" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13"/><path d="M3.5 6h.5M3.5 12h.5M3.5 18h.5"/></svg></span><h3>Positions start at 0</h3><p>Index 0 is the first character and −1 is the last. A slice <code>[start:end]</code> stops <strong>just before</strong> <code>end</code> — the end index is not included. The same rules return for lists next.</p><div class="concept-chip">slice end is excluded</div></div></div></div></div></section><section class="slide content-slide "><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">CHECK YOURSELF</span><h2>Check Yourself — Types and Expressions</h2></div></header><div class="slide-body"><div class="quiz-list"><div class="quiz-row"><span class="qnum">Q1</span><pre><span class="fn">print</span><span class="punct">(</span><span class="num">10</span> <span class="op">/</span> <span class="num">2</span><span class="punct">)</span></pre><span class="qarrow">→</span><div class="quiz-ans" onclick="this.classList.toggle('show')"><small>ANSWER · CLICK TO REVEAL</small><pre>5.0</pre></div></div><div class="quiz-row"><span class="qnum">Q2</span><pre><span class="var">x</span> <span class="op">=</span> <span class="str">'7'</span>
+<span class="fn">print</span><span class="punct">(</span><span class="var">x</span> <span class="op">*</span> <span class="num">2</span><span class="punct">)</span></pre><span class="qarrow">→</span><div class="quiz-ans" onclick="this.classList.toggle('show')"><small>ANSWER · CLICK TO REVEAL</small><pre>77  ← the string &#x27;77&#x27;</pre></div></div><div class="quiz-row"><span class="qnum">Q3</span><pre><span class="fn">print</span><span class="punct">(</span><span class="fn">int</span><span class="punct">(</span><span class="num">4.8</span><span class="punct">)</span> <span class="op">+</span> <span class="num">10</span> <span class="op">//</span> <span class="num">3</span><span class="punct">)</span></pre><span class="qarrow">→</span><div class="quiz-ans" onclick="this.classList.toggle('show')"><small>ANSWER · CLICK TO REVEAL</small><pre>7   (4 + 3)</pre></div></div><p class="quiz-hint">Predict the output first — then check. The gap between your prediction and the answer is where to review.</p></div></div></div></section><section class="slide section-slide unit-title-singleline-v05"><div class="section-grid"></div><div class="section-copy"><span class="section-eyebrow">2</span><h1>Choosing the Right<br>Data Structure</h1><p>Lists, tuples, dictionaries, and sets — four containers, four jobs.</p><div class="section-rule"></div><span class="section-brand">SEOUL CYBER UNIVERSITY</span></div><div class="section-art"><svg class="section-svg" viewBox="0 0 620 520"><defs><filter id="w07s2"><fedropshadow dx="0" dy="20" flood-color="#061525" flood-opacity=".28" stdDeviation="20"></fedropshadow></filter></defs><g filter="url(#w07s2)"><rect fill="#FAFCFD" height="358" rx="34" width="426" x="98" y="76"></rect><rect fill="#225F98" height="74" rx="34" width="426" x="98" y="76"></rect><path d="M98 118h426" opacity=".7" stroke="#A7B8C9" stroke-width="2"></path><circle cx="143" cy="113" fill="#DDE3E9" r="8"></circle><circle cx="172" cy="113" fill="#B1BFCD" r="8"></circle><circle cx="164" cy="190" fill="#1B5FA4" r="22"></circle><path d="m154 190 7 7 13-14" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"></path><rect fill="#DFE6EC" height="20" rx="9" width="264" x="200" y="180"></rect><circle cx="164" cy="258" fill="#1B5FA4" r="22"></circle><path d="m154 258 7 7 13-14" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"></path><rect fill="#DFE6EC" height="20" rx="9" width="222" x="200" y="248"></rect><circle cx="164" cy="326" fill="#1B5FA4" r="22"></circle><path d="m154 326 7 7 13-14" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"></path><rect fill="#DFE6EC" height="20" rx="9" width="286" x="200" y="316"></rect><circle cx="164" cy="394" fill="#58C7B0" r="22"></circle><path d="m154 394 7 7 13-14" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"></path><rect fill="#DFE6EC" height="20" rx="9" width="196" x="200" y="384"></rect></g></svg></div></section><section class="slide content-slide "><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">DATA STRUCTURES</span><h2>Four Structures at a Glance</h2></div></header><div class="slide-body"><div class="ds-table"><div>&nbsp;</div><div><code>list</code></div><div><code>tuple</code></div><div><code>dict</code></div><div><code>set</code></div><div>Ordered</div><div><span class="ds-yes">Yes</span></div><div><span class="ds-yes">Yes</span></div><div><span class="ds-yes">Yes</span>*</div><div><span class="ds-no">No</span></div><div>Mutable</div><div><span class="ds-yes">Yes</span></div><div><span class="ds-no">No</span></div><div><span class="ds-yes">Yes</span></div><div><span class="ds-yes">Yes</span></div><div>Duplicates</div><div><span class="ds-yes">Yes</span></div><div><span class="ds-yes">Yes</span></div><div><span class="ds-no">No</span> (keys)</div><div><span class="ds-no">No</span></div><div>Access by</div><div>index</div><div>index</div><div>key</div><div>membership</div></div><div class="wide-callout soft-callout" style="margin-top:22px"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span><p>This one table answers most “which structure?” questions. (*Dictionaries keep insertion order, but you use them for <strong>key lookup</strong>, not positions.)</p></div></div></div></section><section class="slide content-slide code-slide "><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">LISTS</span><h2>Lists — Index, Slice, Change</h2></div></header><div class="slide-body"><div class="code-demo-layout"><div class="notebook-panel"><div class="nb-toolbar"><span class="run-dot">▶</span><span>Code cell</span><i></i></div><div class="code-wrap"><pre><code><span class="var">scores</span> <span class="op">=</span> <span class="punct">[</span><span class="num">85</span><span class="punct">,</span> <span class="num">90</span><span class="punct">,</span> <span class="num">78</span><span class="punct">,</span> <span class="num">92</span><span class="punct">]</span>
+<span class="fn">print</span><span class="punct">(</span><span class="var">scores</span><span class="punct">[</span><span class="num">0</span><span class="punct">]</span><span class="punct">,</span> <span class="var">scores</span><span class="punct">[</span><span class="op">-</span><span class="num">1</span><span class="punct">]</span><span class="punct">)</span>
+<span class="fn">print</span><span class="punct">(</span><span class="var">scores</span><span class="punct">[</span><span class="num">1</span><span class="punct">:</span><span class="num">3</span><span class="punct">]</span><span class="punct">)</span>
+<span class="var">scores</span><span class="punct">[</span><span class="num">2</span><span class="punct">]</span> <span class="op">=</span> <span class="num">80</span>
+<span class="fn">print</span><span class="punct">(</span><span class="fn">sum</span><span class="punct">(</span><span class="var">scores</span><span class="punct">)</span> <span class="op">/</span> <span class="fn">len</span><span class="punct">(</span><span class="var">scores</span><span class="punct">)</span><span class="punct">)</span></code></pre></div><div class="output-panel"><div class="output-label">Output</div><pre>85 92
+[90, 78]
+86.75</pre></div></div><div class="code-explain"><span class="icon-box huge"><svg aria-hidden="true" class="line-icon" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13"/><path d="M3.5 6h.5M3.5 12h.5M3.5 18h.5"/></svg></span><h3>The workhorse container</h3><p>Lists are ordered and mutable: read by index, slice a range, replace an element in place. <code>len()</code>, <code>sum()</code>, <code>max()</code> combine into the classic average pattern.</p><div class="concept-chip">average = sum / len</div></div></div></div></div></section><section class="slide content-slide results-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">LISTS</span><h2>List Methods to Know</h2></div></header><div class="slide-body"><div class="result-grid"><div class="result-item"><code>.append(x)</code><b>add at the end</b></div><div class="result-item"><code>.insert(i, x)</code><b>add at position i</b></div><div class="result-item"><code>.remove(x)</code><b>delete first x</b></div><div class="result-item"><code>.pop()</code><b>remove &amp; return last</b></div><div class="result-item"><code>.index(x)</code><b>where is x?</b></div><div class="result-item"><code>.count(x)</code><b>how many x?</b></div><div class="result-item wide"><code>nums.sort()  vs.  sorted(nums)</code><b>in place · new list</b></div></div><div class="wide-callout soft-callout"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewBox="0 0 24 24"><path d="M4 21V4"/><path d="M4 4h12l-2 4 2 4H4"/></svg></span><p><code>.sort()</code> changes the list and returns <code>None</code>; <code>sorted()</code> leaves it alone and returns a <strong>new</strong> sorted list. Also: <code>.remove()</code> on a missing value raises an error — check with <code>in</code> first.</p></div></div></div></section><section class="slide content-slide code-slide "><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">TUPLES</span><h2>Tuples — Immutable, and the Comma Matters</h2></div></header><div class="slide-body"><div class="code-demo-layout"><div class="notebook-panel"><div class="nb-toolbar"><span class="run-dot">▶</span><span>Code cell</span><i></i></div><div class="code-wrap"><pre><code><span class="var">point</span> <span class="op">=</span> <span class="punct">(</span><span class="num">3</span><span class="punct">,</span> <span class="num">5</span><span class="punct">)</span>
+<span class="var">x</span><span class="punct">,</span> <span class="var">y</span> <span class="op">=</span> <span class="var">point</span>      <span class="com"># unpacking</span>
+<span class="fn">print</span><span class="punct">(</span><span class="var">x</span><span class="punct">,</span> <span class="var">y</span><span class="punct">)</span>
+<span class="var">single</span> <span class="op">=</span> <span class="punct">(</span><span class="num">5</span><span class="punct">,</span><span class="punct">)</span>     <span class="com"># one-element tuple</span>
+<span class="fn">print</span><span class="punct">(</span><span class="fn">type</span><span class="punct">(</span><span class="var">single</span><span class="punct">)</span><span class="punct">)</span>
+<span class="var">point</span><span class="punct">[</span><span class="num">0</span><span class="punct">]</span> <span class="op">=</span> <span class="num">9</span></code></pre></div><div class="output-panel"><div class="output-label">Output</div><pre>3 5
+&lt;class &#x27;tuple&#x27;&gt;
+TypeError: &#x27;tuple&#x27; object does not
+support item assignment</pre></div></div><div class="code-explain"><span class="icon-box huge"><svg aria-hidden="true" class="line-icon" viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="13" rx="2"/><path d="M4 11h16M9 7V4h6v3"/></svg></span><h3>A fixed record</h3><p>Tuples index and slice like lists but cannot be changed — assignment into a tuple raises <code>TypeError</code>. And <code>(5)</code> is just the number 5: the <strong>comma</strong>, not the parentheses, makes a tuple.</p><div class="concept-chip">(5,) is a tuple · (5) is not</div></div></div></div></div></section><section class="slide content-slide code-slide "><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">DICTIONARIES</span><h2>Dictionaries — Look Up by Key</h2></div></header><div class="slide-body"><div class="code-demo-layout"><div class="notebook-panel"><div class="nb-toolbar"><span class="run-dot">▶</span><span>Code cell</span><i></i></div><div class="code-wrap"><pre><code><span class="var">person</span> <span class="op">=</span> <span class="punct">{</span><span class="str">'name'</span><span class="punct">:</span> <span class="str">'Mina'</span><span class="punct">,</span> <span class="str">'age'</span><span class="punct">:</span> <span class="num">21</span><span class="punct">}</span>
+<span class="fn">print</span><span class="punct">(</span><span class="var">person</span><span class="punct">[</span><span class="str">'name'</span><span class="punct">]</span><span class="punct">)</span>
+<span class="var">person</span><span class="punct">[</span><span class="str">'city'</span><span class="punct">]</span> <span class="op">=</span> <span class="str">'Seoul'</span>   <span class="com"># add</span>
+<span class="kw">del</span> <span class="var">person</span><span class="punct">[</span><span class="str">'age'</span><span class="punct">]</span>          <span class="com"># delete</span>
+<span class="fn">print</span><span class="punct">(</span><span class="str">'name'</span> <span class="kw">in</span> <span class="var">person</span><span class="punct">)</span></code></pre></div><div class="output-panel"><div class="output-label">Output</div><pre>Mina
+True</pre></div></div><div class="code-explain"><span class="icon-box huge"><svg aria-hidden="true" class="line-icon" viewBox="0 0 24 24"><circle cx="8" cy="8" r="4.5"/><path d="M11 11l9 9M17 20l2-2M14 17l2-2"/></svg></span><h3>Key → value</h3><p>Read and write through keys, not positions. Keys must be <strong>immutable</strong> (strings, numbers, tuples — never lists) and each key is unique. Note that <code>in</code> checks the <strong>keys</strong>, not the values.</p><div class="concept-chip">in checks keys</div></div></div></div></div></section><section class="slide content-slide code-slide "><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">SETS</span><h2>Sets — No Duplicates, No Order</h2></div></header><div class="slide-body"><div class="code-demo-layout"><div class="notebook-panel"><div class="nb-toolbar"><span class="run-dot">▶</span><span>Code cell</span><i></i></div><div class="code-wrap"><pre><code><span class="var">nums</span> <span class="op">=</span> <span class="punct">{</span><span class="num">1</span><span class="punct">,</span> <span class="num">2</span><span class="punct">,</span> <span class="num">2</span><span class="punct">,</span> <span class="num">3</span><span class="punct">,</span> <span class="num">3</span><span class="punct">,</span> <span class="num">3</span><span class="punct">}</span>
+<span class="fn">print</span><span class="punct">(</span><span class="var">nums</span><span class="punct">)</span>
+<span class="var">a</span> <span class="op">=</span> <span class="punct">{</span><span class="num">1</span><span class="punct">,</span> <span class="num">2</span><span class="punct">,</span> <span class="num">3</span><span class="punct">}</span>
+<span class="var">b</span> <span class="op">=</span> <span class="punct">{</span><span class="num">3</span><span class="punct">,</span> <span class="num">4</span><span class="punct">}</span>
+<span class="fn">print</span><span class="punct">(</span><span class="var">a</span> | <span class="var">b</span><span class="punct">,</span> <span class="var">a</span> &amp; <span class="var">b</span><span class="punct">,</span> <span class="var">a</span> <span class="op">-</span> <span class="var">b</span><span class="punct">)</span></code></pre></div><div class="output-panel"><div class="output-label">Output</div><pre>{1, 2, 3}
+{1, 2, 3, 4} {3} {1, 2}</pre></div></div><div class="code-explain"><span class="icon-box huge"><svg aria-hidden="true" class="line-icon" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.3-5.7"/><path d="M4 4v5h5"/></svg></span><h3>Membership machine</h3><p>Duplicates disappear the moment a set is created — that alone answers many exam questions. Union <code>|</code>, intersection <code>&amp;</code>, and difference <code>-</code> compare whole collections at once.</p><div class="concept-chip">len({1,2,2,3}) == 3</div></div></div></div></div></section><section class="slide content-slide concept-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">DATA STRUCTURES</span><h2>Which One Do I Use?</h2></div></header><div class="slide-body"><div class="lead-stack"><p class="body-lead">Let the <strong>job</strong> pick the structure:</p><div class="concept-grid cols-4"><article class="concept-card"><span>list</span><h3>an ordered collection that changes</h3><p>Scores to append, rows to sort, items in sequence.</p></article><article class="concept-card"><span>tuple</span><h3>a fixed record</h3><p>A coordinate, an RGB color — values that belong together and never change.</p></article><article class="concept-card"><span>dict</span><h3>lookup by name</h3><p>A profile, a translator, counts per word — anything shaped key → value.</p></article><article class="concept-card"><span>set</span><h3>uniqueness &amp; membership</h3><p>Remove duplicates, test “have we seen this?”, compare groups.</p></article></div></div></div></div></section><section class="slide content-slide "><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">CHECK YOURSELF</span><h2>Check Yourself — Data Structures</h2></div></header><div class="slide-body"><div class="quiz-list"><div class="quiz-row"><span class="qnum">Q1</span><pre><span class="var">t</span> <span class="op">=</span> <span class="punct">(</span><span class="num">1</span><span class="punct">,</span> <span class="num">2</span><span class="punct">,</span> <span class="num">3</span><span class="punct">)</span>
+<span class="var">t</span><span class="punct">[</span><span class="num">1</span><span class="punct">]</span> <span class="op">=</span> <span class="num">5</span></pre><span class="qarrow">→</span><div class="quiz-ans" onclick="this.classList.toggle('show')"><small>ANSWER · CLICK TO REVEAL</small><pre>TypeError — tuples are immutable</pre></div></div><div class="quiz-row"><span class="qnum">Q2</span><pre><span class="fn">print</span><span class="punct">(</span><span class="fn">len</span><span class="punct">(</span><span class="punct">{</span><span class="num">1</span><span class="punct">,</span> <span class="num">2</span><span class="punct">,</span> <span class="num">2</span><span class="punct">,</span> <span class="num">3</span><span class="punct">}</span><span class="punct">)</span><span class="punct">)</span></pre><span class="qarrow">→</span><div class="quiz-ans" onclick="this.classList.toggle('show')"><small>ANSWER · CLICK TO REVEAL</small><pre>3</pre></div></div><div class="quiz-row"><span class="qnum">Q3</span><pre><span class="var">nums</span> <span class="op">=</span> <span class="punct">[</span><span class="num">3</span><span class="punct">,</span> <span class="num">1</span><span class="punct">,</span> <span class="num">2</span><span class="punct">]</span>
+<span class="fn">print</span><span class="punct">(</span><span class="fn">sorted</span><span class="punct">(</span><span class="var">nums</span><span class="punct">)</span><span class="punct">)</span>
+<span class="fn">print</span><span class="punct">(</span><span class="var">nums</span><span class="punct">)</span></pre><span class="qarrow">→</span><div class="quiz-ans" onclick="this.classList.toggle('show')"><small>ANSWER · CLICK TO REVEAL</small><pre>[1, 2, 3]
+[3, 1, 2]  ← unchanged</pre></div></div><p class="quiz-hint">Predict the output first — then check. The gap between your prediction and the answer is where to review.</p></div></div></div></section><section class="slide section-slide unit-title-singleline-v05"><div class="section-grid"></div><div class="section-copy"><span class="section-eyebrow">3</span><h1>Control Flow</h1><p>Conditionals choose; loops repeat. Weeks 05–06 in one pass.</p><div class="section-rule"></div><span class="section-brand">SEOUL CYBER UNIVERSITY</span></div><div class="section-art"><svg class="section-svg" viewBox="0 0 620 520"><defs><filter id="w07s3"><fedropshadow dx="0" dy="20" flood-color="#061525" flood-opacity=".28" stdDeviation="20"></fedropshadow></filter></defs><g filter="url(#w07s3)"><rect fill="#FAFCFD" height="358" rx="34" width="426" x="98" y="76"></rect><rect fill="#225F98" height="74" rx="34" width="426" x="98" y="76"></rect><path d="M98 118h426" opacity=".7" stroke="#A7B8C9" stroke-width="2"></path><circle cx="143" cy="113" fill="#DDE3E9" r="8"></circle><circle cx="172" cy="113" fill="#B1BFCD" r="8"></circle><circle cx="164" cy="190" fill="#1B5FA4" r="22"></circle><path d="m154 190 7 7 13-14" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"></path><rect fill="#DFE6EC" height="20" rx="9" width="264" x="200" y="180"></rect><circle cx="164" cy="258" fill="#1B5FA4" r="22"></circle><path d="m154 258 7 7 13-14" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"></path><rect fill="#DFE6EC" height="20" rx="9" width="222" x="200" y="248"></rect><circle cx="164" cy="326" fill="#1B5FA4" r="22"></circle><path d="m154 326 7 7 13-14" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"></path><rect fill="#DFE6EC" height="20" rx="9" width="286" x="200" y="316"></rect><circle cx="164" cy="394" fill="#58C7B0" r="22"></circle><path d="m154 394 7 7 13-14" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"></path><rect fill="#DFE6EC" height="20" rx="9" width="196" x="200" y="384"></rect></g></svg></div></section><section class="slide content-slide code-slide "><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">CONDITIONALS</span><h2><code>if</code> / <code>elif</code> / <code>else</code> — Order Matters</h2></div></header><div class="slide-body"><div class="code-demo-layout"><div class="notebook-panel"><div class="nb-toolbar"><span class="run-dot">▶</span><span>Code cell</span><i></i></div><div class="code-wrap"><pre><code><span class="var">score</span> <span class="op">=</span> <span class="num">75</span>
+<span class="kw">if</span> <span class="var">score</span> <span class="op">&gt;=</span> <span class="num">90</span><span class="punct">:</span>
+    <span class="fn">print</span><span class="punct">(</span><span class="str">'A'</span><span class="punct">)</span>
+<span class="kw">elif</span> <span class="var">score</span> <span class="op">&gt;=</span> <span class="num">70</span><span class="punct">:</span>
+    <span class="fn">print</span><span class="punct">(</span><span class="str">'B'</span><span class="punct">)</span>
+<span class="kw">else</span><span class="punct">:</span>
+    <span class="fn">print</span><span class="punct">(</span><span class="str">'C'</span><span class="punct">)</span></code></pre></div><div class="output-panel"><div class="output-label">Output</div><pre>B</pre></div></div><div class="code-explain"><span class="icon-box huge"><svg aria-hidden="true" class="line-icon" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="12" r="2.5"/><path d="M8 7.5c4 1.5 4 7.5 7.5 4M8.5 18H12a4 4 0 0 0 4-4"/></svg></span><h3>One branch runs</h3><p>Python checks conditions top to bottom and runs the <strong>first</strong> true branch only. Put the narrower condition first — if <code>score &gt;= 70</code> came before <code>&gt;= 90</code>, a 95 would print B.</p><div class="concept-chip">first True branch wins</div></div></div></div></div></section><section class="slide content-slide results-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">CONDITIONALS</span><h2>What Counts as True?</h2></div></header><div class="slide-body"><div class="result-grid"><div class="result-item"><code>bool(0)</code><b>False</b></div><div class="result-item"><code>bool(3.5)</code><b>True</b></div><div class="result-item"><code>bool('')</code><b>False</b></div><div class="result-item"><code>bool('0')</code><b>True</b></div><div class="result-item"><code>bool([])</code><b>False</b></div><div class="result-item"><code>bool([0])</code><b>True</b></div><div class="result-item wide"><code>bool(None)</code><b>False</b></div></div><div class="wide-callout soft-callout"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewBox="0 0 24 24"><path d="M4 21V4"/><path d="M4 4h12l-2 4 2 4H4"/></svg></span><p>Zero, empty things, and <code>None</code> are falsy — everything else is truthy. The string <code>'0'</code> is <strong>True</strong> because it is not empty, and <code>[0]</code> is <strong>True</strong> because the list holds one element.</p></div></div></div></section><section class="slide content-slide code-slide "><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">CONDITIONALS</span><h2>Logical Operators, Chained Comparisons, <code>in</code></h2></div></header><div class="slide-body"><div class="code-demo-layout"><div class="notebook-panel"><div class="nb-toolbar"><span class="run-dot">▶</span><span>Code cell</span><i></i></div><div class="code-wrap"><pre><code><span class="var">age</span> <span class="op">=</span> <span class="num">25</span>
+<span class="fn">print</span><span class="punct">(</span><span class="num">18</span> <span class="op">&lt;=</span> <span class="var">age</span> <span class="op">&lt;</span> <span class="num">65</span><span class="punct">)</span>
+<span class="fn">print</span><span class="punct">(</span><span class="var">age</span> <span class="op">&gt;</span> <span class="num">20</span> <span class="kw">and</span> <span class="var">age</span> <span class="op">%</span> <span class="num">2</span> <span class="op">==</span> <span class="num">0</span><span class="punct">)</span>
+<span class="fn">print</span><span class="punct">(</span><span class="str">'py'</span> <span class="kw">in</span> <span class="str">'python'</span><span class="punct">,</span>
+      <span class="num">3</span> <span class="kw">in</span> <span class="punct">[</span><span class="num">1</span><span class="punct">,</span> <span class="num">2</span><span class="punct">,</span> <span class="num">3</span><span class="punct">]</span><span class="punct">)</span></code></pre></div><div class="output-panel"><div class="output-label">Output</div><pre>True
+False
+True True</pre></div></div><div class="code-explain"><span class="icon-box huge"><svg aria-hidden="true" class="line-icon" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="12" r="2.5"/><path d="M8 7.5c4 1.5 4 7.5 7.5 4M8.5 18H12a4 4 0 0 0 4-4"/></svg></span><h3>Combine conditions</h3><p><code>and</code> needs both sides true; <code>or</code> needs one; <code>not</code> flips. A chained comparison <code>18 &lt;= age &lt; 65</code> reads like math, and <code>in</code> tests membership in strings, lists, and dictionary keys.</p><div class="concept-chip">18 <= age < 65</div></div></div></div></div></section><section class="slide content-slide code-slide "><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">CONDITIONALS</span><h2>Conditional Expressions — <code>if-else</code> in One Line</h2></div></header><div class="slide-body"><div class="code-demo-layout"><div class="notebook-panel"><div class="nb-toolbar"><span class="run-dot">▶</span><span>Code cell</span><i></i></div><div class="code-wrap"><pre><code><span class="var">score</span> <span class="op">=</span> <span class="num">85</span>
+<span class="var">result</span> <span class="op">=</span> <span class="str">'pass'</span> <span class="kw">if</span> <span class="var">score</span> <span class="op">&gt;=</span> <span class="num">60</span> <span class="kw">else</span> <span class="str">'fail'</span>
+<span class="fn">print</span><span class="punct">(</span><span class="var">result</span><span class="punct">)</span></code></pre></div><div class="output-panel"><div class="output-label">Output</div><pre>pass</pre></div></div><div class="code-explain"><span class="icon-box huge"><svg aria-hidden="true" class="line-icon" viewBox="0 0 24 24"><path d="M7 4v12M7 4 4 7M7 4l3 3"/><path d="M17 20V8M17 20l3-3M17 20l-3-3"/></svg></span><h3>Value, not statement</h3><p>A conditional expression picks one of two <strong>values</strong>, so it fits inside an assignment. Use it for simple choices; once branches multiply, a full <code>if-elif-else</code> stays clearer.</p><div class="concept-chip">A if condition else B</div></div></div></div></div></section><section class="slide content-slide code-slide "><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">LOOPS</span><h2><code>while</code> — Repeat Until Something Changes</h2></div></header><div class="slide-body"><div class="code-demo-layout"><div class="notebook-panel"><div class="nb-toolbar"><span class="run-dot">▶</span><span>Code cell</span><i></i></div><div class="code-wrap"><pre><code><span class="fn">count</span> <span class="op">=</span> <span class="num">0</span>
+<span class="kw">while</span> <span class="fn">count</span> <span class="op">&lt;</span> <span class="num">5</span><span class="punct">:</span>
+    <span class="kw">if</span> <span class="fn">count</span> <span class="op">==</span> <span class="num">3</span><span class="punct">:</span>
+        <span class="kw">break</span>
+    <span class="fn">print</span><span class="punct">(</span><span class="fn">count</span><span class="punct">)</span>
+    <span class="fn">count</span> <span class="op">+=</span> <span class="num">1</span></code></pre></div><div class="output-panel"><div class="output-label">Output</div><pre>0
+1
+2</pre></div></div><div class="code-explain"><span class="icon-box huge"><svg aria-hidden="true" class="line-icon" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.3-5.7"/><path d="M4 4v5h5"/></svg></span><h3>Condition-driven</h3><p>The condition is checked before each pass, so the loop body must move it toward <code>False</code> — or run forever. <code>break</code> exits the loop at once; <code>continue</code> skips to the next pass.</p><div class="concept-chip">update the loop variable</div></div></div></div></div></section><section class="slide content-slide code-slide "><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">LOOPS</span><h2><code>for</code> and <code>range()</code> — Visit Each Item</h2></div></header><div class="slide-body"><div class="code-demo-layout"><div class="notebook-panel"><div class="nb-toolbar"><span class="run-dot">▶</span><span>Code cell</span><i></i></div><div class="code-wrap"><pre><code><span class="var">total</span> <span class="op">=</span> <span class="num">0</span>
+<span class="kw">for</span> <span class="var">x</span> <span class="kw">in</span> <span class="punct">[</span><span class="num">10</span><span class="punct">,</span> <span class="num">20</span><span class="punct">,</span> <span class="num">30</span><span class="punct">]</span><span class="punct">:</span>
+    <span class="var">total</span> <span class="op">+=</span> <span class="var">x</span>
+<span class="fn">print</span><span class="punct">(</span><span class="var">total</span><span class="punct">)</span>
+<span class="kw">for</span> <span class="var">i</span> <span class="kw">in</span> <span class="fn">range</span><span class="punct">(</span><span class="num">1</span><span class="punct">,</span> <span class="num">10</span><span class="punct">,</span> <span class="num">4</span><span class="punct">)</span><span class="punct">:</span>
+    <span class="fn">print</span><span class="punct">(</span><span class="var">i</span><span class="punct">)</span></code></pre></div><div class="output-panel"><div class="output-label">Output</div><pre>60
+1
+5
+9</pre></div></div><div class="code-explain"><span class="icon-box huge"><svg aria-hidden="true" class="line-icon" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.3-5.7"/><path d="M4 4v5h5"/></svg></span><h3>Iterable-driven</h3><p>A <code>for</code> loop visits every item of an iterable — list, string, or <code>range()</code>. Remember <code>range(start, end, step)</code> stops <strong>before</strong> <code>end</code>, exactly like slicing. The accumulator pattern <code>total += x</code> appears everywhere.</p><div class="concept-chip">range end is excluded</div></div></div></div></div></section><section class="slide content-slide concept-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">LOOPS</span><h2>Loop Tools to Recognize</h2></div></header><div class="slide-body"><div class="lead-stack"><p class="body-lead">Three forms you should be able to <strong>read</strong> on sight:</p><div class="concept-grid cols-3"><article class="concept-card"><span>comprehension</span><h3><code>[x*2 for x in nums]</code></h3><p>Build a new list from a loop in one line — optionally with a filter: <code>if x &gt; 0</code>.</p></article><article class="concept-card"><span>enumerate()</span><h3><code>for i, v in enumerate(names)</code></h3><p>Loop with the index and the value together.</p></article><article class="concept-card"><span>zip()</span><h3><code>for n, s in zip(names, scores)</code></h3><p>Walk two sequences in parallel, pair by pair.</p></article></div></div></div></div></section><section class="slide content-slide "><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">CHECK YOURSELF</span><h2>Check Yourself — Control Flow</h2></div></header><div class="slide-body"><div class="quiz-list"><div class="quiz-row"><span class="qnum">Q1</span><pre><span class="kw">for</span> <span class="var">i</span> <span class="kw">in</span> <span class="fn">range</span><span class="punct">(</span><span class="num">2</span><span class="punct">,</span> <span class="num">7</span><span class="punct">,</span> <span class="num">2</span><span class="punct">)</span><span class="punct">:</span>
+    <span class="fn">print</span><span class="punct">(</span><span class="var">i</span><span class="punct">)</span></pre><span class="qarrow">→</span><div class="quiz-ans" onclick="this.classList.toggle('show')"><small>ANSWER · CLICK TO REVEAL</small><pre>2
+4
+6</pre></div></div><div class="quiz-row"><span class="qnum">Q2</span><pre><span class="fn">print</span><span class="punct">(</span><span class="punct">[</span><span class="var">x</span> <span class="op">*</span> <span class="var">x</span> <span class="kw">for</span> <span class="var">x</span> <span class="kw">in</span> <span class="fn">range</span><span class="punct">(</span><span class="num">4</span><span class="punct">)</span><span class="punct">]</span><span class="punct">)</span></pre><span class="qarrow">→</span><div class="quiz-ans" onclick="this.classList.toggle('show')"><small>ANSWER · CLICK TO REVEAL</small><pre>[0, 1, 4, 9]</pre></div></div><div class="quiz-row"><span class="qnum">Q3</span><pre><span class="var">n</span> <span class="op">=</span> <span class="num">0</span>
+<span class="kw">while</span> <span class="kw">True</span><span class="punct">:</span>
+    <span class="var">n</span> <span class="op">+=</span> <span class="num">2</span>
+    <span class="kw">if</span> <span class="var">n</span> <span class="op">&gt;=</span> <span class="num">6</span><span class="punct">:</span>
+        <span class="kw">break</span>
+<span class="fn">print</span><span class="punct">(</span><span class="var">n</span><span class="punct">)</span></pre><span class="qarrow">→</span><div class="quiz-ans" onclick="this.classList.toggle('show')"><small>ANSWER · CLICK TO REVEAL</small><pre>6</pre></div></div><p class="quiz-hint">Predict the output first — then check. The gap between your prediction and the answer is where to review.</p></div></div></div></section><section class="slide section-slide key-takeaways-singleline unit-title-singleline">
+<div class="section-grid"></div>
+<div class="section-copy"><span class="section-eyebrow">SUMMARY</span><h1>Key Takeaways</h1><p>The traps to avoid, and how to spend the week before the exam.</p>
+<div class="section-rule"></div><span class="section-brand">SEOUL CYBER UNIVERSITY</span></div>
+<div class="section-art"><svg class="section-svg" viewBox="0 0 620 520">
+<defs><filter id="w07sum"><fedropshadow dx="0" dy="20" flood-color="#061525" flood-opacity=".28" stdDeviation="20"></fedropshadow></filter></defs>
+<g filter="url(#w07sum)"><rect fill="#FAFCFD" height="352" rx="34" width="424" x="100" y="80"></rect>
+<rect fill="#225F98" height="70" rx="34" width="424" x="100" y="80"></rect>
+<path d="M100 120h424" opacity=".7" stroke="#A7B8C9" stroke-width="2"></path>
+<circle cx="145" cy="115" fill="#DDE3E9" r="8"></circle><circle cx="174" cy="115" fill="#B1BFCD" r="8"></circle>
+<g><circle cx="164" cy="184" fill="#1B5FA4" r="22"></circle><path d="m154 184 7 7 13-14" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"></path><rect fill="#DFE6EC" height="20" rx="9" width="264" x="200" y="174"></rect>
+<circle cx="164" cy="250" fill="#1B5FA4" r="22"></circle><path d="m154 250 7 7 13-14" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"></path><rect fill="#DFE6EC" height="20" rx="9" width="222" x="200" y="240"></rect>
+<circle cx="164" cy="316" fill="#1B5FA4" r="22"></circle><path d="m154 316 7 7 13-14" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"></path><rect fill="#DFE6EC" height="20" rx="9" width="286" x="200" y="306"></rect>
+<circle cx="164" cy="382" fill="#58C7B0" r="22"></circle><path d="m154 382 7 7 13-14" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"></path><rect fill="#CFE0EC" height="20" rx="9" width="196" x="200" y="372"></rect></g></g></svg></div></section><section class="slide content-slide "><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">KEY TAKEAWAYS</span><h2>Common Pitfalls Checklist</h2></div></header><div class="slide-body"><div class="pit-grid"><div class="pit-item"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><code>/</code> always gives a float; <code>//</code> floors, <code>%</code> takes the remainder</span></div><div class="pit-item"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><code>int(3.9)</code> is 3 — <code>int()</code> truncates, it never rounds</span></div><div class="pit-item"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><code>=</code> assigns a name; <code>==</code> compares values</span></div><div class="pit-item"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Slices and <code>range()</code> stop <strong>before</strong> the end value</span></div><div class="pit-item"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><code>(5,)</code> is a tuple; <code>(5)</code> is just the number 5</span></div><div class="pit-item"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Dictionary keys must be immutable, and <code>in</code> checks keys</span></div><div class="pit-item"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>Sets drop duplicates and have no order</span></div><div class="pit-item"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span><code>.sort()</code> changes the list; <code>sorted()</code> returns a new one</span></div></div></div></div></section><section class="slide content-slide summary-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">KEY TAKEAWAYS</span><h2>Summary</h2></div></header><div class="slide-body"><div class="summary-grid"><article class="summary-card"><span>01</span><h3>Objects &amp; expressions</h3><p>Every expression evaluates to a value with a type — and the type decides what happens next.</p></article><article class="summary-card"><span>02</span><h3>Data structures</h3><p>List, tuple, dict, set: ordered vs. not, mutable vs. not, index vs. key vs. membership.</p></article><article class="summary-card"><span>03</span><h3>Control flow</h3><p>One branch runs; loops repeat until a condition changes or the iterable ends.</p></article><article class="summary-card"><span>04</span><h3>How to prepare</h3><p>Re-run the week notebooks, predict outputs before running, and rebuild one example per topic by hand.</p></article></div></div></div></section><section class="slide content-slide keyterms-slide"><span class="soft-orb orb-one"></span><span class="soft-orb orb-two"></span><div class="frame"><header class="slide-header"><div><span class="kicker">KEY TAKEAWAYS</span><h2>Key Terms</h2></div></header><div class="slide-body"><div class="term-cloud"><span>object</span><span>type</span><span>expression</span><span>variable</span><span>type conversion</span><span>indexing</span><span>slicing</span><span>list</span><span>tuple</span><span>dictionary</span><span>set</span><span>mutable</span><span>truthy / falsy</span><span>if-elif-else</span><span>while / for</span><span>range()</span><span>break / continue</span></div><div class="closing-line"><span class="icon-box"><svg aria-hidden="true" class="line-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M8.5 12h7M12.5 8.5 16 12l-3.5 3.5"></path></svg></span><b>Next: Midterm Exam — good luck!</b></div></div></div></section></div><div class="nav-zone prev"></div><div class="nav-zone next"></div><script>
+const slides=Array.from(document.querySelectorAll('.slide'));let index=0;function sizeSlides(){const s=Math.min(window.innerWidth/1600,window.innerHeight/900);document.documentElement.style.setProperty('--scale',s)}function show(i){index=Math.max(0,Math.min(slides.length-1,i));slides.forEach((s,n)=>s.classList.toggle('active',n===index))}window.addEventListener('resize',sizeSlides);window.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='PageDown')show(index+1);if(e.key==='ArrowLeft'||e.key==='PageUp')show(index-1)});document.querySelector('.nav-zone.next').addEventListener('click',()=>show(index+1));document.querySelector('.nav-zone.prev').addEventListener('click',()=>show(index-1));sizeSlides();show(0);
+</script></body></html>
