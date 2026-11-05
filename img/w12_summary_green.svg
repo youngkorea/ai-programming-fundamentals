@@ -4,29 +4,29 @@
 <rect x="1" y="4" width="898" height="4" fill="#0F6E56"/>
 
 <circle cx="35" cy="40" r="9" fill="#0F6E56"/>
-<path d="M 31 40 l 3 3.5 l 6 -7" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="56" y="48" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#04342C">Classes and Objects</text>
-<text x="56" y="80" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#2C4A41">A class is a blueprint for creating objects, and each object can store</text>
-<text x="56" y="110" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#2C4A41">its own data and perform defined actions.</text>
+<path d="M31 40 l3 3.5 l6 -7" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="56" y="48" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#04342C">File Reading and Writing</text>
+<text x="56" y="80" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" fill="#2C4A41">Use open(), file modes, and the with statement to read from and write</text>
+<text x="56" y="110" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" fill="#2C4A41">to text files safely.</text>
 <rect x="26" y="124" width="848" height="1" fill="#C9E7DC"/>
 
 <circle cx="35" cy="158" r="9" fill="#0F6E56"/>
-<path d="M 31 158 l 3 3.5 l 6 -7" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="56" y="166" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#04342C">Attributes and Methods</text>
-<text x="56" y="198" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#2C4A41">Attributes represent an object's state, while methods define the actions</text>
-<text x="56" y="228" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#2C4A41">that an object can perform.</text>
+<path d="M31 158 l3 3.5 l6 -7" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="56" y="166" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#04342C">CSV and JSON Files</text>
+<text x="56" y="198" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" fill="#2C4A41">The csv and json modules support common structured-data formats for</text>
+<text x="56" y="228" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" fill="#2C4A41">storage, exchange, and later processing.</text>
 <rect x="26" y="242" width="848" height="1" fill="#C9E7DC"/>
 
 <circle cx="35" cy="276" r="9" fill="#0F6E56"/>
-<path d="M 31 276 l 3 3.5 l 6 -7" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="56" y="284" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#04342C">Applying Classes and Inheritance</text>
-<text x="56" y="316" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#2C4A41">Classes can model real-world systems, and inheritance allows a new class</text>
-<text x="56" y="346" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#2C4A41">to reuse and extend the attributes and methods of an existing class.</text>
+<path d="M31 276 l3 3.5 l6 -7" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="56" y="284" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#04342C">Exception Handling</text>
+<text x="56" y="316" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" fill="#2C4A41">Use try, except, and finally to respond to runtime errors and keep</text>
+<text x="56" y="346" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" fill="#2C4A41">program execution under control.</text>
 <rect x="26" y="360" width="848" height="1" fill="#C9E7DC"/>
 
 <circle cx="35" cy="394" r="9" fill="#0F6E56"/>
-<path d="M 31 394 l 3 3.5 l 6 -7" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M31 394 l3 3.5 l6 -7" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
 <text x="56" y="402" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#04342C">Data and AI Applications</text>
-<text x="56" y="434" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#2C4A41">Classes can organize data, preprocessing steps, analysis methods, and</text>
-<text x="56" y="464" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#2C4A41">reusable model-related functionality in a structured way.</text>
+<text x="56" y="434" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" fill="#2C4A41">File I/O and exception handling support data loading, result storage,</text>
+<text x="56" y="464" font-family="Roboto, Arial, Helvetica, sans-serif" font-size="21" fill="#2C4A41">text analysis, and robust data-processing workflows.</text>
 </svg>
